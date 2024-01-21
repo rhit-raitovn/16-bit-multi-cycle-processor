@@ -140,3 +140,4 @@ implementation/output_files/TheLime.jdi
 implementation/output_files/TheLime.pin
 implementation/output_files/TheLime.sld
 implementation/output_files/TheLime.sof
+*.bak

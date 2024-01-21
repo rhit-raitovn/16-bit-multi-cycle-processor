@@ -1,4 +1,37 @@
-// Verilog code for a 16-bit ALU
+/*******************************************************************************
+* Author: Yueqiao Wang
+* Date: 1/21/2024
+*
+* Module: ALU (Arithmetic Logic Unit)
+*
+* Description:
+*   Verilog code for a 16-bit ALU with various arithmetic and logic operations.
+*
+* Inputs:
+*   input [15:0] input_A, input_B // ALU inputs
+*   input [2:0] input_ALUOp // ALU operation code
+*
+* Outputs:
+*   output [15:0] output_ALU // ALU output
+*   output output_Zero, output_negative // ALU flags
+*
+* Internal Signals:
+*   wire [15:0] add_result, sub_result, and_result, or_result, xor_result;
+*   wire [16:0] add_carry, sub_borrow;
+*   wire zero, negative;
+*
+* Operations:
+*   - Arithmetic: Addition, Subtraction
+*   - Logic: AND, OR, XOR, Shift
+*   - Flags: Zero, Negative
+*
+* Implementation Details:
+*   - Carry and borrow flags are generated for addition and subtraction operations.
+*   - Zero and negative flags are set based on the ALU output.
+*   - Operation selection is based on the input ALU operation code.
+*   - Default case handles invalid operations.
+*
+*******************************************************************************/
 module ALU(
     input [15:0] input_A, input_B, // ALU inputs
     input [2:0] input_ALUOp, // ALU operation code
