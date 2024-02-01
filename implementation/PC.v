@@ -1,5 +1,5 @@
 /*******************************************************************************
-* Author: Yueqiao Wang
+* Author: Yueqiao Wang, Naziia Raitova (modified)
 * Date: 1/21/2024
 *
 * Module: Program Counter (PC)
@@ -30,7 +30,7 @@ module PC(
     input wire [15:0] input_PC_newPC, // New value for the PC.
     input wire CLK, // Clock signal.
 
-    output wire [15:0] output_PC // Output representing the value of the PC.
+    output reg [15:0] output_PC // Output representing the value of the PC.
 );
 
 reg [15:0] PC; // Internal register to store the PC value.
@@ -39,7 +39,9 @@ always @(posedge CLK)
 begin
     // Check if PC should be updated
     if (input_PC_PCWrite)
-        output_PC <= input_PC_newPC; // Update PC with the new value
+        PC <= input_PC_newPC; // Update PC with the new value
 end
+
+assign output_PC = PC;
 
 endmodule
