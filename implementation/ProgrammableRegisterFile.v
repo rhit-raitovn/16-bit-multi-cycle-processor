@@ -38,8 +38,8 @@ module ProgrammableRegisterFile(
 	 
     input wire CLK, // Single-bit clock signal for synchronization.
 
-    output wire [15:0] output_reg_A, // 16-bit output representing data read from Register A.
-    output wire [15:0] output_reg_B // 16-bit output representing data read from Register B.
+    output reg [15:0] output_reg_A, // 16-bit output representing data read from Register A.
+    output reg [15:0] output_reg_B // 16-bit output representing data read from Register B.
 );
 
 reg [15:0] registers [0:7]; // Array of 8 registers, each 16 bits wide

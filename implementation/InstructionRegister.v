@@ -33,11 +33,11 @@ module InstructionRegister(
     input wire input_IR_write, // Single-bit control signal to write data into the instruction register.
     input wire CLK, // Clock signal.
 
-    output wire [6:0] Output_IR_Control, // 7-bit output for opcode and func4.
-    output wire [3:0] Output_IR_RegA, // 3-bit output for register A address.
-    output wire [3:0] Output_IR_RegB, // 3-bit output for register B address.
-    output wire [3:0] Output_IR_RegD, // 3-bit output for register D address.
-    output wire [15:0] Output_IR_Imm // 16-bit output for immediate value.
+    output reg [6:0] Output_IR_Control, // 7-bit output for opcode and func4.
+    output reg [3:0] Output_IR_RegA, // 3-bit output for register A address.
+    output reg [3:0] Output_IR_RegB, // 3-bit output for register B address.
+    output reg [3:0] Output_IR_RegD, // 3-bit output for register D address.
+    output reg [15:0] Output_IR_Imm // 16-bit output for immediate value.
 );
 
 reg [15:0] instruction_register; // Internal register to store the instruction

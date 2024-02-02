@@ -39,9 +39,9 @@ always @(posedge CLK)
 begin
     // Check if PC should be updated
     if (input_PC_PCWrite)
-        PC <= input_PC_newPC; // Update PC with the new value
+        output_PC <= input_PC_newPC; // Update PC with the new value
 end
 
-assign output_PC = PC;
+
 
 endmodule
