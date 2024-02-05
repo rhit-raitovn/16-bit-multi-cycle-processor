@@ -1,8 +1,8 @@
 module mux2to1 (
-  input wire a,
-  input wire b,
+  input wire a[15:0],
+  input wire b[15:0],
   input wire select,
-  output reg out
+  output reg out[15:0]
 );
 
   always @(posedge select)
