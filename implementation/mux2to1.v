@@ -5,10 +5,6 @@ module mux2to1 (
   output reg out[15:0]
 );
 
-  always @(posedge select)
-    if (select)
-      out <= b;
-    else
-      out <= a;
+   assign y = (select) ? b : a;
 
 endmodule
