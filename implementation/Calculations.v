@@ -41,7 +41,7 @@ SimpleRegister B_inst (
 );
 
 // 3:1 Mux for ALUSrcA
-wire [15:0] A_mux_out;
+reg [15:0] A_mux_out;
 always @(*) begin
 	case(input_ALUSrcA)
 		0: A_mux_out = input_PC;
@@ -52,7 +52,7 @@ always @(*) begin
 end
 
 // 3:1 Mux for ALUSrcB
-wire [15:0] B_mux_out;
+reg [15:0] B_mux_out;
 always @(*) begin
     case(input_ALUSrcB)
         0: B_mux_out = B_sr;
@@ -73,7 +73,7 @@ ALU calculations_inst (
 	.output_negative(output_negative)
 );
 
-wire [15:0] ALUOut_sr;
+reg [15:0] ALUOut_sr;
 SimpleRegister ALUOut_inst (
 	.CLK(clk),
 			  
@@ -82,7 +82,7 @@ SimpleRegister ALUOut_inst (
 );
 
 // 2:1 Mux for PCSrc
-wire [15:0] ALUOut_mux_out;
+reg [15:0] ALUOut_mux_out;
 always @(*) begin
     case(input_PCSrc)
         0: ALUOut_mux_out = output_ALU;
