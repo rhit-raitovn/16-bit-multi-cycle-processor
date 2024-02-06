@@ -4,23 +4,23 @@ module FetchAndMemory(
    input wire [15:0] input_PC_newPC, // New value for the PC.
    input wire CLK, // Clock signal.
 	
-	output reg [15:0] output_PC, // Output representing the value of the PC.
+	output wire [15:0] output_PC, // Output representing the value of the PC.
 	
 	input wire input_IR_write,
 	
-	output reg [6:0] Output_IR_Control,
-	output reg [3:0] Output_IR_RegA,
-	output reg [3:0] Output_IR_RegB,
-	output reg [3:0] Output_IR_RegD,
-	output reg [15:0] Output_IR_Imm,
+	output wire [6:0] Output_IR_Control,
+	output wire [3:0] Output_IR_RegA,
+	output wire [3:0] Output_IR_RegB,
+	output wire [3:0] Output_IR_RegD,
+	output wire [15:0] Output_IR_Imm,
 	
 	input wire [15:0] input_from_ALUOut,
-	output reg [15:0] output_MDR, // Output representing the value in the MDR register.
+	output wire [15:0] output_MDR, // Output representing the value in the MDR register.
 	
 	input wire IorD,
 	
 	input wire input_mem_write,
-	input wire input_mem_data
+	input wire [15:0] input_mem_data
 	
 	
 	
@@ -29,13 +29,14 @@ module FetchAndMemory(
 	
 	
 );
-reg input_mem_add;
-reg output_mem_data;
+wire input_mem_add;
+wire output_mem_data;
 //PC
 PC PC_inst(
 	.CLK(CLK),
 	.input_PC_PCWrite(input_PC_PCWrite),
-	.input_PC_newPC(input_PC_newPC)
+	.input_PC_newPC(input_PC_newPC),
+	.output_PC(output_PC)
 );
 
 //Instruction Register
