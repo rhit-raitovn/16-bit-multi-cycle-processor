@@ -10,15 +10,14 @@
 
 // Example: Main design using the Counter module
 module Calculations(
-
-	 input wire [15:0] input_A, input_B, // ALU inputs
+    input wire [15:0] input_A, input_B, // ALU inputs
     input wire [2:0] input_ALUOp, // ALU operation code
-	 input wire [15:0] input_PC,
-	 input wire [1:0] input_ALUSrcA, input_ALUSrcB, 
-	 input wire [0:0] input_PCSrc,
-	 input wire [15:0] input_imm,
+    input wire [15:0] input_PC,
+    input wire [1:0] input_ALUSrcA, input_ALUSrcB, 
+    input wire [0:0] input_PCSrc,
+    input wire [15:0] input_imm,
 	 
-	 output reg [15:0] output_ALU, // ALU output
+    output reg [15:0] output_ALU, // ALU output
     output reg output_Zero, output_negative, // ALU flags
 	 
     input wire clk,
