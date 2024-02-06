@@ -6,7 +6,6 @@ module Data(
 	input wire CLK, // Single-bit clock signal for synchronization.
     
     input wire [15:0] input_imm, // 16-bit input of the instruction for the immediate to be parsed
-    input wire output_MDR, //MDR output
 
 input wire input_ALUOut[15:0],
   input wire input_MDR[15:0],
@@ -42,8 +41,8 @@ input wire input_ALUOut[15:0],
          
 	wire [15:0] immOrOut;
 	mux2to1 mux_inst(
-		.input_ALUOut(a),
-		.input_MDR(b),
+		.a(input_ALUOut),
+		.b(input_MDR),
 		.select(memToReg),
 		.out(immOrOut)
 	);
