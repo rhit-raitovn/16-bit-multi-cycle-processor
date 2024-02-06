@@ -8,8 +8,8 @@ module Data(
     input wire [15:0] input_imm, // 16-bit input of the instruction for the immediate to be parsed
     input wire output_MDR, //MDR output
 
-input wire a[15:0],
-  input wire b[15:0],
+input wire input_ALUOut[15:0],
+  input wire input_MDR[15:0],
   input wire memToReg,
   
 	
