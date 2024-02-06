@@ -1,10 +1,15 @@
 module mux2to1 (
-  input wire a[15:0],
-  input wire b[15:0],
+  input wire [15:0] a,
+  input wire [15:0] b,
   input wire select,
-  output reg out[15:0]
+  output reg [15:0] out
 );
 
-   assign y = (select) ? b : a;
+  always @(*) begin
+    if (select)
+      out = b;
+    else
+      out = a;
+  end
 
 endmodule
