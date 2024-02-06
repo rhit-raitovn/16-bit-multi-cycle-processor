@@ -39,11 +39,8 @@ input wire a[15:0],
 
 
 	ImmediateGenerator ig_inst(
-		
-	 .input_imm(input_imm),
-	    .output_MDR(output_MDR),
+	    .input_imm(input_imm),
 	    .output_imm(output_imm)
-		
 	);
          
     
