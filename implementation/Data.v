@@ -1,7 +1,7 @@
 module Data(
     input wire [2:0] input_reg_readA_address, // 3-bit address for reading Operand A.
     input wire [2:0] input_reg_readB_address, // 3-bit address for reading Operand B.
-	input wire input_reg_write, // Single-bit signal to enable write operation.
+	input wire input_reg_write, memToReg, // Single-bit signal to enable write operation.
     input wire [15:0] input_reg_write_value, // 16-bit value for write operation.
     input wire [2:0] input_reg_write_address, // 3-bit address for write operation.
 	input wire CLK, // Single-bit clock signal for synchronization.
