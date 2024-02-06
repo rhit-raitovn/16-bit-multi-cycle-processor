@@ -11,7 +11,7 @@ module Data(
 
 input wire a[15:0],
   input wire b[15:0],
-  input wire select,
+  input wire memToReg,
   
 	
 	output reg out[15:0]	
@@ -43,7 +43,7 @@ input wire a[15:0],
 	    .output_imm(output_imm)
 	);
          
-    
+	wire [15:0] immOrOut;
 	mux2to1 mux_inst(
 		.a(a),
 		.b(b),
