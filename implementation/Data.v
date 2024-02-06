@@ -7,8 +7,8 @@ module Data(
     
     	input wire [15:0] input_imm, // 16-bit input of the instruction for the immediate to be parsed
 
-	input wire input_ALUOut[15:0],
-  	input wire input_MDR[15:0],
+	input wire [15:0] input_ALUOut,
+	input wire [15:0] input_MDR,
   	input wire memToReg,
   
 	
@@ -21,7 +21,7 @@ module Data(
 
     ProgrammableRegisterFile register_inst (
 	    
-    	.clk(clk),
+	    .clk(CLK),
 	    .input_reg_readA_address(input_reg_readA_address),
 	    .input_reg_readB_address(input_reg_readB_address),
 	    .input_reg_write(input_reg_write),
