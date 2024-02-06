@@ -20,16 +20,17 @@ module FetchAndMemory(
 	input wire IorD,
 	
 	input wire input_mem_write,
-	input wire input_mem_data,
+	input wire input_mem_data
 	
 	
 	
 	//internal
 	//output assign input_mem_addr = (IorD==0) ? output_PC : input_from_ALUOut,
-	output reg output_mem_data
+	
 	
 );
 reg input_mem_add;
+reg output_mem_data;
 //PC
 PC PC_inst(
 	.CLK(CLK),
