@@ -50,30 +50,66 @@ module Calculations_tb;
         input_PCSrc = 1'b0; // PCSrc value
         input_imm = 16'h4321;
         #20; // Wait for 20 time units
+
+        if (output_ALU !== (16'h1234 + 16'h5678) || output_Zero !== 0 || output_negative !== 0)
+            $display("Test Case 1 ALU addition operation Failed");
     
-        // Test Scenario 2: ALU subtraction operation with immediate value
+        // Test Scenario 2: A - IMM
         input_A = 16'hABCD;
         input_B = 16'h5678;
         input_ALUOp = 3'b010; // ALU operation code for subtraction
         input_PC = 16'h1234;
-        input_ALUSrcA = 2'b00; // ALUSrcA value (using A register)
-        input_ALUSrcB = 2'b01; // ALUSrcB value (using immediate value)
+        input_ALUSrcA = 2'b10; // ALUSrcA value (using A register)
+        input_ALUSrcB = 2'b10; // ALUSrcB value (using immediate value)
         input_PCSrc = 1'b0; // PCSrc value
         input_imm = 16'h1111;
         #20; // Wait for 20 time units
+
+        if (output_ALU !== (16'hABCD - 16'h1111) || output_Zero !== 0 || output_negative !== 0)
+            $display("Test Case 2 (A - IMM) operation Failed");
     
-        // Test Scenario 3: ALU bitwise AND operation
+        // Test Scenario 3: PC + 2
         input_A = 16'hFFFF;
         input_B = 16'h5555;
         input_ALUOp = 3'b011; // ALU operation code for bitwise AND
         input_PC = 16'h1234;
-        input_ALUSrcA = 2'b01; // ALUSrcA value (using immediate value)
-        input_ALUSrcB = 2'b00; // ALUSrcB value (using B register)
-        input_PCSrc = 1'b0; // PCSrc value
+        input_ALUSrcA = 2'b00; 
+        input_ALUSrcB = 2'b01;
+        input_PCSrc = 1'b1; // PCSrc value
         input_imm = 16'h0F0F;
         #20; // Wait for 20 time units
+
+        if (output_ALU !== (16'hFFFF + 16'h0002) || output_Zero !== 0 || output_negative !== 0)
+            $display("Test Case 3: PC + 2 operation Failed");
+
+        // Test Scenario 3: zero is true
+        input_A = 16'h5555;
+        input_B = 16'h5555;
+        input_ALUOp = 3'b010; // ALU operation code for bitwise AND
+        input_PC = 16'h1234;
+        input_ALUSrcA = 2'b10; 
+        input_ALUSrcB = 2'b00;
+        input_PCSrc = 1'b1; // PCSrc value
+        input_imm = 16'h0F0F;
+        #20; // Wait for 20 time units
+
+        if (output_ALU !== (16'h5555 - 16'h5555) || output_Zero === 0 || output_negative !== 0)
+            $display("Test Case 3: zero is true operation Failed");
+
+        // Test Scenario 3: output_negative is true
+        input_A = 16'h5555;
+        input_B = 16'h5585;
+        input_ALUOp = 3'b010; // ALU operation code for bitwise AND
+        input_PC = 16'h1234;
+        input_ALUSrcA = 2'b10; 
+        input_ALUSrcB = 2'b00;
+        input_PCSrc = 1'b1; // PCSrc value
+        input_imm = 16'h0F0F;
+        #20; // Wait for 20 time units
+
+        if (output_ALU !== (16'h5555 - 16'h5585) || output_Zero !== 0 || output_negative === 0)
+            $display("Test Case 3: output_negative is true operation Failed");
     
-        // Add more test scenarios here if needed
     
         // End simulation
         #100;
