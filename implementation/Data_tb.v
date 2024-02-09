@@ -120,21 +120,3 @@ module Data_tb;
     end
 
 endmodule
-    
-    // Task to display outputs
-    task display_outputs;
-        begin
-            #10; // Add delay for stability
-            $display("Outputs:");
-            $display("output_imm = %b", output_imm);
-            $display("output_reg_A = %b", output_reg_A);
-            $display("output_reg_B = %b", output_reg_B);
-        end
-    endtask
-    
-    // Call the task to display outputs at the end of simulation
-    initial begin
-        $finish; // Terminate simulation
-    end
-    
-endmodule
