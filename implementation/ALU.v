@@ -1,5 +1,5 @@
 /*******************************************************************************
-* Author: Yueqiao Wang
+* Author: Yueqiao Wang, Naziia Raitova
 * Date: 1/21/2024
 *
 * Module: ALU (Arithmetic Logic Unit)
@@ -33,10 +33,10 @@
 *
 *******************************************************************************/
 module ALU(
-    input [15:0] input_A, input_B, // ALU inputs
-    input [2:0] input_ALUOp, // ALU operation code
-    output [15:0] output_ALU, // ALU output
-    output output_Zero, output_negative // ALU flags
+    input wire [15:0] input_A, input_B, // ALU inputs
+    input wire [2:0] input_ALUOp, // ALU operation code
+    output reg [15:0] output_ALU, // ALU output
+    output reg output_Zero, output_negative // ALU flags
 );
 
 // Declare internal signals
@@ -63,10 +63,29 @@ assign negative = output_ALU[15];
 always @(*)
 begin
     case(input_ALUOp)
-        
+        3'b000: // Addition
+            output_ALU = add_result;
+        3'b001: // Subtraction
+            output_ALU = sub_result;
+        3'b010: // Bitwise Shift 
+            output_ALU = input_A << input_B;
+        3'b011: // Arithmetic Bitwise Shift
+            output_ALU = (input_B[2]) ? (input_A >> input_B) : (input_A << input_B);
+        3'b100: // AND Operation
+            output_ALU = and_result;
+        3'b101: // OR Operation
+            output_ALU = or_result;
+        3'b110: // XOR Operation
+            output_ALU = xor_result;
         default: // Invalid operation
-            ;
+            output_ALU = 16'h0000; // Output default value for invalid operation
     endcase
+
+    // Set zero flag
+    output_Zero = (output_ALU == 16'b0);
+
+    // Set negative flag
+    output_negative = output_ALU[15];
 end
 
 endmodule
