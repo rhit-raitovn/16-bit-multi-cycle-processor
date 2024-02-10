@@ -1,6 +1,8 @@
 `timescale 1ns / 1ps
 
 module FetchAndMemory_tb();
+
+	parameter CLK_PERIOD = 10; // Clock period in ns
   
 	input wire input_PC_PCWrite; // Flag indicating whether the PC will be updated.
    input wire [15:0] input_PC_newPC; // New value for the PC.
@@ -59,7 +61,7 @@ module FetchAndMemory_tb();
     input_PC_PCWrite = 0;
     input_PC_newPC = 8'hA5;
 	 
-    #10; 
+    #CLK_PERIOD; 
     if (output_PC !== 16'h0000) $display("Test 1 failed!");
 
     
