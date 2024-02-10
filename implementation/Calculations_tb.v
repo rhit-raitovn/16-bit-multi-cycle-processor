@@ -58,7 +58,7 @@ module Calculations_tb;
         input_ALUSrcB = 2'b00; // ALUSrcB value (using B register)
         input_PCSrc = 1'b0; // PCSrc value
         input_imm = 16'h4321;
-        #20; // Wait for 20 time units
+        #CLK_PERIOD; // Wait for 20 time units
 
         if (output_ALU !== (16'h1234 + 16'h5678) || output_Zero !== 0 || output_negative !== 0)
             $display("Test Case 1 ALU addition operation Failed");
@@ -72,7 +72,7 @@ module Calculations_tb;
         input_ALUSrcB = 2'b10; // ALUSrcB value (using immediate value)
         input_PCSrc = 1'b0; // PCSrc value
         input_imm = 16'h1111;
-        #20; // Wait for 20 time units
+        #CLK_PERIOD; // Wait for 20 time units
 
         if (output_ALU !== (16'hABCD - 16'h1111) || output_Zero !== 0 || output_negative !== 0)
             $display("Test Case 2 (A - IMM) operation Failed");
@@ -86,7 +86,7 @@ module Calculations_tb;
         input_ALUSrcB = 2'b01;
         input_PCSrc = 1'b1; // PCSrc value
         input_imm = 16'h0F0F;
-        #20; // Wait for 20 time units
+        #CLK_PERIOD; // Wait for 20 time units
 
         if (output_ALU !== (16'hFFFF + 16'h0002) || output_Zero !== 0 || output_negative !== 0)
             $display("Test Case 3: PC + 2 operation Failed");
@@ -100,7 +100,7 @@ module Calculations_tb;
         input_ALUSrcB = 2'b00;
         input_PCSrc = 1'b1; // PCSrc value
         input_imm = 16'h0F0F;
-        #20; // Wait for 20 time units
+        #CLK_PERIOD; // Wait for 20 time units
 
         if (output_ALU !== (16'h5555 - 16'h5555) || output_Zero === 0 || output_negative !== 0)
             $display("Test Case 3: zero is true operation Failed");
@@ -114,7 +114,7 @@ module Calculations_tb;
         input_ALUSrcB = 2'b00;
         input_PCSrc = 1'b1; // PCSrc value
         input_imm = 16'h0F0F;
-        #20; // Wait for 20 time units
+        #CLK_PERIOD; // Wait for 20 time units
 
         if (output_ALU !== (16'h5555 - 16'h5585) || output_Zero !== 0 || output_negative === 0)
             $display("Test Case 3: output_negative is true operation Failed");
