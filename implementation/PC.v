@@ -1,5 +1,5 @@
 /*******************************************************************************
-* Author: Yueqiao Wang, Naziia Raitova (modified)
+* Author: Yueqiao Wang
 * Date: 1/21/2024
 *
 * Module: Program Counter (PC)
