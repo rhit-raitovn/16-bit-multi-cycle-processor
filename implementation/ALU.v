@@ -32,6 +32,7 @@
 *   - Default case handles invalid operations.
 *
 *******************************************************************************/
+
 module ALU(
     input wire [15:0] input_A, input_B, // ALU inputs
     input wire [2:0] input_ALUOp, // ALU operation code
@@ -40,27 +41,12 @@ module ALU(
 );
 
 // Declare internal signals
-wire [15:0] add_result, sub_result, and_result, or_result, xor_result;
-wire [16:0] add_carry, sub_borrow;
-wire zero, negative;
+reg [15:0] add_result, sub_result, and_result, or_result, xor_result;
+reg [16:0] add_carry, sub_borrow;
+reg zero, negative;
 
 // Perform arithmetic and logic operations
-assign add_result = input_A + input_B;
-assign sub_result = input_A - input_B;
-assign and_result = input_A & input_B;
-assign or_result = input_A | input_B;
-assign xor_result = input_A ^ input_B;
-
-// Generate carry and borrow flags
-assign add_carry = {1'b0, input_A} + {1'b0, input_B};
-assign sub_borrow = {1'b0, input_A} - {1'b0, input_B};
-
-// Generate zero and negative flags
-assign zero = (output_ALU == 16'b0);
-assign negative = output_ALU[15];
-
-// Select the output and flags based on the operation code
-always @(*)
+always @*
 begin
     case(input_ALUOp)
         3'b000: // Addition
@@ -86,6 +72,21 @@ begin
 
     // Set negative flag
     output_negative = output_ALU[15];
+end
+
+// Perform arithmetic and logic operations
+always @*
+begin
+    // Perform arithmetic operations
+    add_result = input_A + input_B;
+    sub_result = input_A - input_B;
+    add_carry = {1'b0, input_A} + {1'b0, input_B};
+    sub_borrow = {1'b0, input_A} - {1'b0, input_B};
+
+    // Perform logic operations
+    and_result = input_A & input_B;
+    or_result = input_A | input_B;
+    xor_result = input_A ^ input_B;
 end
 
 endmodule
