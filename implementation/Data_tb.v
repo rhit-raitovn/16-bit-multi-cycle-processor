@@ -43,20 +43,20 @@ module Data_tb;
         input_reg_write_address = 3'b000;
         input_MDR = 16'h0001;
         memToReg = 1'b1;
-        #20; // Wait for a few cycles
+        #CLK_PERIOD; // Wait for a few cycles
         input_reg_write = 1'b1;
         input_reg_write_address = 3'b001;
         input_MDR = 16'h0005;
         memToReg = 1'b1;
-        #20; // Wait for a few cycles
+        #CLK_PERIOD; // Wait for a few cycles
         input_reg_write = 1'b1;
         input_reg_write_address = 3'b010;
         input_MDR = 16'h0010;
         memToReg = 1'b1;
-        #20; // Wait for a few cycles
+        #CLK_PERIOD; // Wait for a few cycles
         //prepare for tests by setting UI register in immediate generator to 0
         input_imm= 16'b 0000 0000 0000 0 011;
-        #20; // Wait for a few cycles
+        #CLK_PERIOD; // Wait for a few cycles
       
         // Test case 1: 3R-type
         input_reg_readA_address = 3'b000;
@@ -66,7 +66,7 @@ module Data_tb;
         input_ALUOut = 16'h1234;
         memToReg = 1'b0;
         
-        #20; // Wait for a few cycles
+        #CLK_PERIOD; // Wait for a few cycles
       if (output_reg_A !== 16'h0001 || output_reg_B !== 16'h0005)
           $display("Test Case 1 For 3R-Type Failed");
         
@@ -78,7 +78,7 @@ module Data_tb;
         input_ALUOut = 16'h9876;
         memToReg = 1'b0;
         
-        #20; // Wait for a few cycles
+        #CLK_PERIOD; // Wait for a few cycles
         if (output_reg_A !== 16'h0001 || output_imm !== 16'b0000000000000011)
           $display("Test Case 2 For 2RI-type Failed");
 
@@ -89,7 +89,7 @@ module Data_tb;
         input_MDR = 16'h5432;
         memToReg = 1'b1;
         
-        #20; // Wait for a few cycles
+        #CLK_PERIOD; // Wait for a few cycles
         if (output_imm !== 16'b 0000000 000001101)
           $display("Test Case 3 For UJ-type Failed");
 
@@ -100,7 +100,7 @@ module Data_tb;
         input_MDR = 16'h5432;
         memToReg = 1'b1;
 
-        #20; // Wait for a few cycles
+        #CLK_PERIOD; // Wait for a few cycles
         if (output_imm !== 16'b 0000000000 000001)
           $display("Test Case 4 For RI-type Failed");
 
@@ -111,7 +111,7 @@ module Data_tb;
         input_ALUOut = 16'h9876;
         memToReg = 1'b0;
 
-        #20; // Wait for a few cycles
+        #CLK_PERIOD; // Wait for a few cycles
         if (output_imm !== 16'b 0000 0000000000000)
           $display("Test Case 5 For L-type Failed");
                 
