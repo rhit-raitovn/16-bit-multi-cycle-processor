@@ -27,7 +27,7 @@ module SimpleRegister(
     input wire [15:0] input_SR, // Input that updates every cycle.
     input wire CLK, // Clock signal.
 
-    output wire [15:0] output_SR // Output representing the value in the register.
+    output reg [15:0] output_SR // Output representing the value in the register.
 );
 
 reg [15:0] register_data; // Internal register to store the value.
@@ -36,8 +36,9 @@ always @(posedge CLK)
 begin
     // On the rising edge of the clock, set the internal register to the input value.
     register_data <= input_SR;
-end
 
-assign output_SR = register_data; // Continuous assignment for output
+    // Assign the value of the internal register to the output
+    output_SR <= register_data;
+end
 
 endmodule
