@@ -13,13 +13,13 @@ module memory
 
 	// Declare the RAM variable
 	reg [DATA_WIDTH-1:0] ram[0:2**ADDR_WIDTH-1];
-
+	//reg [DATA_WIDTH-1:0] ram[0:16];//I WROTE THIS LINE TO SEE IF IT WOULD WORK (IT  PROBABLY DOESN'T) THE LINE ABOVE IS THE ORIGIONAL PROVIDED
 	// Variable to hold the registered read address
 	reg [ADDR_WIDTH-1:0] addr_reg;
 
 	
 	initial begin
-    $readmemh("memory.txt", ram);
+    $readmemh("C:/Users/pearcyln/Downloads/memory 1.txt", ram);
 	end
 	
 	always @ (posedge clk)
