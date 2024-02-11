@@ -38,6 +38,6 @@ begin
     register_data <= input_SR;
 end
 
-assign output_SR = register_data; // Output is a wire connected to the internal register.
+assign output_SR = register_data; // Continuous assignment for output
 
 endmodule
