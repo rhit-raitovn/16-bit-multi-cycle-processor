@@ -13,12 +13,12 @@ module Calculations(
     input wire [15:0] input_A, input_B, // ALU inputs
     input wire [2:0] input_ALUOp, // ALU operation code
     input wire [15:0] input_PC,
-    input wire [1:0] input_ALUSrcA, input_ALUSrcB, 
+    input wire [1:0] input_ALUSrcA, input_ALUSrcB,
     input wire [0:0] input_PCSrc,
     input wire [15:0] input_imm,
 	 
-    output reg [15:0] output_ALU, // ALU output
-    output reg output_Zero, output_negative, // ALU flags
+    output wire [15:0] output_ALU, // ALU output
+    output wire output_Zero, output_negative, // ALU flags
 	 
     input wire clk,
     input wire reset
@@ -29,7 +29,7 @@ SimpleRegister A_inst (
 	.CLK(clk),
 			  
 	.input_SR(input_A),			  
-	.output_SR(A_sr),
+	.output_SR(A_sr)
 );
 
 wire [15:0] B_sr;
@@ -37,7 +37,7 @@ SimpleRegister B_inst (
 	.CLK(clk),
 			  
 	.input_SR(input_B),			  
-	.output_SR(B_sr),
+	.output_SR(B_sr)
 );
 
 // 3:1 Mux for ALUSrcA
@@ -73,12 +73,13 @@ ALU calculations_inst (
 	.output_negative(output_negative)
 );
 
-reg [15:0] ALUOut_sr;
+wire [15:0] ALU_output_wire;
+assign ALU_output_wire = output_ALU;
+
 SimpleRegister ALUOut_inst (
-	.CLK(clk),
-			  
-	.input_SR(output_ALU),			  
-	.output_SR(ALUOut_sr),
+    .CLK(clk),
+    .input_SR(ALU_output_wire),			  
+    .output_SR(ALUOut_sr)
 );
 
 // 2:1 Mux for PCSrc
