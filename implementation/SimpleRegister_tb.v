@@ -13,6 +13,8 @@
 
 module SimpleRegister_tb;
 
+    parameter CLK_PERIOD = 10; // Clock period in ns
+
     // Inputs
     reg [15:0] input_SR;
     reg CLK;
@@ -39,25 +41,25 @@ module SimpleRegister_tb;
         input_SR = 0;
 
         // Test Case 1: Input value is 0
-        #10; 
+        #CLK_PERIOD; 
         input_SR = 16'h0000;
-        #10;
+        #CLK_PERIOD;
         if (output_SR !== 16'h0000) 
             $display("Test Case 1 Failed: output_SR should be 16'h0000");
 
         // Test Case 2: Input value is a random value
-        #10; 
+        #CLK_PERIOD; 
         input_SR = 16'hABCD;
-        #10;
+        #CLK_PERIOD;
         if (output_SR !== 16'hABCD)
             $display("Test Case 2 Failed: output_SR should be 16'hABCD");
 
         // Test Case 3: Input value changes multiple times
-        #10;
+        #CLK_PERIOD;
         input_SR = 16'h1234;
-        #10;
+        #CLK_PERIOD;
         input_SR = 16'h5678;
-        #10;
+        #CLK_PERIOD;
         if (output_SR !== 16'h5678)
             $display("Test Case 3 Failed: output_SR should be 16'h5678");
 

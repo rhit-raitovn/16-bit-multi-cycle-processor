@@ -36,42 +36,68 @@ module ALU_tb;
     input_A = 16'h1234;
     input_B = 16'h5678;
     #10;
-    if (output_ALU !== (16'h1234 + 16'h5678) || output_Zero !== 0 || output_negative !== 0)
-      $display("Test Case 1 Failed");
+    if (output_ALU !== (16'h68AC) || output_Zero !== 0 || output_negative !== 0) begin
+      $display("Test Case 1 Failed. Output ALU: %h", output_ALU);
+    end else begin
+      $display("Test Case 1 Passed");
+    end
 
     // Test Case 2: Subtraction (ALUOp = 3'b001)
     input_ALUOp = 3'b001;
     input_A = 16'h5678;
     input_B = 16'h1234;
     #10;
-    if (output_ALU !== (16'h5678 - 16'h1234) || output_Zero !== 0 || output_negative !== 0)
-      $display("Test Case 2 Failed");
+    if (output_ALU !== (16'h4444) || output_Zero !== 0 || output_negative !== 0) begin
+      $display("Test Case 2 Failed. Output ALU: %h", output_ALU);
+    end else begin
+      $display("Test Case 2 Passed");
+    end
 
     // Test Case 3: AND Operation (ALUOp = 3'b100)
     input_ALUOp = 3'b100;
     input_A = 16'hAAAA;
     input_B = 16'h5555;
     #10;
-    if (output_ALU !== (16'hAAAA & 16'h5555) || output_Zero !== 0 || output_negative !== 0)
-      $display("Test Case 3 Failed");
+    if (output_ALU !== (16'h0000) || output_Zero !== 1 || output_negative !== 0) begin
+      $display("Test Case 3 Failed. Output ALU: %h", output_ALU);
+    end else begin
+      $display("Test Case 3 Passed");
+    end
 
     // Test Case 4: OR Operation (ALUOp = 3'b101)
     input_ALUOp = 3'b101;
     input_A = 16'hAAAA;
     input_B = 16'h5555;
     #10;
-    if (output_ALU !== (16'hAAAA | 16'h5555) || output_Zero !== 0 || output_negative !== 0)
-      $display("Test Case 4 Failed");
+    if (output_ALU !== (16'hFFFF) || output_Zero !== 0 || output_negative !== 1) begin
+      $display("Test Case 4 Failed. Output ALU: %h", output_ALU);
+    end else begin
+      $display("Test Case 4 Passed");
+    end
 
     // Test Case 5: XOR Operation (ALUOp = 3'b110)
     input_ALUOp = 3'b110;
     input_A = 16'hAAAA;
     input_B = 16'h5555;
     #10;
-    if (output_ALU !== (16'hAAAA ^ 16'h5555) || output_Zero !== 0 || output_negative !== 0)
-      $display("Test Case 5 Failed");
+    if (output_ALU !== (16'hFFFF) || output_Zero !== 0 || output_negative !== 1) begin
+      $display("Test Case 5 Failed. Output ALU: %h", output_ALU);
+    end else begin
+      $display("Test Case 5 Passed");
+    end
+
+    // Test Case 6: Invalid Operation (ALUOp = 3'b111)
+    input_ALUOp = 3'b111;
+    input_A = 16'h1234;
+    input_B = 16'h5678;
+    #10;
+    if (output_ALU !== 16'h0000 || output_Zero !== 1 || output_negative !== 0) begin
+      $display("Test Case 6 Failed. Output ALU: %h", output_ALU);
+    end else begin
+      $display("Test Case 6 Passed");
+    end
 
     $stop; 
   end
-
+  
 endmodule

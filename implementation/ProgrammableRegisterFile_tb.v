@@ -13,6 +13,8 @@
 
 module ProgrammableRegisterFile_tb;
 
+    parameter CLK_PERIOD = 10; // Clock period in ns
+
     // Inputs
     reg [2:0] input_reg_readA_address;
     reg [2:0] input_reg_readB_address;
@@ -59,10 +61,10 @@ module ProgrammableRegisterFile_tb;
         input_reg_write = 1;
         input_reg_write_value = 16'h1234;
         input_reg_write_address = 3'b001;
-        #10;
+        #CLK_PERIOD;
         input_reg_write = 0;
         input_reg_readA_address = 3'b001;
-        #10;
+        #CLK_PERIOD;
         if (output_reg_A !== 16'h1234) 
             $display("Test Case 1 Failed: output_reg_A should be 16'h1234");
 
@@ -71,9 +73,9 @@ module ProgrammableRegisterFile_tb;
         input_reg_write_value = 16'hABCD;
         input_reg_write_address = 3'b010;
         input_reg_readB_address = 3'b001;
-        #10;
+        #CLK_PERIOD;
         input_reg_write = 0;
-        #10;
+        #CLK_PERIOD;
         if (output_reg_B !== 16'h1234) 
             $display("Test Case 2 Failed: output_reg_B should be 16'h1234");
         if (output_reg_A !== 16'h1234) 

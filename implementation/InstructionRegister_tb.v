@@ -11,6 +11,8 @@
 
 module InstructionRegister_tb;
 
+  parameter CLK_PERIOD = 10; // Clock period in ns
+
   // Inputs
   reg [15:0] input_IR_Instru;
   reg input_IR_write;
@@ -48,7 +50,7 @@ module InstructionRegister_tb;
     CLK = 0;
 
     // Test Case 1: Check default values, values should not change
-    #10;
+    #CLK_PERIOD;
     if (Output_IR_Control !== 7'b0000000 || Output_IR_RegA !== 4'b0000 ||
         Output_IR_RegB !== 4'b0000 || Output_IR_RegD !== 4'b0000 || Output_IR_Imm !== 16'h0000)
       $display("Test Case 1 Failed");
@@ -56,14 +58,14 @@ module InstructionRegister_tb;
     // Test Case 2: Set instruction to a specific value
     input_IR_write = 1;
     input_IR_Instru = 16'h1A2B;
-    #10;
+    #CLK_PERIOD;
     if (Output_IR_Control !== 7'b0110101 || Output_IR_RegA !== 4'b0010 ||
         Output_IR_RegB !== 4'b1011 || Output_IR_RegD !== 4'b0010 || Output_IR_Imm !== 16'h1A2B)
       $display("Test Case 2 Failed");
 
     // Test Case 3: Check values after write operation, values should not change when disabled
     input_IR_write = 0;
-    #10;
+    #CLK_PERIOD;
     if (Output_IR_Control !== 7'b0110101 || Output_IR_RegA !== 4'b0010 ||
         Output_IR_RegB !== 4'b1011 || Output_IR_RegD !== 4'b0010 || Output_IR_Imm !== 16'h1A2B)
       $display("Test Case 3 Failed");

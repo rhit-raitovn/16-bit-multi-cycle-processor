@@ -43,19 +43,19 @@ module PC_tb();
     input_PC_PCWrite = 0;
     input_PC_newPC = 8'hA5;
 	 
-    #10; 
+    #CLK_PERIOD ; 
     if (output_PC !== 16'h0000) $display("Test 1 failed!");
 
     // Test 2: PCWrite = 1, PC should be updated
     input_PC_PCWrite = 1;
     input_PC_newPC = 16'h1234;
-    #10; 
+    #CLK_PERIOD ; 
     if (output_PC !== 16'h1234) $display("Test 2 failed!");
 
     // Test 3: PCWrite = 1, PC should be updated
     input_PC_PCWrite = 1;
     input_PC_newPC = 16'h5678;
-    #10; 
+    #CLK_PERIOD ; 
     if (output_PC !== 16'h5678) $display("Test 3 failed!");
 
     $stop;
