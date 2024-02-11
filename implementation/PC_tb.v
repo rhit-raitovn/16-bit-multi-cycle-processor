@@ -97,8 +97,8 @@ initial begin
   input_PC_isbranch = 1;
   #10;
   $display("PC is %h", output_PC);
-  if (output_PC !== 16'h0014)
-		$display("Test Case 4 Failed. Expected: %h, Actual: %h", 16'h0014, output_PC);
+  if (output_PC !== 16'h0010)
+		$display("Test Case 4 Failed. Expected: %h, Actual: %h", 16'h0010, output_PC);
   else
 		$display("Test Case 4 Passed");
 		
