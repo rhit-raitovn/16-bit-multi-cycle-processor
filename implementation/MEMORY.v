@@ -2,20 +2,19 @@
 // Single port RAM with single read/write address 
 
 module memory 
-#(parameter DATA_WIDTH=16, parameter ADDR_WIDTH=10)
 (
-	input [(DATA_WIDTH-1):0] data,
-	input [(ADDR_WIDTH-1):0] addr,
+	input [15:0] data,
+	input [15:0] addr,
 	input we, clk,
 	
-	output [(DATA_WIDTH-1):0] q
+	output [15:0] q
 );
-
+parameter ADDR_WIDTH=10;
 	// Declare the RAM variable
-	reg [DATA_WIDTH-1:0] ram[0:2**ADDR_WIDTH-1];
+	reg [9:0] ram[0:2**ADDR_WIDTH-1];
 
 	// Variable to hold the registered read address
-	reg [ADDR_WIDTH-1:0] addr_reg;
+	reg [15:0] addr_reg;
 
 	
 	initial begin
