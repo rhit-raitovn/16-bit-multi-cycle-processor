@@ -11,8 +11,7 @@
 
 module InstructionRegister_tb;
 
-  parameter CLK_PERIOD = 10; // Clock period in ns
-
+  
   // Inputs
   reg [15:0] input_IR_Instru;
   reg input_IR_write;
@@ -20,9 +19,9 @@ module InstructionRegister_tb;
 
   // Outputs
   wire [6:0] Output_IR_Control;
-  wire [3:0] Output_IR_RegA;
-  wire [3:0] Output_IR_RegB;
-  wire [3:0] Output_IR_RegD;
+  wire [2:0] Output_IR_RegA;
+  wire [2:0] Output_IR_RegB;
+  wire [2:0] Output_IR_RegD;
   wire [15:0] Output_IR_Imm;
 
   // Instantiate the InstructionRegister module
@@ -36,6 +35,8 @@ module InstructionRegister_tb;
     .Output_IR_RegD(Output_IR_RegD),
     .Output_IR_Imm(Output_IR_Imm)
   );
+	
+  parameter CLK_PERIOD = 10; // Clock period in ns
 
   // Clock generation
   always begin
@@ -45,30 +46,30 @@ module InstructionRegister_tb;
   // Test procedure
   initial begin
     // Initialize inputs
-    input_IR_write = 0;
+    input_IR_write = 1;
     input_IR_Instru = 16'h0000;
     CLK = 0;
 
-    // Test Case 1: Check default values, values should not change
+    // Test Case 1: Check values for all zero instruction
     #CLK_PERIOD;
     if (Output_IR_Control !== 7'b0000000 || Output_IR_RegA !== 4'b0000 ||
         Output_IR_RegB !== 4'b0000 || Output_IR_RegD !== 4'b0000 || Output_IR_Imm !== 16'h0000)
-      $display("Test Case 1 Failed");
+      $display("instruction register Test Case 1 Failed: %h",Output_IR_Imm);
 
     // Test Case 2: Set instruction to a specific value
     input_IR_write = 1;
     input_IR_Instru = 16'h1A2B;
     #CLK_PERIOD;
-    if (Output_IR_Control !== 7'b0110101 || Output_IR_RegA !== 4'b0010 ||
-        Output_IR_RegB !== 4'b1011 || Output_IR_RegD !== 4'b0010 || Output_IR_Imm !== 16'h1A2B)
-      $display("Test Case 2 Failed");
+    if (Output_IR_Control !== 7'b0101011 || Output_IR_RegA !== 3'b110 ||
+        Output_IR_RegB !== 3'b100 || Output_IR_RegD !== 3'b000 || Output_IR_Imm !== 16'h1A2B)
+      $display("instruction register Test Case 2 Failed: %b",Output_IR_Control);
 
     // Test Case 3: Check values after write operation, values should not change when disabled
     input_IR_write = 0;
     #CLK_PERIOD;
-    if (Output_IR_Control !== 7'b0110101 || Output_IR_RegA !== 4'b0010 ||
-        Output_IR_RegB !== 4'b1011 || Output_IR_RegD !== 4'b0010 || Output_IR_Imm !== 16'h1A2B)
-      $display("Test Case 3 Failed");
+    if (Output_IR_Control !== 7'b0101011 || Output_IR_RegA !== 3'b110 ||
+        Output_IR_RegB !== 3'b100 || Output_IR_RegD !== 3'b000 || Output_IR_Imm !== 16'h1A2B)
+      $display("instruction register Test Case 3 Failed: %h",Output_IR_Imm);
 
     $stop; 
   end

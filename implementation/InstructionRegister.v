@@ -28,15 +28,16 @@
 *   - Control signals are output based on specific bit slices of the instruction.
 *
 *******************************************************************************/
+`timescale 1ns / 1ps
 module InstructionRegister(
     input wire [15:0] input_IR_Instru, // 16-bit input bus for storing instruction data.
     input wire input_IR_write, // Single-bit control signal to write data into the instruction register.
     input wire CLK, // Clock signal.
 
     output reg [6:0] Output_IR_Control, // 7-bit output for opcode and func4.
-    output reg [3:0] Output_IR_RegA, // 3-bit output for register A address.
-    output reg [3:0] Output_IR_RegB, // 3-bit output for register B address.
-    output reg [3:0] Output_IR_RegD, // 3-bit output for register D address.
+    output reg [2:0] Output_IR_RegA, // 3-bit output for register A address.
+    output reg [2:0] Output_IR_RegB, // 3-bit output for register B address.
+    output reg [2:0] Output_IR_RegD, // 3-bit output for register D address.
     output reg [15:0] Output_IR_Imm // 16-bit output for immediate value.
 );
 
@@ -45,14 +46,14 @@ reg [15:0] instruction_register; // Internal register to store the instruction
 always @(posedge CLK)
 begin
     // Write operation
-    if (input_IR_write)
+    if (input_IR_write) 
         instruction_register <= input_IR_Instru;
-
+    #1
     // Output control signals
     Output_IR_Control <= instruction_register[6:0];
     Output_IR_RegA <= instruction_register[12:10];
     Output_IR_RegB <= instruction_register[9:7];
-    Output_IR_RegD <= instruction_register[12:10];
+    Output_IR_RegD <= instruction_register[15:13];
     Output_IR_Imm <= instruction_register;
 end
 
