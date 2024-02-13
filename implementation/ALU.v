@@ -41,7 +41,7 @@ module ALU(
 );
 
 // Declare internal signals
-reg [15:0] add_result, sub_result, and_result, or_result, xor_result;
+reg [15:0] add_result, sub_result, and_result, or_result, xor_result, two_star;
 reg [16:0] add_carry, sub_borrow;
 reg zero, negative;
 
@@ -63,6 +63,8 @@ begin
             output_ALU = or_result;
         3'b110: // XOR Operation
             output_ALU = xor_result;
+        3'b111: // 2* Operation
+            output_ALU = two_star;
         default: // Invalid operation
             output_ALU = 16'h0000; // Output default value for invalid operation
     endcase
@@ -80,6 +82,7 @@ begin
     // Perform arithmetic operations
     add_result = input_A + input_B;
     sub_result = input_A - input_B;
+    two_star = {1'b0, add_result}; // Multiply sum by 2
     add_carry = {1'b0, input_A} + {1'b0, input_B};
     sub_borrow = {1'b0, input_A} - {1'b0, input_B};
 
