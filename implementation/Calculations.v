@@ -17,8 +17,9 @@ module Calculations(
     input wire [15:0] input_imm,
 	 
     output wire [15:0] output_ALUOut, // ALUOut
-	output wire [15:0] output_ALUMuxOut, // ALUMuxOut
+    output wire [15:0] output_ALUMuxOut, // ALUMuxOut
     output wire output_Zero, output_negative, // ALU flags
+    output wire [15:0] output_B_sr;
 	 
     input wire clk,
 );
@@ -31,12 +32,11 @@ SimpleRegister A_inst (
 	.output_SR(A_sr)
 );
 
-wire [15:0] B_sr;
 SimpleRegister B_inst (
 	.CLK(clk),
 			  
 	.input_SR(input_B),			  
-	.output_SR(B_sr)
+	.output_SR(output_B_sr)
 );
 
 // 3:1 Mux for ALUSrcA
@@ -54,13 +54,13 @@ end
 reg [15:0] B_mux_out;
 always @(*) begin
     case(input_ALUSrcB)
-        0: B_mux_out = B_sr;
+        0: B_mux_out = output_B_sr;
         1: B_mux_out = 16'b0000_0000_0000_0010; // Assuming you have an immediate generator module
         2: B_mux_out = input_imm; // Assuming '2' is a 16-bit immediate value
         default: B_mux_out = 16'b0000_0000_0000_0000; // Default to zero if an invalid selection
     endcase
 end
-
+	
 wire [15:0] ALU_output_wire;
 // Instantiate Counter module
 ALU calculations_inst (			  
