@@ -8,7 +8,6 @@
 *******************************************************************************/
 
 
-// Example: Main design using the Counter module
 module Calculations(
     input wire [15:0] input_A, input_B, // ALU inputs
     input wire [2:0] input_ALUOp, // ALU operation code
@@ -17,7 +16,8 @@ module Calculations(
     input wire [0:0] input_PCSrc,
     input wire [15:0] input_imm,
 	 
-    output wire [15:0] output_ALU, // ALU output
+    output wire [15:0] output_ALUOut, // ALUOut
+	output wire [15:0] output_ALUMuxOut, // ALUMuxOut
     output wire output_Zero, output_negative, // ALU flags
 	 
     input wire clk,
@@ -61,25 +61,25 @@ always @(*) begin
     endcase
 end
 
+wire [15:0] ALU_output_wire;
 // Instantiate Counter module
 ALU calculations_inst (			  
 	.input_A(A_mux_out),
 	.input_B(B_mux_out),
 	.input_ALUOp(input_ALUOp),
 			  
-	.output_ALU(output_ALU),
+	.output_ALU(ALU_output_wire),
 	.output_Zero(output_Zero),
 	.output_negative(output_negative)
 );
-
-wire [15:0] ALU_output_wire;
-assign ALU_output_wire = output_ALU;
 
 SimpleRegister ALUOut_inst (
     .CLK(clk),
     .input_SR(ALU_output_wire),			  
     .output_SR(ALUOut_sr)
 );
+
+assign ALUOut_sr = output_ALUOut;
 
 // 2:1 Mux for PCSrc
 reg [15:0] ALUOut_mux_out;
@@ -90,5 +90,7 @@ always @(*) begin
         default: ALUOut_mux_out = 16'b0000_0000_0000_0000; // Default to zero if an invalid selection
     endcase
 end
+
+assign ALUOut_mux_out = output_ALUMuxOut
 
 endmodule
