@@ -1,17 +1,21 @@
 module FetchAndMemory(
 	//external
 	input wire input_PC_PCWrite, // Flag indicating whether the PC will be updated.
-   input wire [15:0] input_PC_newPC, // New value for the PC.
-   input wire CLK, // Clock signal.
+   	input wire [15:0] input_PC_newPC, // New value for the PC.
+   	input wire CLK, // Clock signal..input_zero(),                 // Signal indicating ALU output is zero.
+    	input wire input_zero,
+	input wire input_negative,             // Signal indicating ALU output is negative.
+    	input wire [1:0] input_branchType,     // Branch type selector.
+    	input wire input_PC_isbranch,          // Signal from control indicating if a branch comparison is being performed.	
 	
 	output wire [15:0] output_PC, // Output representing the value of the PC.
 	
 	input wire input_IR_write,
 	
 	output wire [6:0] Output_IR_Control,
-	output wire [3:0] Output_IR_RegA,
-	output wire [3:0] Output_IR_RegB,
-	output wire [3:0] Output_IR_RegD,
+	output wire [2:0] Output_IR_RegA,
+	output wire [2:0] Output_IR_RegB,
+	output wire [2:0] Output_IR_RegD,
 	output wire [15:0] Output_IR_Imm,
 	
 	input wire [15:0] input_from_ALUOut,
@@ -29,14 +33,18 @@ module FetchAndMemory(
 	
 	
 );
-wire input_mem_add;
-wire output_mem_data;
+wire [15:0] input_mem_addr;
+wire [15:0] output_mem_data;
 //PC
 PC PC_inst(
-	.CLK(CLK),
-	.input_PC_PCWrite(input_PC_PCWrite),
-	.input_PC_newPC(input_PC_newPC),
-	.output_PC(output_PC)
+	.input_PCWrite(input_PC_PCWrite),              // Flag indicating whether the PC will be updated.
+    	.input_newPC(input_PC_newPC),         // New value for the PC.
+   	.CLK(CLK),                        // Clock signal.
+    	.input_zero(input_zero),                 // Signal indicating ALU output is zero.
+    	.input_negative(input_negative),             // Signal indicating ALU output is negative.
+    	.input_branchType(input_branchType),     // Branch type selector.
+    	.input_PC_isbranch(input_PC_isBranch),          // Signal from control indicating if a branch comparison is being performed.
+    	.output_PC(output_PC)            // Output representing the value of the PC.
 );
 
 //Instruction Register
@@ -52,27 +60,28 @@ InstructionRegister IR_inst(
   );
 
 //Memory
-MEMORY mem_int(
-	 .input_mem_write(input_mem_write),
-    .input_mem_addr(input_mem_addr),//mux output here
-    .input_mem_data(input_mem_data),
-    .CLK(CLK),
-    .output_mem_data(output_mem_data)
+memory_component mem_int(
+	.data(input_mem_data),
+	.addr(input_mem_addr),
+	.we(input_mem_write), 
+	.clk(CLK),
+	
+	.q(output_mem_data)
 );
 
 //MDR
 SimpleRegister MDR(
-	 .input_SR(output_mem_data), // Input that updates every cycle.
-    .CLK(CLK), // Clock signal.
-	 .output_SR(output_MDR) // Output representing the value in the register.
+	.input_SR(output_mem_data), // Input that updates every cycle.
+    	.CLK(CLK), // Clock signal.
+	.output_SR(output_MDR) // Output representing the value in the register.
 );
 
 //IorD mux
 mux2to1 IorDMux(
-  .a(output_PC),
-  .b(input_from_ALUOut),
-  .select(IorD),
-  .out(input_mem_addr)
+  	.a(output_PC),
+  	.b(input_from_ALUOut),
+  	.select(IorD),
+  	.out(input_mem_addr)
 );
 
 
