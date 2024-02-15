@@ -19,7 +19,7 @@ module Calculations(
     output wire [15:0] output_ALUOut, // ALUOut
     output wire [15:0] output_ALUMuxOut, // ALUMuxOut
     output wire output_Zero, output_negative, // ALU flags
-    output wire [15:0] B_sr;
+    output wire [15:0] output_B_sr;
 	 
     input wire clk,
 );
@@ -32,12 +32,11 @@ SimpleRegister A_inst (
 	.output_SR(A_sr)
 );
 
-wire [15:0] B_sr;
 SimpleRegister B_inst (
 	.CLK(clk),
 			  
 	.input_SR(input_B),			  
-	.output_SR(B_sr)
+	.output_SR(output_B_sr)
 );
 
 // 3:1 Mux for ALUSrcA
