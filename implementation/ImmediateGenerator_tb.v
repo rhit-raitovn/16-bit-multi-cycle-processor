@@ -22,28 +22,28 @@ module tb_ImmediateGenerator;
 
   initial begin
     // Test 1: test LUI for setting UI register
-    input_imm = 16'h0000_0010_0000_0011; //sets UI to 64
+    input_imm = 16'b0000001000000011; //sets UI to 64
     #CLK_PERIOD;
-    if(output_imm !== 16'h0000_0000_0000_0000) 
-      $display("Immediate Generator Test 1 failed:  LUI instruction output was not 0");
+    if(output_imm !== 16'b0000000000000000) 
+      $display("Immediate Generator Test 1 failed:  LUI instruction output was not 0, immediate was %b (%h)",output_imm,output_imm);
 
     // Test 2: generating immediate for 2RI instruction using UI register
-    input_imm =  16'h0000_0000_0010_0010; //2RI instruction: addi x0, x0, 2
+    input_imm =  16'b0000000000100010; //2RI instruction: addi x0, x0, 2
     #CLK_PERIOD;
-    if(output_imm !== 16'h0000_0000_0100_0010) //immediate should be 64+2=66
-      $display("Immediate Generator Test 2 failed:  immediate for 2RI instruction was not UI with provided immediate appended");
+    if(output_imm !== 16'b0000000001000010) //immediate should be 64+2=66
+      $display("Immediate Generator Test 2 failed:  immediate for 2RI instruction was not UI with provided immediate appended, immediate was %b (%h)",output_imm,output_imm);
 
     // Test 3: test immediate for UJ type
-    input_imm = 16'h0000_0111_1110_1001; //UJ instruction: jal x0 500
+    input_imm = 16'b0000011111101001; //UJ instruction: jal x0 500
     #CLK_PERIOD;
-    if(output_imm !== 16'h0000_0001_1111_0100) // immediate should be 500
-      $display("Immediate Generator Test 3 failed:  UJ immediate was not given value in instruction");
+    if(output_imm !== 16'b0000000111110100) // immediate should be 500
+      $display("Immediate Generator Test 3 failed:  UJ immediate was not given value in instruction, immediate was %b (%h)",output_imm,output_imm);
 
     // Test 4: test immediate for RI type
-    input_imm = 16'h0000_1100_1000_1000; //RI instruction: inc x0, 50
+    input_imm = 16'b0000110010001000; //RI instruction: inc x0, 50
     #CLK_PERIOD;
-    if(output_imm !== 16'h0000_0000_0011_0010) //immediate should be 50
-      $display("Immediate Generator Test 4 failed:  ");
+    if(output_imm !== 16'b0000000000110010) //immediate should be 50
+      $display("Immediate Generator Test 4 failed: immediate should be 50, but was %b (%h)",output_imm,output_imm);
 
     $stop;
   end
