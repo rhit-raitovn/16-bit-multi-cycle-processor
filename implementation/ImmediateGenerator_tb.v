@@ -37,7 +37,7 @@ module tb_ImmediateGenerator;
     // Test 3: test immediate for UJ type
     input_imm = 16'b000_111110100_100; //UJ instruction: jal x0 500
     #CLK_PERIOD;
-    if(output_imm !== 16'b0000000111110100) // immediate should be 500
+    if(output_imm !== 16'b0000000111110100) // immediate should be 500 
       $display("Immediate Generator Test 3 failed:  UJ immediate was not given value in instruction, immediate was %b (%h)",output_imm,output_imm);
 
     // Test 4: test immediate for RI type

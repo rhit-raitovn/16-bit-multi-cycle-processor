@@ -45,8 +45,8 @@ begin
         // Normal case
         case(input_imm[2:0])
             3'b001: imm <= {UI_reg[12:0], input_imm[9:7]}; //2RI: Output for input_imm[2:0] = 001 merge UI_reg[12], UI_reg, input_imm[9:7]
-            3'b010: imm <= {{8{input_imm[11:0]}}, input_imm[12:7]}; //RI: Output for 010, SE(input_imm[12:7])
-            3'b100: imm <= {{4{input_imm[11:0]}}, input_imm[12:3]}; //JAL Output for 100, SE(input_imm[12:3])
+            3'b010: imm <= {{8{input_imm[12]}}, input_imm[12:7]}; //RI: Output for 010, SE(input_imm[12:7])
+            3'b100: imm <= {{4{input_imm[12]}}, input_imm[12:3]}; //JAL Output for 100, SE(input_imm[12:3])
             default: imm <=  16'b0; // Default case (sign-extended)
         endcase
     end
