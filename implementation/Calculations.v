@@ -17,8 +17,9 @@ module Calculations(
     input wire [15:0] input_imm,
 	 
     output wire [15:0] output_ALUOut, // ALUOut
-	output wire [15:0] output_ALUMuxOut, // ALUMuxOut
+    output wire [15:0] output_ALUMuxOut, // ALUMuxOut
     output wire output_Zero, output_negative, // ALU flags
+    output wire [15:0] B_sr;
 	 
     input wire clk,
 );
@@ -60,7 +61,7 @@ always @(*) begin
         default: B_mux_out = 16'b0000_0000_0000_0000; // Default to zero if an invalid selection
     endcase
 end
-
+	
 wire [15:0] ALU_output_wire;
 // Instantiate Counter module
 ALU calculations_inst (			  
