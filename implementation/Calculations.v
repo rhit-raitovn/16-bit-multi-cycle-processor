@@ -44,8 +44,9 @@ reg [15:0] A_mux_out;
 always @(*) begin
 	case(input_ALUSrcA)
 		0: A_mux_out = input_PC;
-      1: A_mux_out = 16'b0000_0000_0000_0010;
-      2: A_mux_out = A_sr;
+		1: A_mux_out = 16'b0000_0000_0000_0010;
+		2: A_mux_out = A_sr;
+		3: A_mux_out = input_imm;
       default: A_mux_out = 16'b0000_0000_0000_0000; // Default to zero if an invalid selection
    endcase
 end
