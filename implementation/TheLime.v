@@ -19,8 +19,7 @@ wire branch;
 wire [1:0] branchType;
 
 wire CLK;
-
-wire CLK;
+wire reset;
 wire zero;
 wire negative;
     
@@ -41,7 +40,7 @@ Control control_inst (
   // Inputs
   .input_control(input_control),
   .CLK(CLK),
-  .Reset(Reset),
+  .Reset(reset),
         
   // Outputs
   .output_control_PCWrite(PCWrite),
