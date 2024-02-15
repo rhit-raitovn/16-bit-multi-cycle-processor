@@ -21,7 +21,6 @@ module Calculations(
     output wire output_Zero, output_negative, // ALU flags
 	 
     input wire clk,
-    input wire reset
 );
 
 wire [15:0] A_sr;
