@@ -24,7 +24,7 @@ parameter ADDR_WIDTH=10;
     		$readmemh("C:/Users/pearcyln/OneDrive - Rose-Hulman Institute of Technology/Documents/GitHub/rhit-csse232-2324b-project-lime-2324b-02/implementation/memory.txt", ram);//opens file here
 	end
 	
-	always @ (posedge clk)
+	always @ (negedge clk)
 	begin
 		// Write
 		if (we)
