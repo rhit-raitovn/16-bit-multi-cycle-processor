@@ -55,7 +55,7 @@ always @(posedge CLK) begin
 					 if (!input_negative)
 						  PC <= input_newPC; // Branch taken
 				end
-				2'b10: begin // blt Reg[r1] - Reg[rd] != 0
+				2'b10: begin // bne Reg[r1] - Reg[rd] != 0
 					 if (!input_zero)
 						  PC <= input_newPC; // Branch taken
 				end
