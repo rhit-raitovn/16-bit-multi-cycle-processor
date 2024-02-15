@@ -31,7 +31,7 @@ module tb_ImmediateGenerator;
     // Test 2: generating immediate for 2RI instruction using UI register
     input_imm =  16'b000_000_010_0000_001; //2RI instruction: addi x0, x0, 2
     #CLK_PERIOD;
-    if(output_imm !== 16'b0000000001000000_010) //immediate should be merge of ui reg and 010
+    if(output_imm !== 16'b0000001000000_010) //immediate should be merge of ui reg and 010
       $display("Immediate Generator Test 2 failed:  immediate for 2RI instruction was not UI with provided immediate appended, immediate was %b (%h)",output_imm,output_imm);
 
     // Test 3: test immediate for UJ type
