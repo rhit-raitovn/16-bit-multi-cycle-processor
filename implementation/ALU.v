@@ -1,95 +1,75 @@
 /*******************************************************************************
-* Author: Yueqiao Wang, Naziia Raitova
-* Date: 1/21/2024
+* Author: Yueqiao Wang
+* Date: 2/14/2024
 *
 * Module: ALU (Arithmetic Logic Unit)
 *
-* Description:
-*   Verilog code for a 16-bit ALU with various arithmetic and logic operations.
+* Description: This module implements an Arithmetic Logic Unit (ALU) capable of performing
+* various arithmetic and logical operations based on the provided operation code.
 *
 * Inputs:
-*   input [15:0] input_A, input_B // ALU inputs
-*   input [2:0] input_ALUOp // ALU operation code
+*   - input_A: 16-bit input operand A
+*   - input_B: 16-bit input operand B
+*   - input_ALUOp: 4-bit operation code specifying the operation to be performed
 *
 * Outputs:
-*   output [15:0] output_ALU // ALU output
-*   output output_Zero, output_negative // ALU flags
+*   - output_ALU: 2-bit output representing the result of the ALU operation
+*   - output_Zero: Output indicating if the result of the ALU operation is zero
+*   - output_Negative: Output indicating if the result of the ALU operation is negative
+*   - output_Carry: Output indicating if there's a carry out during arithmetic operations
 *
 * Internal Signals:
-*   wire [15:0] add_result, sub_result, and_result, or_result, xor_result;
-*   wire [16:0] add_carry, sub_borrow;
-*   wire zero, negative;
+*   - output: 17-bit internal signal used for computation of ALU operations
 *
 * Operations:
-*   - Arithmetic: Addition, Subtraction
-*   - Logic: AND, OR, XOR, Shift
-*   - Flags: Zero, Negative
+*   - Addition (add)
+*   - Subtraction (subtract)
+*   - Bitwise AND (and)
+*   - Bitwise OR (or)
+*   - Bitwise XOR (xor)
+*   - Logical left shift (shift left logical)
+*   - Logical right shift (shift right logical)
+*   - Arithmetic left shift (shift left arithmetic)
+*   - Arithmetic right shift (shift right arithmetic)
+*   - 2* Operation (twice the sum of input operands)
 *
 * Implementation Details:
-*   - Carry and borrow flags are generated for addition and subtraction operations.
-*   - Zero and negative flags are set based on the ALU output.
-*   - Operation selection is based on the input ALU operation code.
-*   - Default case handles invalid operations.
-*
+*   - The module uses a case statement to select the appropriate operation based on the input_ALUOp.
+*   - Internal signal 'output' is used for intermediate computation of ALU operations.
+*   - Zero, Negative, and Carry flags are generated based on the result of the ALU operation.
 *******************************************************************************/
+
 
 module ALU(
     input wire [15:0] input_A, input_B, // ALU inputs
-    input wire [2:0] input_ALUOp, // ALU operation code
-    output reg [15:0] output_ALU, // ALU output
-    output reg output_Zero, output_negative // ALU flags
+    input wire [3:0] input_ALUOp, // ALU operation code
+    output reg [1:0] output_ALU, // ALU output
+    output reg output_Zero, output_Negative, output_Carry // ALU flags
 );
 
-// Declare internal signals
-reg [15:0] add_result, sub_result, and_result, or_result, xor_result, two_star;
-reg [16:0] add_carry, sub_borrow;
-reg zero, negative;
+reg [16:0] output;
 
-// Perform arithmetic and logic operations
-always @*
-begin
+// ALUOp Calculation
+always @ (*) begin
     case(input_ALUOp)
-        3'b000: // Addition
-            output_ALU = add_result;
-        3'b001: // Subtraction
-            output_ALU = sub_result;
-        3'b010: // Bitwise Shift 
-            output_ALU = input_A << input_B;
-        3'b011: // Arithmetic Bitwise Shift
-            output_ALU = (input_B[2]) ? (input_A >> input_B) : (input_A << input_B);
-        3'b100: // AND Operation
-            output_ALU = and_result;
-        3'b101: // OR Operation
-            output_ALU = or_result;
-        3'b110: // XOR Operation
-            output_ALU = xor_result;
-        3'b111: // 2* Operation
-            output_ALU = two_star;
-        default: // Invalid operation
-            output_ALU = 16'h0000; // Output default value for invalid operation
+        4'b0000: output = input_A + input_B; // add
+        4'b0001: output = input_A - input_B; // subtract
+        4'b0010: output = input_A & input_B; // and
+        4'b0011: output = input_A | input_B; // or
+        4'b0100: output = input_A ^ input_B; // xor
+        4'b0101: output = input_A << input_B[3:0]; // shift left logical
+        4'b0110: output = input_A >> input_B[3:0]; // shift right logical
+        4'b0111: output = input_A <<< input_B[3:0]; // shift left arithmetic
+        4'b1000: output = input_A >>> input_B[3:0]; // shift right arithmetic
+        4'b1001: output = 2 * (input_A + input_B); // 2* Operation
+        default: output = 16'hxxxx; // default value for undefined inputs
     endcase
-
-    // Set zero flag
-    output_Zero = (output_ALU == 16'b0);
-
-    // Set negative flag
-    output_negative = output_ALU[15];
 end
 
-// Perform arithmetic and logic operations
-always @*
-begin
-    // Perform arithmetic operations
-    add_result = input_A + input_B;
-    sub_result = input_A - input_B;
-    two_star = {1'b0, add_result}; // Multiply sum by 2
-    add_carry = {1'b0, input_A} + {1'b0, input_B};
-    sub_borrow = {1'b0, input_A} - {1'b0, input_B};
-
-    // Perform logic operations
-    and_result = input_A & input_B;
-    or_result = input_A | input_B;
-    xor_result = input_A ^ input_B;
+//Flag Logic
+always @ (*) begin
+    output_Zero = (output[15:0] == 16'h0000); // Set if output is zero
+    if()
 end
 
 endmodule
