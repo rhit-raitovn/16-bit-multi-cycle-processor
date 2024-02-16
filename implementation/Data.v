@@ -26,17 +26,25 @@ reg [15:0] BorRd;
 always @(*) begin
     case(input_branch)
         0: BorRd = input_reg_readB_address;
-        1: BorRd = input_reg_write_address; // Assuming you have an immediate generator module
+        1: BorRd = input_reg_write_address; 
         default: BorRd = 16'b0000_0000_0000_0000; // Default to zero if an invalid selection
     endcase
 end
+
+wire[15:0] registerInput;
+mux2to1 IorD(
+	.a(input_ALUOut),
+	.b(input_MDR),
+	.select(memToReg),
+	.out(registerInput)
+);
 
 ProgrammableRegisterFile register_inst (
     .CLK(CLK),
     .input_reg_readA_address(input_reg_readA_address),
     .input_reg_readB_address(BorRd),
     .input_reg_write(input_reg_write),
-    .input_reg_write_value(output_imm), // Changed from 'immOrOut'
+    .input_reg_write_value(registerInput), // Changed from 'immOrOut'
     .input_reg_write_address(input_reg_write_address),
     .output_reg_A(output_reg_A),
     .output_reg_B(output_reg_B)
@@ -47,13 +55,6 @@ ImmediateGenerator ig_inst(
     .output_imm(output_imm)
 );
 
-reg [15:0] mdrOrALU;
-always @(*) begin
-    case(memToReg)
-        0: mdrOrALU = input_ALUOut;
-        1: mdrOrALU = input_MDR; // Assuming you have an immediate generator module
-        default: mdrOrALU = 16'b0000_0000_0000_0000; // Default to zero if an invalid selection
-    endcase
-end
+
 
 endmodule
