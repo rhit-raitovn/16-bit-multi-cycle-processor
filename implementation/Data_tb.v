@@ -37,13 +37,13 @@ module Data_tb;
     parameter cycleLength = 10;
     // Initialize clock
     initial begin
-        CLK = 1'b0;
+        
         forever #(cycleLength/2) CLK = ~CLK; // Toggle clock every 5 time units
     end
 
     // Test cases
     initial begin
-
+	CLK = 1'b0;
 	//Test case 0:initialize some registers
 	input_branch=1'b0;
 	input_reg_write_address=3'b000;

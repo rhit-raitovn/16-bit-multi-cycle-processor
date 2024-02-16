@@ -44,14 +44,14 @@ module Calculations_tb();
 
     // Initialize clock
     initial begin
-        clk = 1'b0;
         forever #((10)/2) clk = ~clk; // Toggle clock every half period
     end
 
     // Test cases
     initial begin
         // Test case 0
-        input_A = 16'h0001; // Input A = 1
+		  clk = 1'b0;
+        	  input_A = 16'h0001; // Input A = 1
 		  input_B = 16'h0002; // Input B = 2
 		  input_ALUOp = 4'b0000; // Example ALU operation code
 		  input_PC = 16'b0000_0000_0000_0011; // Example PC value
@@ -194,7 +194,7 @@ module Calculations_tb();
     
         // End simulation
         #100;
-        $finish;
+        $stop;
     end
 
 endmodule
