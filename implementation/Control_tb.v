@@ -77,13 +77,12 @@ parameter    jal = 11;
 
   initial begin
 
+    input_control = 7'b0010000; //and
+
     // Reset generation
     Reset = 1;
     #full;
-
-    input_control = 7'b0010000; //and
     Reset = 0;
-    #full;
 
     // Test 1 3R Type Path
 
