@@ -1,10 +1,10 @@
 `timescale 1ns / 1ps
 
-module tb;
+module Control_tb;
 
   // Parameters
-  parameter CLK_PERIOD = 10; // Clock period in time units
-  parameter SIM_TIME = 100;  // Simulation time in time units
+  parameter full = 10; // Clock period in time units
+  parameter half = 5;
 
   // Inputs
   reg [6:0] input_control;
@@ -29,11 +29,11 @@ module tb;
   wire [3:0] output_control_next_state;
 
   // Instantiate the control module
-  contol uut(
+  Control uut(
     .input_control(input_control),
     .CLK(CLK),
     .Reset(Reset),
-    .output_control_branch(output_control_branch),
+    .output_control_Branch(output_control_branch),
     .output_control_IoD(output_control_IoD),
     .output_control_IRWrite(output_control_IRWrite),
     .output_control_Mem2Reg(output_control_Mem2Reg),
@@ -44,7 +44,7 @@ module tb;
     .output_control_RegWrite(output_control_RegWrite),
     .output_control_ALUSrcA(output_control_ALUSrcA),
     .output_control_ALUSrcB(output_control_ALUSrcB),
-    .output_control_branchType(output_control_branchType),
+    .output_control_BranchType(output_control_branchType),
     .output_control_ALUOp(output_control_ALUOp),
     .output_control_current_state(output_control_current_state),
     .output_control_next_state(output_control_next_state)
@@ -85,7 +85,7 @@ parameter    jal = 11;
 
     // Test 1 3R Type Path
 
-    input_control = 7'b0010000 //and
+    input_control = 7'b0010000; //and
 
     // Test 1 3R Type Path Fetech
     // Test Case 1 (3R) Fetech for output_control_ALUOp
@@ -177,8 +177,8 @@ parameter    jal = 11;
       $display("Test Case 1 (3R) for output_control_current_state in Decode State Passed.");
 
     // State Machine Transition Test for Decode State
-    if (output_control_next_state !== RType3)
-      $display("Test Case 1 (3R) State Machine Transition Test for Decode State Failed. Next State Expected: %h, Actual: %h", RType3, output_control_next_state);
+    if (output_control_next_state !== RType)
+      $display("Test Case 1 (3R) State Machine Transition Test for Decode State Failed. Next State Expected: %h, Actual: %h", RType, output_control_next_state);
     else
       $display("Test Case 1 (3R) State Machine Transition Test for Decode State Passed.");
 

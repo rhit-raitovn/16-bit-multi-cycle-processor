@@ -211,3 +211,17 @@ Lab7/simulation/modelsim/testMem.cr.mti
 Lab7/simulation/modelsim/testMem.mpf
 Lab7/simulation/modelsim/transcript
 Lab7/simulation/modelsim/vsim.wlf
+implementation/simulation/modelsim/test.mpf
+implementation/simulation/modelsim/test.cr.mti
+implementation/simulation/modelsim/TheLime.sft
+implementation/simulation/modelsim/TheLime.vo
+implementation/simulation/modelsim/TheLime_6_1200mv_0c_slow.vo
+implementation/simulation/modelsim/TheLime_6_1200mv_0c_v_slow.sdo
+implementation/simulation/modelsim/TheLime_6_1200mv_85c_slow.vo
+implementation/simulation/modelsim/TheLime_6_1200mv_85c_v_slow.sdo
+implementation/simulation/modelsim/TheLime_min_1200mv_0c_fast.vo
+implementation/simulation/modelsim/TheLime_min_1200mv_0c_v_fast.sdo
+implementation/simulation/modelsim/TheLime_modelsim.xrf
+implementation/simulation/modelsim/TheLime_v.sdo
+implementation/simulation/modelsim/transcript
+implementation/simulation/modelsim/vsim.wlf
