@@ -24,10 +24,11 @@ module FetchAndMemory(
 	input wire IorD,
 	
 	input wire input_mem_write,
-	input wire [15:0] input_mem_data
+	input wire [15:0] input_mem_data,
 	
 	
-	
+	input wire [15:0]processor_input,
+	output wire [15:0]processor_output
 	//internal
 	//output assign input_mem_addr = (IorD==0) ? output_PC : input_from_ALUOut,
 	
@@ -65,7 +66,8 @@ memory_component mem_int(
 	.addr(input_mem_addr),
 	.we(input_mem_write), 
 	.clk(CLK),
-	
+	.processor_input(processor_input),
+	.processor_output(processor_output),
 	.q(output_mem_data)
 );
 

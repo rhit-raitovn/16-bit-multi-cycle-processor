@@ -43,7 +43,10 @@ module PC (
 
 reg [15:0] PC; // Internal register to store the PC value.
 
+initial PC=16'h0000; //PC INITIAL VALUE
+
 always @(posedge CLK) begin
+	$display("CURRENT PC: %h",PC);
 	if (input_PCWrite) begin
 		if(input_PC_isbranch) begin
 		  case(input_branchType)

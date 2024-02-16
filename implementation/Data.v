@@ -22,7 +22,7 @@ module Data(
     output wire [15:0] output_reg_B // 16-bit output representing data read from Register B.
 );
 
-reg [15:0] BorRd;
+reg [2:0] BorRd;
 always @(*) begin
     case(input_branch)
         0: BorRd = input_reg_readB_address;

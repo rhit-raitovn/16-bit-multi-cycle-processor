@@ -24,8 +24,8 @@ parameter ADDR_WIDTH=10;
 	initial begin
 		$display("atempting to find memory.txt");
 		
-		//CHANGE THIS FILEPATH
-    		$readmemh("C:/Users/pearcyln/OneDrive - Rose-Hulman Institute of Technology/Documents/GitHub/rhit-csse232-2324b-project-lime-2324b-02/implementation/memory.txt", ram);//opens file here
+		//CHANGE THIS FILEPATH //should be readmemh for hex and redmemb for binary
+    		$readmemb("C:/Users/pearcyln/OneDrive - Rose-Hulman Institute of Technology/Documents/GitHub/rhit-csse232-2324b-project-lime-2324b-02/implementation/memory.txt", ram);//opens file here
 	end
 	
 	always @ (negedge clk)
