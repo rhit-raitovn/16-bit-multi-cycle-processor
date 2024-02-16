@@ -52,7 +52,7 @@ module Control(
   output reg [1:0] output_control_ALUSrcA,
   output reg [1:0] output_control_ALUSrcB,
   output reg [1:0] output_control_BranchType,
-  output reg [2:0] output_control_ALUOp,
+  output reg [3:0] output_control_ALUOp,
 
   output reg [3:0] output_control_current_state,
   output reg [3:0] output_control_next_state

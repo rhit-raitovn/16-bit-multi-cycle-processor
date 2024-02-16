@@ -24,7 +24,7 @@ module Control_tb;
   wire [1:0] output_control_ALUSrcA;
   wire [1:0] output_control_ALUSrcB;
   wire [1:0] output_control_BranchType;
-  wire [2:0] output_control_ALUOp;
+  wire [3:0] output_control_ALUOp;
   wire [3:0] output_control_current_state;
   wire [3:0] output_control_next_state;
 
@@ -89,66 +89,66 @@ parameter    jal = 11;
 
     // Test 1 3R Type Path Fetech
     #half;
-    
+
     // Test Case 1 (3R) Fetech for output_control_ALUOp
     if (output_control_ALUOp !== 4'b0000)
       $display("Test Case 1 (3R) Fetech 1 (3R) Fetech output_control_ALUOp Failed. Expected: %h, Actual: %h", 4'b0000, output_control_ALUOp);
     else
-      $display("Test Case 1 (3R) Fetech 1 (3R) Fetech output_control_ALUOp Passed.");
+      $display("Test Case 1 (3R) Fetech 1 (3R) Fetech output_control_ALUOp Passed at Time %0t.", $time);
 
     // Test Case 1 (3R) Fetech 1 (3R) Fetech for output_control_ALUSrcA
     if (output_control_ALUSrcA !== 2'b00)
       $display("Test Case 1 (3R) Fetech output_control_ALUSrcA Failed. Expected: %h, Actual: %h", 2'b00, output_control_ALUSrcA);
     else
-      $display("Test Case 1 (3R) Fetech output_control_ALUSrcA Passed.");
+      $display("Test Case 1 (3R) Fetech output_control_ALUSrcA Passed at Time %0t.", $time);
 
     // Test Case 1 (3R) Fetech for output_control_ALUSrcB
     if (output_control_ALUSrcB !== 2'b01)
       $display("Test Case 1 (3R) Fetech output_control_ALUSrcB Failed. Expected: %h, Actual: %h", 2'b01, output_control_ALUSrcB);
     else
-      $display("Test Case 1 (3R) Fetech output_control_ALUSrcB Passed.");
+      $display("Test Case 1 (3R) Fetech output_control_ALUSrcB Passed at Time %0t.", $time);
 
     // Test Case 1 (3R) Fetech for output_control_IoD
     if (output_control_IoD !== 1'b0)
       $display("Test Case 1 (3R) Fetech output_control_IoD Failed. Expected: %h, Actual: %h", 1'b0, output_control_IoD);
     else
-      $display("Test Case 1 (3R) Fetech output_control_IoD Passed.");
+      $display("Test Case 1 (3R) Fetech output_control_IoD Passed at Time %0t.", $time);
 
     // Test Case 1 (3R) Fetech for output_control_IRWrite
     if (output_control_IRWrite !== 1'b1)
       $display("Test Case 1 (3R) Fetech output_control_IRWrite Failed. Expected: %h, Actual: %h", 1'b1, output_control_IRWrite);
     else
-      $display("Test Case 1 (3R) Fetech output_control_IRWrite Passed.");
+      $display("Test Case 1 (3R) Fetech output_control_IRWrite Passed at Time %0t.", $time);
 
     // Test Case 1 (3R) Fetech for output_control_MemR
     if (output_control_MemR !== 1'b0)
       $display("Test Case 1 (3R) Fetech output_control_MemR Failed. Expected: %h, Actual: %h", 1'b0, output_control_MemR);
     else
-      $display("Test Case 1 (3R) Fetech output_control_MemR Passed.");
+      $display("Test Case 1 (3R) Fetech output_control_MemR Passed at Time %0t.", $time);
 
     // Test Case 1 (3R) Fetech for output_control_PCSrc
     if (output_control_PCSrc !== 1'b0)
       $display("Test Case 1 (3R) Fetech output_control_PCSrc Failed. Expected: %h, Actual: %h", 1'b0, output_control_PCSrc);
     else
-      $display("Test Case 1 (3R) Fetech output_control_PCSrc Passed.");
+      $display("Test Case 1 (3R) Fetech output_control_PCSrc Passed at Time %0t.", $time);
 
     // Test Case 1 (3R) Fetech for output_control_PCWrite
     if (output_control_PCWrite !== 1'b1)
       $display("Test Case 1 (3R) Fetech output_control_PCWrite Failed. Expected: %h, Actual: %h", 1'b1, output_control_PCWrite);
     else
-      $display("Test Case 1 (3R) Fetech output_control_PCWrite Passed.");
+      $display("Test Case 1 (3R) Fetech output_control_PCWrite Passed at Time %0t.", $time);
 
     // Test Case for output_control_current_state
     if (output_control_current_state !== Fetch)
       $display("Test Case 1 (3R) Fetech output_control_current_state Failed. Expected: %h, Actual: %h", Fetch, output_control_current_state);
     else
-      $display("Test Case 1 (3R) Fetech: output_control_current_state Passed.");
+      $display("Test Case 1 (3R) Fetech: output_control_current_state Passed at Time %0t.", $time);
 
     // Test Case for output_control_next_state
     if (output_control_next_state !== Decode)
       $display("Test Case 1 (3R) Fetech for output_control_next_state Failed. Expected: %h, Actual: %h", Decode, output_control_next_state);
     else
-      $display("Test Case 1 (3R) Fetech for output_control_next_state Passed.");
+      $display("Test Case 1 (3R) Fetech for output_control_next_state Passed at Time %0t.", $time);
 
     #full
 
@@ -158,31 +158,31 @@ parameter    jal = 11;
     if (output_control_IRWrite !== 1'b0)
       $display("Test Case 1 (3R) for output_control_IRWrite in Decode state Failed. Expected: %h, Actual: %h", 1'b0, output_control_IRWrite);
     else
-      $display("Test Case 1 (3R) for output_control_IRWrite in Decode state Passed.");
+      $display("Test Case 1 (3R) for output_control_IRWrite in Decode state Passed at Time %0t.", $time);
 
     // Test Case for output_control_MemR
     if (output_control_MemR !== 1'b0)
       $display("Test Case 1 (3R) for output_control_MemR in Decode state Failed. Expected: %h, Actual: %h", 1'b0, output_control_MemR);
     else
-      $display("Test Case 1 (3R) for output_control_MemR in Decode state Passed.");
+      $display("Test Case 1 (3R) for output_control_MemR in Decode state Passed at Time %0t.", $time);
 
     // Test Case for output_control_PCWrite
     if (output_control_PCWrite !== 1'b0)
       $display("Test Case 1 (3R) for output_control_PCWrite in Decode state Failed. Expected: %h, Actual: %h", 1'b0, output_control_PCWrite);
     else
-      $display("Test Case 1 (3R) for output_control_PCWrite in Decode state Passed.");
+      $display("Test Case 1 (3R) for output_control_PCWrite in Decode state Passed at Time %0t.", $time);
 
     // Test Case for output_control_current_state in Decode State
     if (output_control_current_state !== Decode)
       $display("Test Case 1 (3R) for output_control_current_state in Decode State Failed. Expected: %h, Actual: %h", Decode, output_control_current_state);
     else
-      $display("Test Case 1 (3R) for output_control_current_state in Decode State Passed.");
+      $display("Test Case 1 (3R) for output_control_current_state in Decode State Passed at Time %0t.", $time);
 
     // State Machine Transition Test for Decode State
     if (output_control_next_state !== RType)
       $display("Test Case 1 (3R) State Machine Transition Test for Decode State Failed. Next State Expected: %h, Actual: %h", RType, output_control_next_state);
     else
-      $display("Test Case 1 (3R) State Machine Transition Test for Decode State Passed.");
+      $display("Test Case 1 (3R) State Machine Transition Test for Decode State Passed at Time %0t.", $time);
 
 
 
