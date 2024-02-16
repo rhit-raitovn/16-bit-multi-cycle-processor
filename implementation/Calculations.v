@@ -10,7 +10,7 @@
 
 module Calculations(
     input wire [15:0] input_A, input_B, // ALU inputs
-    input wire [2:0] input_ALUOp, // ALU operation code
+    input wire [3:0] input_ALUOp, // ALU operation code
     input wire [15:0] input_PC,
     input wire [1:0] input_ALUSrcA, input_ALUSrcB,
     input wire [0:0] input_PCSrc,
@@ -18,8 +18,8 @@ module Calculations(
 	 
     output wire [15:0] output_ALUOut, // ALUOut
     output wire [15:0] output_ALUMuxOut, // ALUMuxOut
-    output wire output_Zero, output_negative, // ALU flags
-    output wire [15:0] output_B_sr;
+    output wire output_Zero, output_negative, output_carry, // ALU flags
+    output wire [15:0] output_B_sr,
 	 
     input wire clk,
 );
@@ -71,7 +71,8 @@ ALU calculations_inst (
 			  
 	.output_ALU(ALU_output_wire),
 	.output_Zero(output_Zero),
-	.output_negative(output_negative)
+	.output_negative(output_negative),
+	.output_carry(output_carry)
 );
 
 SimpleRegister ALUOut_inst (
