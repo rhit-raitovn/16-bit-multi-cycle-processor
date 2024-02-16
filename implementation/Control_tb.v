@@ -80,12 +80,14 @@ parameter    jal = 11;
     // Reset generation
     Reset = 1;
     #full;
+
+    input_control = 7'b0010000; //and
     Reset = 0;
     #full;
 
     // Test 1 3R Type Path
 
-    input_control = 7'b0010000; //and
+    
 
     // Test 1 3R Type Path Fetech
     #half;
