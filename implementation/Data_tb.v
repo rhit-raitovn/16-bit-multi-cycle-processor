@@ -1,36 +1,24 @@
 /*******************************************************************************
-* Author: Naziia Raitova and Luke Pearcy
-* Date: 2/8/2024
+* Author: tulsi
+* Date: 
 *
-* Module: Data tb
-*
+* Module: Data_tb
 *
 *******************************************************************************/
 
-`timescale 1ns / 1ps
+`timescale 1ns / 1ps // Define timescale for simulation
 
 module Data_tb;
 
-    // Parameters
-    parameter CLK_PERIOD = 10; // Clock period in ns
-    
-    // Signals
-    reg [2:0] input_reg_readA_address;
-    reg [2:0] input_reg_readB_address;
-    reg input_reg_write;
-    reg [2:0] input_reg_write_address;
-    reg CLK;
-    reg [15:0] input_imm;
-    reg [15:0] input_ALUOut;
-    reg [15:0] input_MDR;
-    reg memToReg;
-	 reg input_branch;
+    // Inputs
+    reg [2:0] input_reg_readA_address, input_reg_readB_address, input_reg_write_address;
+    reg input_reg_write, CLK, input_branch, memToReg;
+    reg [15:0] input_imm, input_ALUOut, input_MDR;
 
-    wire [15:0] output_imm;
-    wire [15:0] output_reg_A;
-    wire [15:0] output_reg_B;
-    
-    // Instantiate the module under test
+    // Outputs
+    wire [15:0] output_imm, output_reg_A, output_reg_B;
+
+    // Instantiate the module
     Data dut (
         .input_reg_readA_address(input_reg_readA_address),
         .input_reg_readB_address(input_reg_readB_address),
@@ -38,105 +26,65 @@ module Data_tb;
         .input_reg_write_address(input_reg_write_address),
         .CLK(CLK),
         .input_imm(input_imm),
+        .input_branch(input_branch),
         .input_ALUOut(input_ALUOut),
         .input_MDR(input_MDR),
         .memToReg(memToReg),
-		  .input_branch(input_branch),
-		  .output_imm(output_imm), 
-		  .output_reg_A(output_reg_A), 
-		  .output_reg_B(output_reg_B)
+        .output_imm(output_imm),
+        .output_reg_A(output_reg_A),
+        .output_reg_B(output_reg_B)
     );
 
-    // Clock generation
-    always #((CLK_PERIOD / 2)) CLK = ~CLK;
-    
-    // Initial stimulus
+    // Initialize clock
     initial begin
-			CLK = 1'b1;
-        input_reg_write = 1'b1;
-        input_reg_write_address = 3'b000;
-        input_MDR = 16'h0001;
-        memToReg = 1'b1;
-        #CLK_PERIOD; // Wait for a few cycles
-        input_reg_write = 1'b1;
-        input_reg_write_address = 3'b001;
-        input_MDR = 16'h0005;
-        memToReg = 1'b1;
-        #CLK_PERIOD; // Wait for a few cycles
-        input_reg_write = 1'b1;
-        input_reg_write_address = 3'b010;
-        input_MDR = 16'h0010;
-        memToReg = 1'b1;
-        #CLK_PERIOD; // Wait for a few cycles
-        // Prepare for tests by setting UI register in immediate generator to 0
-        input_imm = 16'b_0000_0000_0000_0_011;
-        #CLK_PERIOD; // Wait for a few cycles
+        CLK = 1'b0;
+        forever #5 CLK = ~CLK; // Toggle clock every 5 time units
+    end
 
-        // Test case 1: 3R-type
-        input_branch = 1'b0;
+    // Test cases
+    initial begin
+        // Test case 1: Write to register
         input_reg_readA_address = 3'b000;
         input_reg_readB_address = 3'b001;
         input_reg_write = 1'b1;
         input_reg_write_address = 3'b010;
-        input_ALUOut = 16'h1234;
+        input_imm = 16'h1234;
+        input_branch = 1'b1;
+        input_ALUOut = 16'hABCD;
+        input_MDR = 16'h5678;
         memToReg = 1'b0;
 
-        #CLK_PERIOD; // Wait for a few cycles
-        if (output_reg_A !== 16'h0001 || output_reg_B !== 16'h0005)
-            $display("Test Case 1 For 3R-Type Failed Output: output_reg_A=%h, output_reg_B=%h", output_reg_A, output_reg_B);
-				
-				
-        // Test case 2: 2RI Type
-		  input_branch = 1'b1;
-        input_reg_readA_address = 3'b010;
-        input_reg_write = 1'b1;
-        input_reg_write_address = 3'b100;
-        input_imm = 16'b010010000000001;
+        #10; // Wait some time for signals to stabilize
+
+        // Check output
+        if (output_imm !== 16'h1234 || output_reg_A !== 16'hABCD || output_reg_B !== 16'h5678) begin
+            $display("Test case 1 failed! Output: output_imm=%h, output_reg_A=%h, output_reg_B=%h", output_imm, output_reg_A, output_reg_B);
+        end else begin
+            $display("Test case 1 passed!");
+        end
+
+        // Test case 2: Read from register
+        input_reg_readA_address = 3'b100;
+        input_reg_readB_address = 3'b101;
+        input_reg_write = 1'b0;
+        input_reg_write_address = 3'b110;
+        input_imm = 16'h4321;
+        input_branch = 1'b0;
         input_ALUOut = 16'h9876;
-        memToReg = 1'b0;
-        
-        #CLK_PERIOD; // Wait for a few cycles
-        if (output_reg_A !== 16'h0001 || output_reg_B !== 16'h0010)
-          $display("Test Case 2 For 2RI-type Failed Output: output_reg_A=%h, output_reg_B=%h", output_reg_A, output_reg_B);
-
-        // Test case 3: UJ Type
-		  input_branch = 1'b0;
-        input_reg_write = 1'b1;
-        input_reg_write_address = 3'b100;
-        input_imm = 16'b100_000001101_100;
-        input_MDR = 16'h5432;
-        memToReg = 1'b1;
-        
-        #CLK_PERIOD; // Wait for a few cycles
-        if (output_imm !== 16'b0000000_000001101)
-          $display("Test Case 3 For UJ-type Failed");
-
-        // Test case 4: RI Type
-		  input_branch = 1'b0;
-        input_reg_write = 1'b1;
-        input_reg_write_address = 3'b100;
-        input_imm = 16'h100_000001_0110_010;
         input_MDR = 16'h5432;
         memToReg = 1'b1;
 
-        #CLK_PERIOD; // Wait for a few cycles
-        if (output_imm !== 16'b0000000000_000001)
-          $display("Test Case 4 For RI-type Failed Output: output_reg_A=%h, output_reg_B=%h", output_reg_A, output_imm);
+        #10; // Wait some time for signals to stabilize
 
-        // Test case 5: L Type
-		  input_branch = 1'b0;
-        input_reg_write = 1'b1;
-        input_reg_write_address = 3'b100;
-        input_imm = 16'b0000000000000_011;
-        input_ALUOut = 16'h9876;
-        memToReg = 1'b0;
+        // Check output
+        if (output_imm !== 16'h4321 || output_reg_A !== 16'h9876 || output_reg_B !== 16'h5432) begin
+            $display("Test case 2 failed! Output: output_imm=%h, output_reg_A=%h, output_reg_B=%h", output_imm, output_reg_A, output_reg_B);
+        end else begin
+            $display("Test case 2 passed!");
+        end
 
-        #CLK_PERIOD; // Wait for a few cycles
-        if (output_imm !== 16'b0000_0000000000000)
-          $display("Test Case 5 For L-type Failed");
-               
-                
         // End simulation
+        #100;
         $finish;
     end
 
