@@ -77,6 +77,9 @@ parameter    jal = 11;
 
   initial begin
 
+    $display("*****************************************************************");
+    $display("3R Type AND TEST");
+
     input_control = 7'b0010000; //and
 
     // Reset generation
@@ -86,11 +89,9 @@ parameter    jal = 11;
 
     // Test 1 3R Type Path
 
-    
-
     // Test 1 3R Type Path Fetech
     #half;
-
+    $display("----------------------Fetech----------------");
     // Test Case 1 (3R) Fetech for output_control_ALUOp
     if (output_control_ALUOp !== 4'b0000)
       $display("Test Case 1 (3R) Fetech 1 (3R) Fetech output_control_ALUOp Failed. Expected: %h, Actual: %h", 4'b0000, output_control_ALUOp);
@@ -150,9 +151,9 @@ parameter    jal = 11;
       $display("Test Case 1 (3R) Fetech for output_control_next_state Failed. Expected: %h, Actual: %h", Decode, output_control_next_state);
     else
       $display("Test Case 1 (3R) Fetech for output_control_next_state Passed at Time %0t.", $time);
-
+    $display("----------------------Fetech----------------");
     #full
-
+    $display("----------------------Decode----------------");
     //Test 1 3R Type Path Decode
 
     // Test Case for output_control_IRWrite
@@ -184,17 +185,246 @@ parameter    jal = 11;
       $display("Test Case 1 (3R) State Machine Transition Test for Decode State Failed. Next State Expected: %h, Actual: %h", RType, output_control_next_state);
     else
       $display("Test Case 1 (3R) State Machine Transition Test for Decode State Passed at Time %0t.", $time);
+    $display("----------------------Decode----------------");
+    #full
+    $display("----------------------RType----------------");
+    //Test 1 3R Type Path RType
+    // Test Case for output_control_ALUOp in RType State
+    if (output_control_ALUOp !== 4'b0010)
+      $display("Test Case for output_control_ALUOp in RType state Failed. Expected: %h, Actual: %h", 4'b0010, output_control_ALUOp);
+    else
+      $display("Test Case for output_control_ALUOp in RType state Passed at Time %0t.", $time);
+
+    // Test Case for output_control_ALUSrcA in RType State
+    if (output_control_ALUSrcA !== 2'b10)
+      $display("Test Case for output_control_ALUSrcA in RType state Failed. Expected: %h, Actual: %h", 2'b10, output_control_ALUSrcA);
+    else
+      $display("Test Case for output_control_ALUSrcA in RType state Passed at Time %0t.", $time);
+
+    // Test Case for output_control_ALUSrcB in RType State
+    if (output_control_ALUSrcB !== 2'b00)
+      $display("Test Case for output_control_ALUSrcB in RType state Failed. Expected: %h, Actual: %h", 2'b00, output_control_ALUSrcB);
+    else
+      $display("Test Case for output_control_ALUSrcB in RType state Passed at Time %0t.", $time);
+
+    // Test Case for output_control_current_state in RType State
+    if (output_control_current_state !== RType)
+      $display("Test Case for output_control_current_state in RType State Failed. Expected: %h, Actual: %h", RType, output_control_current_state);
+    else
+      $display("Test Case for output_control_current_state in RType State Passed at Time %0t.", $time);
+
+    // State Machine Transition Test for RType State
+    if (output_control_next_state !== RTypeEnd)
+      $display("Test Case for State Machine Transition in RType State Failed. Next State Expected: %h, Actual: %h", RTypeEnd, output_control_next_state);
+    else
+      $display("Test Case for State Machine Transition in RType State Passed at Time %0t.", $time);
+    $display("----------------------RType----------------");
+    #full
+    $display("----------------------RTypeEnd----------------");
+    //Test 1 3R Type Path RTypeEnd
+    // Test Case for output_control_Mem2Reg in RTypeEnd State
+    if (output_control_Mem2Reg !== 1'b0)
+      $display("Test Case for output_control_Mem2Reg in RTypeEnd state Failed. Expected: %h, Actual: %h", 1'b0, output_control_Mem2Reg);
+    else
+      $display("Test Case for output_control_Mem2Reg in RTypeEnd state Passed at Time %0t.", $time);
+
+    // Test Case for output_control_RegWrite in RTypeEnd State
+    if (output_control_RegWrite !== 1'b1)
+      $display("Test Case for output_control_RegWrite in RTypeEnd state Failed. Expected: %h, Actual: %h", 1'b1, output_control_RegWrite);
+    else
+      $display("Test Case for output_control_RegWrite in RTypeEnd state Passed at Time %0t.", $time);
+
+    // Test Case for output_control_current_state in RTypeEnd State
+    if (output_control_current_state !== RTypeEnd)
+      $display("Test Case for output_control_current_state in RTypeEnd State Failed. Expected: %h, Actual: %h", RTypeEnd, output_control_current_state);
+    else
+      $display("Test Case for output_control_current_state in RTypeEnd State Passed at Time %0t.", $time);
+
+    // State Machine Transition Test for RTypeEnd State
+    if (output_control_next_state !== Fetech)
+      $display("Test Case for State Machine Transition in RTypeEnd State Failed. Next State Expected: %h, Actual: %h", Fetech, output_control_next_state);
+    else
+      $display("Test Case for State Machine Transition in RTypeEnd State Passed at Time %0t.", $time);
+    $display("----------------------RTypeEnd----------------");
+    input_control = 7'b0101001; //slli
+    $display("~~~TEST 2 input_control changed at Time %0t~~~~", $time);
+
+    $display("Test 1 3R Type Path Passed Entirely at Time %0t.", $time);
+    $display("*****************************************************************");
+
+    $display("*****************************************************************");
+    $display("TEST 2 Normal 2RI Type slli TEST");
+    input_control = 7'b0101001; //slli
+    #full
+    $display("----------------------Fetech----------------");
+    // Test for output_control_ALUOp
+    if (output_control_ALUOp !== 4'b0000)
+      $display("TEST 2 Normal 2RI Type slli: output_control_ALUOp Failed at Time %0t. Expected: %h, Actual: %h", $time, 4'b0000, output_control_ALUOp);
+    else
+      $display("TEST 2 Normal 2RI Type slli: output_control_ALUOp Passed at Time %0t.", $time);
+
+    // Test for output_control_ALUSrcA
+    if (output_control_ALUSrcA !== 2'b00)
+      $display("TEST 2 Normal 2RI Type slli: output_control_ALUSrcA Failed at Time %0t. Expected: %h, Actual: %h", $time, 2'b00, output_control_ALUSrcA);
+    else
+      $display("TEST 2 Normal 2RI Type slli: output_control_ALUSrcA Passed at Time %0t.", $time);
+
+    // Test for output_control_ALUSrcB
+    if (output_control_ALUSrcB !== 2'b01)
+      $display("TEST 2 Normal 2RI Type slli: output_control_ALUSrcB Failed at Time %0t. Expected: %h, Actual: %h", $time, 2'b01, output_control_ALUSrcB);
+    else
+      $display("TEST 2 Normal 2RI Type slli: output_control_ALUSrcB Passed at Time %0t.", $time);
+
+    // Test for output_control_IoD
+    if (output_control_IoD !== 1'b0)
+      $display("TEST 2 Normal 2RI Type slli: output_control_IoD Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_IoD);
+    else
+      $display("TEST 2 Normal 2RI Type slli: output_control_IoD Passed at Time %0t.", $time);
+
+    // Test for output_control_IRWrite
+    if (output_control_IRWrite !== 1'b1)
+      $display("TEST 2 Normal 2RI Type slli: output_control_IRWrite Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b1, output_control_IRWrite);
+    else
+      $display("TEST 2 Normal 2RI Type slli: output_control_IRWrite Passed at Time %0t.", $time);
+
+    // Test for output_control_MemR
+    if (output_control_MemR !== 1'b0)
+      $display("TEST 2 Normal 2RI Type slli: output_control_MemR Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_MemR);
+    else
+      $display("TEST 2 Normal 2RI Type slli: output_control_MemR Passed at Time %0t.", $time);
+
+    // Test for output_control_PCSrc
+    if (output_control_PCSrc !== 1'b0)
+      $display("TEST 2 Normal 2RI Type slli: output_control_PCSrc Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_PCSrc);
+    else
+      $display("TEST 2 Normal 2RI Type slli: output_control_PCSrc Passed at Time %0t.", $time);
+
+    // Test for output_control_PCWrite
+    if (output_control_PCWrite !== 1'b1)
+      $display("TEST 2 Normal 2RI Type slli: output_control_PCWrite Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b1, output_control_PCWrite);
+    else
+      $display("TEST 2 Normal 2RI Type slli: output_control_PCWrite Passed at Time %0t.", $time);
+
+    // Test Case for output_control_current_state in Fetch State
+    if (output_control_current_state !== Fetch)
+      $display("TEST 2 Normal 2RI Type slli: output_control_current_state in Fetch State Failed at Time %0t. Expected: %h, Actual: %h", $time, Fetch, output_control_current_state);
+    else
+      $display("TEST 2 Normal 2RI Type slli: output_control_current_state in Fetch State Passed at Time %0t.", $time);
+
+    // State Machine Transition Test for Fetch State
+    if (output_control_next_state !== Decode)
+      $display("TEST 2 Normal 2RI Type slli: State Machine Transition Test for Fetch State Failed at Time %0t. Next State Expected: %h, Actual: %h", $time, Decode, output_control_next_state);
+    else
+      $display("TEST 2 Normal 2RI Type slli: State Machine Transition Test for Fetch State Passed at Time %0t.", $time);
+    $display("----------------------Fetech----------------");
+
+    #full
+
+    $display("----------------------Decode----------------");
+    // Test Case for output_control_IRWrite in Decode State
+    if (output_control_IRWrite !== 1'b0)
+      $display("TEST 2 Normal 2RI Type slli: output_control_IRWrite in Decode state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_IRWrite);
+    else
+      $display("TEST 2 Normal 2RI Type slli: output_control_IRWrite in Decode state Passed at Time %0t.", $time);
+
+    // Test Case for output_control_MemR in Decode State
+    if (output_control_MemR !== 1'b0)
+      $display("TEST 2 Normal 2RI Type slli: output_control_MemR in Decode state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_MemR);
+    else
+      $display("TEST 2 Normal 2RI Type slli: output_control_MemR in Decode state Passed at Time %0t.", $time);
+
+    // Test Case for output_control_PCWrite in Decode State
+    if (output_control_PCWrite !== 1'b0)
+      $display("TEST 2 Normal 2RI Type slli: output_control_PCWrite in Decode state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_PCWrite);
+    else
+      $display("TEST 2 Normal 2RI Type slli: output_control_PCWrite in Decode state Passed at Time %0t.", $time);
+
+    // Test Case for output_control_current_state in Decode State
+    if (output_control_current_state !== Decode)
+      $display("TEST 2 Normal 2RI Type slli: output_control_current_state in Decode State Failed at Time %0t. Expected: %h, Actual: %h", $time, Decode, output_control_current_state);
+    else
+      $display("TEST 2 Normal 2RI Type slli: output_control_current_state in Decode State Passed at Time %0t.", $time);
+
+    // State Machine Transition Test for Decode State
+    if (output_control_next_state !== RIType)
+      $display("TEST 2 Normal 2RI Type slli: State Machine Transition Test for Decode State Failed at Time %0t. Next State Expected: %h, Actual: %h", $time, RIType, output_control_next_state);
+    else
+      $display("TEST 2 Normal 2RI Type slli: State Machine Transition Test for Decode State Passed at Time %0t.", $time);
+
+    $display("----------------------Decode----------------");
+
+    #full
+
+    $display("----------------------RIType----------------");
+
+    // Test Case for output_control_ALUOp in RIType State
+    if (output_control_ALUOp !== 4'b0101)
+      $display("TEST 2 RI Type Path RIType: output_control_ALUOp in RIType state Failed at Time %0t. Expected: %h, Actual: %h", $time, 4'b0101, output_control_ALUOp);
+    else
+      $display("TEST 2 RI Type Path RIType: output_control_ALUOp in RIType state Passed at Time %0t.", $time);
+
+    // Test Case for output_control_ALUSrcA in RIType State
+    if (output_control_ALUSrcA !== 2'b10)
+      $display("TEST 2 RI Type Path RIType: output_control_ALUSrcA in RIType state Failed at Time %0t. Expected: %h, Actual: %h", $time, 2'b10, output_control_ALUSrcA);
+    else
+      $display("TEST 2 RI Type Path RIType: output_control_ALUSrcA in RIType state Passed at Time %0t.", $time);
+
+    // Test Case for output_control_ALUSrcB in RIType State
+    if (output_control_ALUSrcB !== 2'b10)
+      $display("TEST 2 RI Type Path RIType: output_control_ALUSrcB in RIType state Failed at Time %0t. Expected: %h, Actual: %h", $time, 2'b10, output_control_ALUSrcB);
+    else
+      $display("TEST 2 RI Type Path RIType: output_control_ALUSrcB in RIType state Passed at Time %0t.", $time);
+
+    // Test Case for output_control_current_state in RIType State
+    if (output_control_current_state !== RIType)
+      $display("TEST 2 RI Type Path RIType: output_control_current_state in RIType State Failed at Time %0t. Expected: %h, Actual: %h", $time, RIType, output_control_current_state);
+    else
+      $display("TEST 2 RI Type Path RIType: output_control_current_state in RIType State Passed at Time %0t.", $time);
+
+    // State Machine Transition Test from RIType State to RTypeEnd State
+    if (output_control_next_state !== RTypeEnd)
+      $display("TEST 2 RI Type Path RIType: State Machine Transition from RIType State to RTypeEnd State Failed at Time %0t. Next State Expected: %h, Actual: %h", $time, RTypeEnd, output_control_next_state);
+    else
+      $display("TEST 2 RI Type Path RIType: State Machine Transition from RIType State to RTypeEnd State Passed at Time %0t.", $time);
+    $display("----------------------RIType----------------");
+
+    #full
+
+    $display("----------------------RTypeEnd----------------");
+    // Test Case for output_control_Mem2Reg in RTypeEnd State
+    if (output_control_Mem2Reg !== 1'b0)
+      $display("TEST 2 RTypeEnd Path: output_control_Mem2Reg in RTypeEnd state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_Mem2Reg);
+    else
+      $display("TEST 2 RTypeEnd Path: output_control_Mem2Reg in RTypeEnd state Passed at Time %0t.", $time);
+
+    // Test Case for output_control_RegWrite in RTypeEnd State
+    if (output_control_RegWrite !== 1'b1)
+      $display("TEST 2 RTypeEnd Path: output_control_RegWrite in RTypeEnd state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b1, output_control_RegWrite);
+    else
+      $display("TEST 2 RTypeEnd Path: output_control_RegWrite in RTypeEnd state Passed at Time %0t.", $time);
+
+    // Test Case for output_control_current_state in RTypeEnd State
+    if (output_control_current_state !== RTypeEnd)
+      $display("TEST 2 RTypeEnd Path: output_control_current_state in RTypeEnd State Failed at Time %0t. Expected: %h, Actual: %h", $time, RTypeEnd, output_control_current_state);
+    else
+      $display("TEST 2 RTypeEnd Path: output_control_current_state in RTypeEnd State Passed at Time %0t.", $time);
+
+    // State Machine Transition Test from RTypeEnd State to Fetch State
+    if (output_control_next_state !== Fetch)
+      $display("TEST 2 RTypeEnd Path: State Machine Transition from RTypeEnd State to Fetch State Failed at Time %0t. Next State Expected: %h, Actual: %h", $time, Fetch, output_control_next_state);
+    else
+      $display("TEST 2 RTypeEnd Path: State Machine Transition from RTypeEnd State to Fetch State Passed at Time %0t.", $time);
+    $display("----------------------RTypeEnd----------------");
+    input_control = 7'b1001001; //lw
+    $display("~~~TEST 3 input_control changed to 7'b1001001 at Time %0t~~~~", $time);
+
+    $display("Test 2 Normal 2RI Path Passed Entirely at Time %0t.", $time);
+    $display("*****************************************************************");
 
 
-
-
-
-
-    
-    
     // Finish simulation
     #full;
-    $finish;
+    $stop;
   end
 
 endmodule

@@ -110,13 +110,6 @@ always @ (*) begin
   branchType = input_control[4:3];
 end
 
-//// Reset 
-//always @ (posedge CLK or posedge Reset) begin
-//  if (Reset)
-//    current_state <= Fetch; // Reset state
-////  else
-////    current_state <= next_state; // Transition to next state
-//end
 
 //OUTPUT signals for each state (depends on current state)
 always @ (current_state)
@@ -301,7 +294,7 @@ always @ (current_state, next_state, input_control) begin
         3'b011: begin
           $display("L Type Instruction");
           next_state = Fetch;
-          $display("The next state is Fetch/Fetch");
+          $display("The next state is Fetch");
         end
 
         3'b100: begin
