@@ -8,8 +8,11 @@
 `timescale 1ns / 1ps // Define timescale for simulation
 module TheLime(
   input wire [15:0] main_input, //main input
-  output wire [15:0] main_output // main output
+  output wire [15:0] main_output, // main output
+  output reg CLK
 );
+  initial CLK=1;
+  always #5 CLK=~CLK;
 
 // Control signals
 wire PCWrite;
@@ -26,9 +29,8 @@ wire PCSrc;
 wire branch;
 wire [1:0] branchType;
 
-reg CLK;
-initial CLK=1;
-always #5 CLK=~CLK;
+
+
 
 
 wire reset;
