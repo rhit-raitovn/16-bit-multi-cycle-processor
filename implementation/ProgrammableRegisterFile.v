@@ -48,7 +48,9 @@ always @(posedge CLK)
 begin
     // Read operations
     output_reg_A <= registers[input_reg_readA_address];
+	$display(output_reg_A)
     output_reg_B <= registers[input_reg_readB_address];
+	$display(output_reg_B)
 
     // Write operation
     if (input_reg_write)
