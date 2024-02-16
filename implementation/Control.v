@@ -102,6 +102,8 @@ always @ (*) begin
         4'b0110: ALUOp = 4'b0110; // shift right logical
         4'b0111: ALUOp = 4'b0111; // shift left arithmetic
         4'b1000: ALUOp = 4'b1000; // shift right arithmetic
+        4'b1001: ALUOp = 4'b1001; // lw
+        4'b1010: ALUOp = 4'b1001; // sw
         default: ALUOp = 4'bxxxx; // default value for undefined inputs
     endcase
 end
@@ -155,8 +157,6 @@ always @ (current_state)
     end
 
     RIType: begin
-      // Define behavior for RI-type instruction category
-      // This could be similar to the behavior of other RI-type instructions
       output_control_ALUOp = ALUOp;
       output_control_ALUSrcA = 2;
       output_control_ALUSrcB = 2;

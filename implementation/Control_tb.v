@@ -432,64 +432,64 @@ parameter    jal = 11;
     // Test Case for Fetch State
     // Test Case for output_control_ALUOp in Fetch State
     if (output_control_ALUOp !== 4'b0000)
-      $display("TEST 3 Load Word TEST: output_control_ALUOp in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 4'b0000, output_control_ALUOp);
+      $display("TEST 3 Load Word Fetch Path: output_control_ALUOp in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 4'b0000, output_control_ALUOp);
     else
-      $display("TEST 3 Load Word TEST: output_control_ALUOp in Fetch state !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word Fetch Path: output_control_ALUOp in Fetch state !!!Passed!!! at Time %0t.", $time);
 
     // Test Case for output_control_ALUSrcA in Fetch State
     if (output_control_ALUSrcA !== 2'b00)
-      $display("TEST 3 Load Word TEST: output_control_ALUSrcA in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 2'b00, output_control_ALUSrcA);
+      $display("TEST 3 Load Word Fetch Path: output_control_ALUSrcA in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 2'b00, output_control_ALUSrcA);
     else
-      $display("TEST 3 Load Word TEST: output_control_ALUSrcA in Fetch state !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word Fetch Path: output_control_ALUSrcA in Fetch state !!!Passed!!! at Time %0t.", $time);
 
     // Test Case for output_control_ALUSrcB in Fetch State
     if (output_control_ALUSrcB !== 2'b01)
-      $display("TEST 3 Load Word TEST: output_control_ALUSrcB in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 2'b01, output_control_ALUSrcB);
+      $display("TEST 3 Load Word Fetch Path: output_control_ALUSrcB in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 2'b01, output_control_ALUSrcB);
     else
-      $display("TEST 3 Load Word TEST: output_control_ALUSrcB in Fetch state !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word Fetch Path: output_control_ALUSrcB in Fetch state !!!Passed!!! at Time %0t.", $time);
 
     // Test Case for output_control_IoD in Fetch State
     if (output_control_IoD !== 1'b0)
-      $display("TEST 3 Load Word TEST: output_control_IoD in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_IoD);
+      $display("TEST 3 Load Word Fetch Path: output_control_IoD in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_IoD);
     else
-      $display("TEST 3 Load Word TEST: output_control_IoD in Fetch state !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word Fetch Path: output_control_IoD in Fetch state !!!Passed!!! at Time %0t.", $time);
 
     // Test Case for output_control_IRWrite in Fetch State
     if (output_control_IRWrite !== 1'b1)
-      $display("TEST 3 Load Word TEST: output_control_IRWrite in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b1, output_control_IRWrite);
+      $display("TEST 3 Load Word Fetch Path: output_control_IRWrite in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b1, output_control_IRWrite);
     else
-      $display("TEST 3 Load Word TEST: output_control_IRWrite in Fetch state !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word Fetch Path: output_control_IRWrite in Fetch state !!!Passed!!! at Time %0t.", $time);
 
     // Test Case for output_control_MemR in Fetch State
     if (output_control_MemR !== 1'b0)
-      $display("TEST 3 Load Word TEST: output_control_MemR in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_MemR);
+      $display("TEST 3 Load Word Fetch Path: output_control_MemR in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_MemR);
     else
-      $display("TEST 3 Load Word TEST: output_control_MemR in Fetch state !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word Fetch Path: output_control_MemR in Fetch state !!!Passed!!! at Time %0t.", $time);
 
     // Test Case for output_control_PCSrc in Fetch State
     if (output_control_PCSrc !== 1'b0)
-      $display("TEST 3 Load Word TEST: output_control_PCSrc in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_PCSrc);
+      $display("TEST 3 Load Word Fetch Path: output_control_PCSrc in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_PCSrc);
     else
-      $display("TEST 3 Load Word TEST: output_control_PCSrc in Fetch state !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word Fetch Path: output_control_PCSrc in Fetch state !!!Passed!!! at Time %0t.", $time);
 
     // Test Case for output_control_PCWrite in Fetch State
     if (output_control_PCWrite !== 1'b1)
-      $display("TEST 3 Load Word TEST: output_control_PCWrite in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b1, output_control_PCWrite);
+      $display("TEST 3 Load Word Fetch Path: output_control_PCWrite in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b1, output_control_PCWrite);
     else
-      $display("TEST 3 Load Word TEST: output_control_PCWrite in Fetch state !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word Fetch Path: output_control_PCWrite in Fetch state !!!Passed!!! at Time %0t.", $time);
 
-    
+
     // Test Case for output_control_current_state in Fetch State
     if (output_control_current_state !== Fetch)
-      $display("TEST 3 Load Word TEST: output_control_current_state in Fetch State Failed at Time %0t. Expected: %h, Actual: %h", $time, Fetch, output_control_current_state);
+      $display("TEST 3 Load Word Fetch Path: output_control_current_state in Fetch State Failed at Time %0t. Expected: %h, Actual: %h", $time, Fetch, output_control_current_state);
     else
-      $display("TEST 3 Load Word TEST: output_control_current_state in Fetch State !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word Fetch Path: output_control_current_state in Fetch State !!!Passed!!! at Time %0t.", $time);
 
     // State Machine Transition Test for Fetch State
     if (output_control_next_state !== Decode)
-      $display("TEST 3 Load Word TEST: State Machine Transition Test for Fetch State Failed at Time %0t. Next State Expected: %h, Actual: %h", $time, Decode, output_control_next_state);
+      $display("TEST 3 Load Word Fetch Path: State Machine Transition Test for Fetch State Failed at Time %0t. Next State Expected: %h, Actual: %h", $time, Decode, output_control_next_state);
     else
-      $display("TEST 3 Load Word TEST: State Machine Transition Test for Fetch State !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word Fetch Path: State Machine Transition Test for Fetch State !!!Passed!!! at Time %0t.", $time);
 
     $display("----------------------Fetch----------------");
     #full
@@ -497,73 +497,118 @@ parameter    jal = 11;
     
     // Test Case for output_control_IRWrite in Decode State
     if (output_control_IRWrite !== 1'b0)
-      $display("TEST 3 Load Word Path: output_control_IRWrite in Decode state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_IRWrite);
+      $display("TEST 3 Load Word Decode Path: output_control_IRWrite in Decode state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_IRWrite);
     else
-      $display("TEST 3 Load Word Path: output_control_IRWrite in Decode state !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word Decode Path: output_control_IRWrite in Decode state !!!Passed!!! at Time %0t.", $time);
 
     // Test Case for output_control_MemR in Decode State
     if (output_control_MemR !== 1'b0)
-      $display("TEST 3 Load Word Path: output_control_MemR in Decode state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_MemR);
+      $display("TEST 3 Load Word Decode Path: output_control_MemR in Decode state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_MemR);
     else
-      $display("TEST 3 Load Word Path: output_control_MemR in Decode state !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word Decode Path: output_control_MemR in Decode state !!!Passed!!! at Time %0t.", $time);
 
     // Test Case for output_control_PCWrite in Decode State
     if (output_control_PCWrite !== 1'b0)
-      $display("TEST 3 Load Word Path: output_control_PCWrite in Decode state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_PCWrite);
+      $display("TEST 3 Load Word Decode Path: output_control_PCWrite in Decode state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_PCWrite);
     else
-      $display("TEST 3 Load Word Path: output_control_PCWrite in Decode state !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word Decode Path: output_control_PCWrite in Decode state !!!Passed!!! at Time %0t.", $time);
 
     // Test Case for output_control_current_state in Decode State
     if (output_control_current_state !== Decode)
-      $display("TEST 3 Load Word Path: output_control_current_state in Decode State Failed at Time %0t. Expected: %h, Actual: %h", $time, Decode, output_control_current_state);
+      $display("TEST 3 Load Word Decode Path: output_control_current_state in Decode State Failed at Time %0t. Expected: %h, Actual: %h", $time, Decode, output_control_current_state);
     else
-      $display("TEST 3 Load Word Path: output_control_current_state in Decode State !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word Decode Path: output_control_current_state in Decode State !!!Passed!!! at Time %0t.", $time);
 
     // State Machine Transition Test from Decode State to DECODE State
     if (output_control_next_state !== RIType)
-      $display("TEST 3 Load Word Path: State Machine Transition from Decode State to RIType State Failed at Time %0t. Next State Expected: %h, Actual: %h", $time, RIType, output_control_next_state);
+      $display("TEST 3 Load Word Decode Path: State Machine Transition from Decode State to RIType State Failed at Time %0t. Next State Expected: %h, Actual: %h", $time, RIType, output_control_next_state);
     else
-      $display("TEST 3 Load Word Path: State Machine Transition from Decode State to RIType State !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word Decode Path: State Machine Transition from Decode State to RIType State !!!Passed!!! at Time %0t.", $time);
     $display("----------------------Decode----------------");
     #full    
     $display("----------------------RIType----------------");
     // Test Case for output_control_ALUOp in RIType State
-    if (output_control_ALUOp !== ALUOp)
-      $display("TEST 3 Load Word Path: output_control_ALUOp in RIType state Failed at Time %0t. Expected: %h, Actual: %h", $time, ALUOp, output_control_ALUOp);
+    if (output_control_ALUOp !== 4'b1001)
+      $display("TEST 3 Load Word RIType Path: output_control_ALUOp in RIType state Failed at Time %0t. Expected: %h, Actual: %h", $time, ALUOp, output_control_ALUOp);
     else
-      $display("TEST 3 Load Word Path: output_control_ALUOp in RIType state !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word RIType Path: output_control_ALUOp in RIType state !!!Passed!!! at Time %0t.", $time);
 
     // Test Case for output_control_ALUSrcA in RIType State
     if (output_control_ALUSrcA !== 2'b10)
-      $display("TEST 3 Load Word Path: output_control_ALUSrcA in RIType state Failed at Time %0t. Expected: %h, Actual: %h", $time, 2'b10, output_control_ALUSrcA);
+      $display("TEST 3 Load Word RIType Path: output_control_ALUSrcA in RIType state Failed at Time %0t. Expected: %h, Actual: %h", $time, 2'b10, output_control_ALUSrcA);
     else
-      $display("TEST 3 Load Word Path: output_control_ALUSrcA in RIType state !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word RIType Path: output_control_ALUSrcA in RIType state !!!Passed!!! at Time %0t.", $time);
 
     // Test Case for output_control_ALUSrcB in RIType State
     if (output_control_ALUSrcB !== 2'b10)
-      $display("TEST 3 Load Word Path: output_control_ALUSrcB in RIType state Failed at Time %0t. Expected: %h, Actual: %h", $time, 2'b10, output_control_ALUSrcB);
+      $display("TEST 3 Load Word RIType Path: output_control_ALUSrcB in RIType state Failed at Time %0t. Expected: %h, Actual: %h", $time, 2'b10, output_control_ALUSrcB);
     else
-      $display("TEST 3 Load Word Path: output_control_ALUSrcB in RIType state !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word RIType Path: output_control_ALUSrcB in RIType state !!!Passed!!! at Time %0t.", $time);
 
     // Test Case for output_control_current_state in RIType State
     if (output_control_current_state !== RIType)
-      $display("TEST 3 Load Word Path: output_control_current_state in RIType State Failed at Time %0t. Expected: %h, Actual: %h", $time, RIType, output_control_current_state);
+      $display("TEST 3 Load Word RIType Path: output_control_current_state in RIType State Failed at Time %0t. Expected: %h, Actual: %h", $time, RIType, output_control_current_state);
     else
-      $display("TEST 3 Load Word Path: output_control_current_state in RIType State !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word RIType Path: output_control_current_state in RIType State !!!Passed!!! at Time %0t.", $time);
 
     // State Machine Transition Test from RIType State to LW1 State
     if (output_control_next_state !== LW1)
-      $display("TEST 3 Load Word Path: State Machine Transition from RIType State to LW1 State Failed at Time %0t. Next State Expected: %h, Actual: %h", $time, LW1, output_control_next_state);
+      $display("TEST 3 Load Word RIType Path: State Machine Transition from RIType State to LW1 State Failed at Time %0t. Next State Expected: %h, Actual: %h", $time, LW1, output_control_next_state);
     else
-      $display("TEST 3 Load Word Path: State Machine Transition from RIType State to LW1 State !!!Passed!!! at Time %0t.", $time);
+      $display("TEST 3 Load Word RIType Path: State Machine Transition from RIType State to LW1 State !!!Passed!!! at Time %0t.", $time);
     $display("----------------------RIType----------------");
     #full    
     $display("----------------------LW1----------------");
-    
+    // Test Case for output_control_IoD in LW1 State
+    if (output_control_IoD !== 1'b1)
+      $display("TEST 3 Load Word LW1 Path: output_control_IoD in LW1 state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b1, output_control_IoD);
+    else
+      $display("TEST 3 Load Word LW1 Path: output_control_IoD in LW1 state !!!Passed!!! at Time %0t.", $time);
+
+    // Test Case for output_control_MemR in LW1 State
+    if (output_control_MemR !== 1'b1)
+      $display("TEST 3 Load Word LW1 Path: output_control_MemR in LW1 state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b1, output_control_MemR);
+    else
+      $display("TEST 3 Load Word LW1 Path: output_control_MemR in LW1 state !!!Passed!!! at Time %0t.", $time);
+
+    // Test Case for output_control_current_state in LW1 State
+    if (output_control_current_state !== LW1)
+      $display("TEST 3 Load Word LW1 Path: output_control_current_state in LW1 State Failed at Time %0t. Expected: %h, Actual: %h", $time, LW1, output_control_current_state);
+    else
+      $display("TEST 3 Load Word LW1 Path: output_control_current_state in LW1 State !!!Passed!!! at Time %0t.", $time);
+
+    // State Machine Transition Test from LW1 State to LW2 State
+    if (output_control_next_state !== LW2)
+      $display("TEST 3 Load Word LW1 Path: State Machine Transition from LW1 State to LW2 State Failed at Time %0t. Next State Expected: %h, Actual: %h", $time, LW2, output_control_next_state);
+    else
+      $display("TEST 3 Load Word LW1 Path: State Machine Transition from LW1 State to LW2 State !!!Passed!!! at Time %0t.", $time);
     $display("----------------------LW1----------------");
     #full
+
     $display("----------------------LW2----------------");
-    
+    // Test Case for output_control_Mem2Reg in LW2 State
+    if (output_control_Mem2Reg !== 1'b1)
+      $display("TEST 3 Load Word LW2 Path: output_control_Mem2Reg in LW2 state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b1, output_control_Mem2Reg);
+    else
+      $display("TEST 3 Load Word LW2 Path: output_control_Mem2Reg in LW2 state !!!Passed!!! at Time %0t.", $time);
+
+    // Test Case for output_control_RegWrite in LW2 State
+    if (output_control_RegWrite !== 1'b1)
+      $display("TEST 3 Load Word LW2 Path: output_control_RegWrite in LW2 state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b1, output_control_RegWrite);
+    else
+      $display("TEST 3 Load Word LW2 Path: output_control_RegWrite in LW2 state !!!Passed!!! at Time %0t.", $time);
+
+     // Test Case for output_control_current_state in LW2 State
+    if (output_control_current_state !== LW2)
+      $display("TEST 3 Load Word LW2 Path: output_control_current_state in LW2 State Failed at Time %0t. Expected: %h, Actual: %h", $time, LW2, output_control_current_state);
+    else
+      $display("TEST 3 Load Word LW2 Path: output_control_current_state in LW2 State !!!Passed!!! at Time %0t.", $time);
+
+    // State Machine Transition Test from LW2 State to Fetch State
+    if (output_control_next_state !== Fetch)
+      $display("TEST 3 Load Word LW2 Path: State Machine Transition from LW2 State to Fetch State Failed at Time %0t. Next State Expected: %h, Actual: %h", $time, Fetch, output_control_next_state);
+    else
+      $display("TEST 3 Load Word LW2 Path: State Machine Transition from LW2 State to Fetch State !!!Passed!!! at Time %0t.", $time);
     $display("----------------------LW2----------------");
 
     $display("~~~TEST 4 SW input_control changed to 7'b1010001 at Time %0t~~~~", $time);
