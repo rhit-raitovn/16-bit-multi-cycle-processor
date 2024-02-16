@@ -422,6 +422,79 @@ parameter    jal = 11;
     $display("*****************************************************************");
 
 
+
+    // Test Case for L Type Instruction
+#half;
+$display("----------L Type------------");
+// Setting input_control to represent an L Type instruction (opcode = 3'b011)
+input_control <= 7'bXXXX011;
+
+#full; // Wait for one clock cycle
+
+
+// Test Case for output_control_IoD
+if (output_control_IoD !== 1'b0) // ince L Type instruction writes to IR
+  $display("Test Case L Type: output_control_IoD Failed. Expected: %h, Actual: %h", 1'b0, output_control_IoD);
+else
+  $display("Test Case L Type: output_control_IoD Passed at Time %0t.", $time);
+
+// Test Case for output_control_IRWrite
+if (output_control_IRWrite !== 0'b1) // Since L Type instruction writes to IR
+  $display("Test Case L Type: output_control_IRWrite Failed. Expected: %h, Actual: %h", 0'b1, output_control_IRWrite);
+else
+  $display("Test Case L Type: output_control_IRWrite Passed at Time %0t.", $time);
+
+// Test Case for output_control_MemR
+if (output_control_MemR !== 1'b0) // L Type instruction does not memory read
+  $display("Test Case L Type: output_control_MemR Failed. Expected: %h, Actual: %h", 1'b0, output_control_MemR);
+else
+  $display("Test Case L Type: output_control_MemR Passed at Time %0t.", $time);
+
+// Test Case for output_control_PCSrc
+if (output_control_PCSrc !== 1'b0) // Since L Type instruction doesn't involve PC source change
+  $display("Test Case L Type: output_control_PCSrc Failed. Expected: %h, Actual: %h", 1'b0, output_control_PCSrc);
+else
+  $display("Test Case L Type: output_control_PCSrc Passed at Time %0t.", $time);
+
+// Test Case for output_control_PCWrite
+if (output_control_PCWrite !== 1'b0) // Since L Type instruction doesn't involve PC write
+  $display("Test Case L Type: output_control_PCWrite Failed. Expected: %h, Actual: %h", 1'b0, output_control_PCWrite);
+else
+  $display("Test Case L Type: output_control_PCWrite Passed at Time %0t.", $time);
+
+// Test Case for output_control_RegWrite
+if (output_control_RegWrite !== 1'b0) // Since L Type instruction doesn't write to register
+  $display("Test Case L Type: output_control_RegWrite Failed. Expected: %h, Actual: %h", 1'b0, output_control_RegWrite);
+else
+  $display("Test Case L Type: output_control_RegWrite Passed at Time %0t.", $time);
+
+// Test Case for output_control_Mem2Reg
+if (output_control_Mem2Reg !== 1'b0) // Since L Type instruction doesn't involve memory to register
+  $display("Test Case L Type: output_control_Mem2Reg Failed. Expected: %h, Actual: %h", 1'b0, output_control_Mem2Reg);
+else
+  $display("Test Case L Type: output_control_Mem2Reg Passed at Time %0t.", $time);
+
+// Test Case for output_control_Branch
+if (output_control_Branch !== 1'b0) // Since L Type instruction doesn't involve branch
+  $display("Test Case L Type: output_control_Branch Failed. Expected: %h, Actual: %h", 1'b0, output_control_Branch);
+else
+  $display("Test Case L Type: output_control_Branch Passed at Time %0t.", $time);
+
+// Test Case for output_control_BranchType
+if (output_control_BranchType !== 2'b00) // Since L Type instruction doesn't involve branch
+  $display("Test Case L Type: output_control_BranchType Failed. Expected: %h, Actual: %h", 2'b00, output_control_BranchType);
+else
+  $display("Test Case L Type: output_control_BranchType Passed at Time %0t.", $time);
+
+// Test Case for output_control_next_state
+if (output_control_next_state !== Fetch) // Since L Type instruction directly goes back to Fetch
+  $display("Test Case L Type: output_control_next_state Failed. Expected: %h, Actual: %h", Fetch, output_control_next_state);
+else
+  $display("Test Case L Type: output_control_next_state Passed at Time %0t.", $time);
+
+#full;
+
+
     // Finish simulation
     #full;
     $stop;
