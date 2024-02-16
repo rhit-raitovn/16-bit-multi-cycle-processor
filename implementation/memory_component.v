@@ -38,8 +38,8 @@ parameter ADDR_WIDTH=10;
 		addr_reg <= addr;
 
 		//check if address is valid for 10 bit ram
-		if(addr[15:10]!==6'b000000) 
-			$display("EXCEPTION IN MEMORY: the memory address 0x%h is invalid for 10 bit adressed ram component (first 6 bits are ignored)",addr);
+		if(addr[15:10]!==6'b000000 && addr!==16'b1111110000000000) 
+			$display("EXCEPTION IN MEMORY: the memory address 0x%h is invalid for 10 bit adressed ram component and was not special input/output address(first 6 bits are ignored)",addr);
 	end
 
 	// Continuous assignment implies read returns NEW data.
@@ -50,9 +50,9 @@ parameter ADDR_WIDTH=10;
 	always @ (*) begin
 		case (addr) 
 			16'b1111110000000000: begin
-				processor_output = data;
 				if(we) 
-					q = processor_input;
+				   processor_output = data;
+				q = processor_input;
 			end
 			
 			default: begin
