@@ -62,6 +62,7 @@ always @ (*) begin
         4'b0111: alu_output = input_A <<< input_B[3:0]; // shift left arithmetic
         4'b1000: alu_output = input_A >>> input_B[3:0]; // shift right arithmetic
         4'b1001: alu_output = 2 * (input_A + input_B); // 2* Operation
+        4'b1100: alu_output = input_B; // set to IG
         default: begin 
 		 alu_output = 16'hxxxx; // default value for undefined inputs
 		 $display("ALU EXCEPTION: invalid operation %b",input_ALUOp);		

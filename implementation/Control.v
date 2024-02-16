@@ -106,6 +106,10 @@ always @ (*) begin
         4'b1000: ALUOp = 4'b1000; // shift right arithmetic
         4'b1001: ALUOp = 4'b1001; // lw
         4'b1010: ALUOp = 4'b1001; // sw
+        4'b1011: ALUOp = 4'bxxxx; // changeable
+        4'b1100: ALUOp = 4'b1100; // set
+        4'b1101: ALUOp = 4'bxxxx; // changeable
+        4'b1111: ALUOp = 4'bxxxx; // changeable
         default: ALUOp = 4'bxxxx; // default value for undefined inputs
     endcase
 end
