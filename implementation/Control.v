@@ -77,6 +77,8 @@ parameter    BRANCH = 9;
 parameter    BRANCH2 = 10;
 parameter    JAL = 11;
 
+initial current_state = 4'b0000;
+
 
 //register calculation
 always @ (posedge CLK, posedge Reset)

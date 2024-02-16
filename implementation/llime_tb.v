@@ -3,10 +3,12 @@ module lime_tb();
 
 reg [15:0] main_input;
 wire [15:0] main_output;
+wire internalClock;
 
 TheLime uut(
 	.main_input(main_input),
-	.main_output(main_output)
+	.main_output(main_output),
+	.CLK(internalClock)
 );
 
 initial begin
