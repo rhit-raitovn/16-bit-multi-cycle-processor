@@ -60,11 +60,11 @@ module Calculations_tb();
 		  input_PCSrc = 1'b0; // Select output_ALU
 		  input_imm = 16'b0000_0000_0000_0100; // Example immediate value
 		  reset = 1'b0; // Deassert reset
-		  clk = 1'b0; // Initialize clock
+		  
 		  #10; // Wait some time for signals to stabilize
-		  clk = 1'b1; // Toggle clock
+		  
 		  #10; // Wait some time for signals to stabilize
-		  clk = 1'b0; // Toggle clock back
+		  
 		  #10; // Wait some time for signals to stabilize
 
         // Check output
@@ -84,11 +84,11 @@ module Calculations_tb();
         input_PCSrc = 1'b0; // PCSrc value
         input_imm = 16'h4321;
         reset = 1'b0; // Deassert reset
-		  clk = 1'b0; // Initialize clock
+		  
 		  #10; // Wait some time for signals to stabilize
-		  clk = 1'b1; // Toggle clock
+		 
 		  #10; // Wait some time for signals to stabilize
-		  clk = 1'b0; // Toggle clock back
+		  
 		  #10; // Wait some time for signals to stabilize
 
         if (output_ALUMuxOut !== (16'h68AC) || output_Zero !== 0 || output_negative !== 0) begin
@@ -108,11 +108,11 @@ module Calculations_tb();
         input_PCSrc = 1'b0; // PCSrc value
         input_imm = 16'h0111;
         reset = 1'b0; // Deassert reset
-		  clk = 1'b0; // Initialize clock
+		  
 		  #10; // Wait some time for signals to stabilize
-		  clk = 1'b1; // Toggle clock
+		  
 		  #10; // Wait some time for signals to stabilize
-		  clk = 1'b0; // Toggle clock back
+		
 		  #10; // Wait some time for signals to stabilize
 
         if (output_ALUMuxOut !== (16'h0ABC) || output_Zero !== 0 || output_negative !== 0) begin
@@ -131,11 +131,11 @@ module Calculations_tb();
         input_ALUSrcB = 2'b01;
         input_PCSrc = 1'b0; // PCSrc value
         reset = 1'b0; // Deassert reset
-		  clk = 1'b0; // Initialize clock
+		  
 		  #10; // Wait some time for signals to stabilize
-		  clk = 1'b1; // Toggle clock
+		  
 		  #10; // Wait some time for signals to stabilize
-		  clk = 1'b0; // Toggle clock back
+		  
 		  #10; // Wait some time for signals to stabilize
 
         if (output_ALUMuxOut !== (16'h1236) || output_Zero !== 0 || output_negative !== 0) begin
@@ -155,11 +155,11 @@ module Calculations_tb();
         input_PCSrc = 1'b0; // PCSrc value
         input_imm = 16'h0F0F;
         //reset = 1'b0; // Deassert reset
-		  clk = 1'b0; // Initialize clock
+		  
 		  #10; // Wait some time for signals to stabilize
-		  clk = 1'b1; // Toggle clock
+		  
 		  #10; // Wait some time for signals to stabilize
-		  clk = 1'b0; // Toggle clock back
+		  
 		  #10; // Wait some time for signals to stabilize
 
         if (output_ALUMuxOut !== (16'h0000) || output_Zero !== 1 || output_negative !== 0) begin
@@ -178,11 +178,11 @@ module Calculations_tb();
         input_PCSrc = 1'b0; // PCSrc value
         input_imm = 16'h0F0F;
         //reset = 1'b0; // Deassert reset
-		  clk = 1'b0; // Initialize clock
+		  
 		  #10; // Wait some time for signals to stabilize
-		  clk = 1'b1; // Toggle clock
+		  
 		  #10; // Wait some time for signals to stabilize
-		  clk = 1'b0; // Toggle clock back
+		  
 		  #10; // Wait some time for signals to stabilize
 
         if (output_ALUMuxOut !== (16'h5555 - 16'h5585) || output_Zero !== 0 || output_negative !== 1) begin
