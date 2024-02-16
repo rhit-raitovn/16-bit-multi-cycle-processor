@@ -1,6 +1,14 @@
+/*******************************************************************************
+* Author: Naziia Raitova
+* Date: 2/15/2024
+*
+* Module: The Lime
+*
+*******************************************************************************/
+
 module TheLime(
-  input wire [15:0] input, //main input
-  output wire [15:0] output // main output
+  input wire [15:0] main_input, //main input
+  output reg [15:0] main_output // main output
 );
 
 // Control signals
@@ -9,7 +17,7 @@ wire IorD;
 wire memR;
 wire memW;
 wire mem2reg;
-wire regWrite
+wire regWrite;
 wire IRWrite;
 wire [1:0] ALUSrcA;
 wire [1:0] ALUSrcB;
@@ -22,15 +30,16 @@ wire CLK;
 wire reset;
 wire zero;
 wire negative;
+wire carry;
     
-wire [15:0] output_PC,
-wire [6:0] Output_IR_Control,
-wire [2:0] Output_IR_RegA,
-wire [2:0] Output_IR_RegB,
-wire [2:0] Output_IR_RegD,
-wire [15:0] Output_IR_Imm,
-wire [15:0] input_from_ALUOut,
-wire [15:0] output_MDR,
+wire [15:0] output_PC;
+wire [6:0] Output_IR_Control;
+wire [2:0] Output_IR_RegA;
+wire [2:0] Output_IR_RegB;
+wire [2:0] Output_IR_RegD;
+wire [15:0] Output_IR_Imm;
+wire [15:0] input_from_ALUOut;
+wire [15:0] output_MDR;
 wire [15:0] input_mem_data;
 
 // wire output_Zero;
@@ -55,7 +64,10 @@ Control control_inst (
   .output_control_ALUOp(ALUOp),
   .output_control_PCSrc(PCSrc),
   .output_control_branch(branch),
-  .output_control_branchType(branchType)
+  .output_control_branchType(branchType),
+  
+  .output_control_current_state(output_control_current_state),
+  .output_control_next_state(output_control_next_state)
 );
   
 FetchAndMemory fetch_and_memory_inst (
@@ -71,7 +83,7 @@ FetchAndMemory fetch_and_memory_inst (
   .input_from_ALUOut(output_ALUOut),
   .IorD(IorD),
   .input_mem_write(memW),
-  .input_mem_data(output_B_sr)
+  .input_mem_data(output_B_sr),
   
   .output_PC(output_PC),
   .Output_IR_Control(Output_IR_Control),
@@ -82,7 +94,7 @@ FetchAndMemory fetch_and_memory_inst (
   .output_MDR(output_MDR),
 );
 
-wire [15:0] output_reg_A,
+wire [15:0] output_reg_A;
 wire [15:0] output_reg_B;
 wire [15:0] output_imm;
 wire [15:0] ALUOut;
@@ -98,6 +110,7 @@ Data data_inst (
   .input_ALUOut(output_ALUOut),
   .input_MDR(output_MDR),
   .memToReg(mem2reg),
+  .input_branch(input_branch),
         
   // Outputs
   .output_imm(output_imm),
@@ -107,7 +120,7 @@ Data data_inst (
 
 wire [15:0] output_ALUOut;
 wire [15:0] output_ALUMuxOut;
-  wire [15:0] output_B_sr;
+wire [15:0] output_B_sr;
   
 Calculations calculations_inst (
   // Inputs
@@ -120,12 +133,14 @@ Calculations calculations_inst (
   .input_PCSrc(PCSrc),
   .input_imm(output_imm),
   .clk(CLK),
+  .set(reset),
   
   // Outputs
-  .output_ALU(output_ALUOut),
-  .output_ALU(output_ALUMuxOut),
+  .output_ALU_sr(output_ALUOut),
+  .output_ALUMuxOut(output_ALUMuxOut),
   .output_Zero(zero),
   .output_negative(negative),
+  .output_carry(carry),
   .outut_B_sr(output_B_sr),
 );
 
