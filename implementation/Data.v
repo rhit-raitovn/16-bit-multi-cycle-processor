@@ -13,6 +13,7 @@ module Data(
     input wire [2:0] input_reg_write_address, // 3-bit address for write operation.
     input wire CLK, // Single-bit clock signal for synchronization.
     input wire [15:0] input_imm, // 16-bit input of the instruction for the immediate to be parsed
+    input wire input_branch,
     input wire [15:0] input_ALUOut,
     input wire [15:0] input_MDR,
     input wire memToReg,
@@ -21,32 +22,38 @@ module Data(
     output wire [15:0] output_reg_B // 16-bit output representing data read from Register B.
 );
 
-    wire [15:0] immOrOut; // Declare wire for multiplexer output
-    
-    // Instantiate ProgrammableRegisterFile module
-    ProgrammableRegisterFile register_inst (
-        .CLK(CLK),
-        .input_reg_readA_address(input_reg_readA_address),
-        .input_reg_readB_address(input_reg_readB_address),
-        .input_reg_write(input_reg_write),
-        .input_reg_write_value(immOrOut), // Connect immOrOut to input_reg_write_value
-        .input_reg_write_address(input_reg_write_address),
-        .output_reg_A(output_reg_A),
-        .output_reg_B(output_reg_B)
-    );
+reg [15:0] BorRd;
+always @(*) begin
+    case(input_branch)
+        0: BorRd = input_reg_readB_address;
+        1: BorRd = input_reg_write_address; // Assuming you have an immediate generator module
+        default: BorRd = 16'b0000_0000_0000_0000; // Default to zero if an invalid selection
+    endcase
+end
 
-    // Instantiate ImmediateGenerator module
-    ImmediateGenerator ig_inst(
-        .input_imm(input_imm),
-        .output_imm(output_imm)
-    );
+ProgrammableRegisterFile register_inst (
+    .CLK(CLK),
+    .input_reg_readA_address(input_reg_readA_address),
+    .input_reg_readB_address(BorRd),
+    .input_reg_write(input_reg_write),
+    .input_reg_write_value(output_imm), // Changed from 'immOrOut'
+    .input_reg_write_address(input_reg_write_address),
+    .output_reg_A(output_reg_A),
+    .output_reg_B(output_reg_B)
+);
 
-    // Instantiate 2-to-1 multiplexer module
-    mux2to1 mux_inst(
-        .a(input_ALUOut),
-        .b(input_MDR),
-        .select(memToReg),
-        .out(immOrOut) // Connect immOrOut to the output of the multiplexer
-    );
-    
+ImmediateGenerator ig_inst(
+    .input_imm(input_imm),
+    .output_imm(output_imm)
+);
+
+reg [15:0] mdrOrALU;
+always @(*) begin
+    case(memToReg)
+        0: mdrOrALU = input_ALUOut;
+        1: mdrOrALU = input_MDR; // Assuming you have an immediate generator module
+        default: mdrOrALU = 16'b0000_0000_0000_0000; // Default to zero if an invalid selection
+    endcase
+end
+
 endmodule
