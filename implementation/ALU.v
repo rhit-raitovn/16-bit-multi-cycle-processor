@@ -43,33 +43,37 @@
 module ALU(
     input wire [15:0] input_A, input_B, // ALU inputs
     input wire [3:0] input_ALUOp, // ALU operation code
-    output reg [1:0] output_ALU, // ALU output
+    output reg [15:0] output_ALU, // ALU output
     output reg output_Zero, output_Negative, output_Carry // ALU flags
 );
 
-reg [16:0] output;
+reg [16:0] alu_output;
 
 // ALUOp Calculation
 always @ (*) begin
     case(input_ALUOp)
-        4'b0000: output = input_A + input_B; // add
-        4'b0001: output = input_A - input_B; // subtract
-        4'b0010: output = input_A & input_B; // and
-        4'b0011: output = input_A | input_B; // or
-        4'b0100: output = input_A ^ input_B; // xor
-        4'b0101: output = input_A << input_B[3:0]; // shift left logical
-        4'b0110: output = input_A >> input_B[3:0]; // shift right logical
-        4'b0111: output = input_A <<< input_B[3:0]; // shift left arithmetic
-        4'b1000: output = input_A >>> input_B[3:0]; // shift right arithmetic
-        4'b1001: output = 2 * (input_A + input_B); // 2* Operation
-        default: output = 16'hxxxx; // default value for undefined inputs
+        4'b0000: alu_output = input_A + input_B; // add
+        4'b0001: alu_output = input_A - input_B; // subtract
+        4'b0010: alu_output = input_A & input_B; // and
+        4'b0011: alu_output = input_A | input_B; // or
+        4'b0100: alu_output = input_A ^ input_B; // xor
+        4'b0101: alu_output = input_A << input_B[3:0]; // shift left logical
+        4'b0110: alu_output = input_A >> input_B[3:0]; // shift right logical
+        4'b0111: alu_output = input_A <<< input_B[3:0]; // shift left arithmetic
+        4'b1000: alu_output = input_A >>> input_B[3:0]; // shift right arithmetic
+        4'b1001: alu_output = 2 * (input_A + input_B); // 2* Operation
+        default: begin 
+		 alu_output = 16'hxxxx; // default value for undefined inputs
+		 $display("ALU EXCEPTION: invalid operation %b",input_ALUOp);		
+		end
     endcase
+	output_ALU=alu_output[15:0];
 end
 
 //Flag Logic
 always @ (*) begin
-    output_Zero = (output[15:0] == 16'h0000); // Set if output is zero
-    if()
+    output_Zero = (alu_output[15:0] == 16'h0000); // Set if output is zero
+    output_Negative = alu_output[15];
 end
 
 endmodule
