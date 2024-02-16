@@ -529,7 +529,7 @@ parameter    JAL = 11;
     $display("----------------------RITYPE----------------");
     // Test Case for output_control_ALUOp in RITYPE State
     if (output_control_ALUOp !== 4'b1001)
-      $display("TEST 3 Load Word RITYPE Path: output_control_ALUOp in RITYPE state Failed at Time %0t. Expected: %h, Actual: %h", $time, ALUOp, output_control_ALUOp);
+      $display("TEST 3 Load Word RITYPE Path: output_control_ALUOp in RITYPE state Failed at Time %0t. Expected: %h, Actual: %h", $time, 4'b1001, output_control_ALUOp);
     else
       $display("TEST 3 Load Word RITYPE Path: output_control_ALUOp in RITYPE state !!!Passed!!! at Time %0t.", $time);
 
