@@ -2,7 +2,7 @@
  * Module: control
  * Description: This module implements the control logic for lime. It generates control signals
  *              based on the current state and input control signals. The module defines various states
- *              such as Fetch, Decode, RType3, RIType, RTypeEnd, lw1, lw2, sw, JALR, BRANCH, BRANCH2,
+ *              such as FETCH, DECODE, RTYPE3, RITYPE, RTYPEEND, lw1, lw2, sw, JALR, BRANCH, BRANCH2,
  *              and JAL. It utilizes sequential logic to transition between states and assigns output
  *              control signals accordingly. The module takes input control signals, clock signal (CLK),
  *              and reset signal (Reset), and outputs various control signals required for the processor
@@ -64,11 +64,11 @@ reg [3:0]    current_state;
 reg [3:0]    next_state;
 
 //state definitions
-parameter    Fetch = 0;
-parameter    Decode = 1;
-parameter    RType = 2;
-parameter    RIType = 3;
-parameter    RTypeEnd = 4;
+parameter    FETCH = 0;
+parameter    DECODE = 1;
+parameter    RTYPE = 2;
+parameter    RITYPE = 3;
+parameter    RTYPEEND = 4;
 parameter    LW1 = 5;
 parameter    LW2 = 6;
 parameter    SW = 7;
@@ -82,7 +82,7 @@ parameter    JAL = 11;
 always @ (posedge CLK, posedge Reset)
   begin
     if (Reset)
-      current_state = Fetch;
+      current_state = FETCH;
     else 
   current_state = next_state;
 end
@@ -102,6 +102,8 @@ always @ (*) begin
         4'b0110: ALUOp = 4'b0110; // shift right logical
         4'b0111: ALUOp = 4'b0111; // shift left arithmetic
         4'b1000: ALUOp = 4'b1000; // shift right arithmetic
+        4'b1001: ALUOp = 4'b1001; // lw
+        4'b1010: ALUOp = 4'b1001; // sw
         default: ALUOp = 4'bxxxx; // default value for undefined inputs
     endcase
 end
@@ -131,7 +133,7 @@ always @ (current_state)
   output_control_RegWrite = 1'b0;
 
   case (current_state)
-    Fetch: begin
+    FETCH: begin
       output_control_ALUOp = 4'b0000; // "+"
       output_control_ALUSrcA = 0;
       output_control_ALUSrcB = 1;
@@ -142,27 +144,25 @@ always @ (current_state)
       output_control_PCWrite = 1;
     end
 
-    Decode: begin
+    DECODE: begin
       output_control_IRWrite = 0;
       output_control_MemR = 0;
       output_control_PCWrite = 0;
     end
 
-    RType: begin
+    RTYPE: begin
       output_control_ALUOp = ALUOp;
       output_control_ALUSrcA = 2;
       output_control_ALUSrcB = 0;
     end
 
-    RIType: begin
-      // Define behavior for RI-type instruction category
-      // This could be similar to the behavior of other RI-type instructions
+    RITYPE: begin
       output_control_ALUOp = ALUOp;
       output_control_ALUSrcA = 2;
       output_control_ALUSrcB = 2;
     end
 
-    RTypeEnd: begin
+    RTYPEEND: begin
       // Behavior at the end of R-type instructions
       output_control_Mem2Reg = 0;
       output_control_RegWrite = 1;
@@ -229,19 +229,19 @@ end
 always @ (current_state, next_state, input_control) begin         
   $display("The current state is %d", current_state);
   case (current_state)
-    Fetch: begin
-      next_state = Decode;
-      $display("In Fetch, the next_state is %d", next_state);
+    FETCH: begin
+      next_state = DECODE;
+      $display("In FETCH, the next_state is %d", next_state);
     end
 
-    Decode: begin       
+    DECODE: begin       
       $display("The opcode is %d", input_control[2:0]);
       case (input_control[2:0])
 
         3'b000: begin
           $display("3R Type Instruction");
-          next_state = RType;
-          $display("The next state is RType");
+          next_state = RTYPE;
+          $display("The next state is RTYPE");
         end
 
         3'b001: begin
@@ -279,22 +279,22 @@ always @ (current_state, next_state, input_control) begin
 
             default: begin
               $display("2RI Normal Instruction");
-              next_state = RIType;
-              $display("The next state is RIType");
+              next_state = RITYPE;
+              $display("The next state is RITYPE");
             end
           endcase 
         end
 
         3'b010: begin
           $display("RI Type Instruction");
-          next_state = RIType;
-          $display("The next state is RIType");
+          next_state = RITYPE;
+          $display("The next state is RITYPE");
         end
 
         3'b011: begin
           $display("L Type Instruction");
-          next_state = Fetch;
-          $display("The next state is Fetch");
+          next_state = FETCH;
+          $display("The next state is FETCH");
         end
 
         3'b100: begin
@@ -305,42 +305,42 @@ always @ (current_state, next_state, input_control) begin
 
       endcase  
 
-      $display("In Decode, the next_state is %d", next_state);
+      $display("In DECODE, the next_state is %d", next_state);
     end
 
-    RType: begin
-      next_state = RTypeEnd;
-      $display("In RType, the next_state RTypeEnd is %d", next_state);
+    RTYPE: begin
+      next_state = RTYPEEND;
+      $display("In RTYPE, the next_state RTYPEEND is %d", next_state);
     end
 
-    RTypeEnd: begin
-      next_state = Fetch;
-      $display("In RTypeEnd, the next_state Fetch is %d", next_state);
+    RTYPEEND: begin
+      next_state = FETCH;
+      $display("In RTYPEEND, the next_state FETCH is %d", next_state);
     end
 
-    RIType: begin
+    RITYPE: begin
       case(input_control[6:3])
         4'b1001: begin
           next_state = LW1;
-          $display("In RIType, lw instruction, the next_state LW1 is %d", next_state);
+          $display("In RITYPE, lw instruction, the next_state LW1 is %d", next_state);
         end
 
         4'b1010: begin
           next_state = SW;
-          $display("In RIType, SW instruction, the next_state SW is %d", next_state);
+          $display("In RITYPE, SW instruction, the next_state SW is %d", next_state);
         end
 
         default: begin
-          next_state = RTypeEnd;
-          $display("In RIType, normal calculation instruction, the next_state RTypeEnd is %d", next_state);
+          next_state = RTYPEEND;
+          $display("In RITYPE, normal calculation instruction, the next_state RTYPEEND is %d", next_state);
         end
 
       endcase
     end
 
     SW: begin
-      next_state = Fetch;
-      $display("In SW, the next_state Fetch is %d", next_state);
+      next_state = FETCH;
+      $display("In SW, the next_state FETCH is %d", next_state);
     end
 
     LW1: begin
@@ -349,18 +349,18 @@ always @ (current_state, next_state, input_control) begin
     end
 
     LW2: begin
-      next_state = Fetch;
-      $display("In LW2, the next_state Fetch is %d", next_state);
+      next_state = FETCH;
+      $display("In LW2, the next_state FETCH is %d", next_state);
     end
 
     JAL: begin
-      next_state = Fetch;
-      $display("In JAL, the next_state Fetch is %d", next_state);
+      next_state = FETCH;
+      $display("In JAL, the next_state FETCH is %d", next_state);
     end
 
     JALR: begin
-      next_state = Fetch;
-      $display("In JALR, the next_state Fetch is %d", next_state);
+      next_state = FETCH;
+      $display("In JALR, the next_state FETCH is %d", next_state);
     end
 
     BRANCH: begin
@@ -369,13 +369,13 @@ always @ (current_state, next_state, input_control) begin
     end
 
     BRANCH2: begin
-      next_state = Fetch;
-      $display("In JALR, the next_state Fetch is %d", next_state);
+      next_state = FETCH;
+      $display("In JALR, the next_state FETCH is %d", next_state);
     end
 
     default: begin
       $display("Error State!");
-      next_state = Fetch;
+      next_state = FETCH;
     end
 
   endcase
