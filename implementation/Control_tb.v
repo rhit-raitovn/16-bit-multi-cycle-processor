@@ -418,81 +418,321 @@ parameter    jal = 11;
     input_control = 7'b1001001; //lw
     $display("~~~TEST 3 input_control changed to 7'b1001001 at Time %0t~~~~", $time);
 
-    $display("Test 2 Normal 2RI Path !!!Passed!!! Entirely at Time %0t.", $time);
     $display("*****************************************************************");
 
+    
 
+    $display("*****************************************************************");
+    $display("TEST 3 Load Word TEST");
+    input_control = 7'b1001001; //lw
+    #full
 
+    $display("----------------------Fetch----------------");
+
+    // Test Case for Fetch State
+    // Test Case for output_control_ALUOp in Fetch State
+    if (output_control_ALUOp !== 4'b0000)
+      $display("TEST 3 Load Word TEST: output_control_ALUOp in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 4'b0000, output_control_ALUOp);
+    else
+      $display("TEST 3 Load Word TEST: output_control_ALUOp in Fetch state !!!Passed!!! at Time %0t.", $time);
+
+    // Test Case for output_control_ALUSrcA in Fetch State
+    if (output_control_ALUSrcA !== 2'b00)
+      $display("TEST 3 Load Word TEST: output_control_ALUSrcA in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 2'b00, output_control_ALUSrcA);
+    else
+      $display("TEST 3 Load Word TEST: output_control_ALUSrcA in Fetch state !!!Passed!!! at Time %0t.", $time);
+
+    // Test Case for output_control_ALUSrcB in Fetch State
+    if (output_control_ALUSrcB !== 2'b01)
+      $display("TEST 3 Load Word TEST: output_control_ALUSrcB in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 2'b01, output_control_ALUSrcB);
+    else
+      $display("TEST 3 Load Word TEST: output_control_ALUSrcB in Fetch state !!!Passed!!! at Time %0t.", $time);
+
+    // Test Case for output_control_IoD in Fetch State
+    if (output_control_IoD !== 1'b0)
+      $display("TEST 3 Load Word TEST: output_control_IoD in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_IoD);
+    else
+      $display("TEST 3 Load Word TEST: output_control_IoD in Fetch state !!!Passed!!! at Time %0t.", $time);
+
+    // Test Case for output_control_IRWrite in Fetch State
+    if (output_control_IRWrite !== 1'b1)
+      $display("TEST 3 Load Word TEST: output_control_IRWrite in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b1, output_control_IRWrite);
+    else
+      $display("TEST 3 Load Word TEST: output_control_IRWrite in Fetch state !!!Passed!!! at Time %0t.", $time);
+
+    // Test Case for output_control_MemR in Fetch State
+    if (output_control_MemR !== 1'b0)
+      $display("TEST 3 Load Word TEST: output_control_MemR in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_MemR);
+    else
+      $display("TEST 3 Load Word TEST: output_control_MemR in Fetch state !!!Passed!!! at Time %0t.", $time);
+
+    // Test Case for output_control_PCSrc in Fetch State
+    if (output_control_PCSrc !== 1'b0)
+      $display("TEST 3 Load Word TEST: output_control_PCSrc in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_PCSrc);
+    else
+      $display("TEST 3 Load Word TEST: output_control_PCSrc in Fetch state !!!Passed!!! at Time %0t.", $time);
+
+    // Test Case for output_control_PCWrite in Fetch State
+    if (output_control_PCWrite !== 1'b1)
+      $display("TEST 3 Load Word TEST: output_control_PCWrite in Fetch state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b1, output_control_PCWrite);
+    else
+      $display("TEST 3 Load Word TEST: output_control_PCWrite in Fetch state !!!Passed!!! at Time %0t.", $time);
+
+    
+    // Test Case for output_control_current_state in Fetch State
+    if (output_control_current_state !== Fetch)
+      $display("TEST 3 Load Word TEST: output_control_current_state in Fetch State Failed at Time %0t. Expected: %h, Actual: %h", $time, Fetch, output_control_current_state);
+    else
+      $display("TEST 3 Load Word TEST: output_control_current_state in Fetch State !!!Passed!!! at Time %0t.", $time);
+
+    // State Machine Transition Test for Fetch State
+    if (output_control_next_state !== Decode)
+      $display("TEST 3 Load Word TEST: State Machine Transition Test for Fetch State Failed at Time %0t. Next State Expected: %h, Actual: %h", $time, Decode, output_control_next_state);
+    else
+      $display("TEST 3 Load Word TEST: State Machine Transition Test for Fetch State !!!Passed!!! at Time %0t.", $time);
+
+    $display("----------------------Fetch----------------");
+    #full
+    $display("----------------------Decode----------------");
+    
+    // Test Case for output_control_IRWrite in Decode State
+    if (output_control_IRWrite !== 1'b0)
+      $display("TEST 3 Load Word Path: output_control_IRWrite in Decode state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_IRWrite);
+    else
+      $display("TEST 3 Load Word Path: output_control_IRWrite in Decode state !!!Passed!!! at Time %0t.", $time);
+
+    // Test Case for output_control_MemR in Decode State
+    if (output_control_MemR !== 1'b0)
+      $display("TEST 3 Load Word Path: output_control_MemR in Decode state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_MemR);
+    else
+      $display("TEST 3 Load Word Path: output_control_MemR in Decode state !!!Passed!!! at Time %0t.", $time);
+
+    // Test Case for output_control_PCWrite in Decode State
+    if (output_control_PCWrite !== 1'b0)
+      $display("TEST 3 Load Word Path: output_control_PCWrite in Decode state Failed at Time %0t. Expected: %h, Actual: %h", $time, 1'b0, output_control_PCWrite);
+    else
+      $display("TEST 3 Load Word Path: output_control_PCWrite in Decode state !!!Passed!!! at Time %0t.", $time);
+
+    // Test Case for output_control_current_state in Decode State
+    if (output_control_current_state !== Decode)
+      $display("TEST 3 Load Word Path: output_control_current_state in Decode State Failed at Time %0t. Expected: %h, Actual: %h", $time, Decode, output_control_current_state);
+    else
+      $display("TEST 3 Load Word Path: output_control_current_state in Decode State !!!Passed!!! at Time %0t.", $time);
+
+    // State Machine Transition Test from Decode State to DECODE State
+    if (output_control_next_state !== RIType)
+      $display("TEST 3 Load Word Path: State Machine Transition from Decode State to RIType State Failed at Time %0t. Next State Expected: %h, Actual: %h", $time, RIType, output_control_next_state);
+    else
+      $display("TEST 3 Load Word Path: State Machine Transition from Decode State to RIType State !!!Passed!!! at Time %0t.", $time);
+    $display("----------------------Decode----------------");
+    #full    
+    $display("----------------------RIType----------------");
+    
+    $display("----------------------RIType----------------");
+    #full    
+    $display("----------------------LW1----------------");
+    
+    $display("----------------------LW1----------------");
+    #full
+    $display("----------------------LW2----------------");
+    
+    $display("----------------------LW2----------------");
+
+    $display("~~~TEST 4 SW input_control changed to 7'b1010001 at Time %0t~~~~", $time);
+    input_control = 7'b1010001; //sw
+
+    $display("*****************************************************************");
+    
+    $display("*****************************************************************");
+    $display("TEST 4 Save Word TEST");
+    input_control = 7'b1010001; //sw
+
+    #full
+
+    $display("----------------------Fetch----------------");
+
+    $display("----------------------Fetch----------------");
+
+    #full
+
+    $display("----------------------Decode----------------");
+    
+    $display("----------------------Decode----------------");
+
+    #full
+    
+    $display("----------------------RIType----------------");
+    
+    $display("----------------------RIType----------------");
+
+    #full
+
+    $display("----------------------SW----------------");
+    
+    $display("----------------------SW----------------");
+
+    $display("~~~TEST 5 jalr input_control changed to 7'b1011001 at Time %0t~~~~", $time);
+    input_control = 7'b1011001; //jalr
+
+    $display("*****************************************************************");
+
+    #full
+
+    $display("*****************************************************************");
+    $display("TEST 5 JALR TEST");
+    input_control = 7'b1011001; //jalr
+
+    $display("----------------------Fetch----------------");
+
+    $display("----------------------Fetch----------------");
+
+    #full
+
+    $display("----------------------Decode----------------");
+    
+    $display("----------------------Decode----------------");
+
+    #full
+    
+    $display("----------------------JALR----------------");
+    
+    $display("----------------------JALR----------------");
+
+    $display("~~~TEST 6 jal input_control changed to 7'bXXXX100 at Time %0t~~~~", $time);
+    input_control = 7'bXXXX100; //jal
+
+    $display("*****************************************************************");
+
+    #full
+
+    $display("*****************************************************************");
+    $display("TEST 6 JAL TEST");
+    input_control = 7'bXXXX100; //jal
+
+    $display("----------------------Fetch----------------");
+
+    $display("----------------------Fetch----------------");
+
+    #full
+
+    $display("----------------------Decode----------------");
+    
+    $display("----------------------Decode----------------");
+
+    #full
+    
+    $display("----------------------JAL----------------");
+    
+    $display("----------------------JAL----------------");
+
+    $display("~~~TEST 7 BRNACH input_control changed to 7'b11110001 bne at Time %0t~~~~", $time);
+    input_control = 7'b1110001; //bne
+
+    $display("*****************************************************************");
+
+    $display("*****************************************************************");
+    $display("TEST 7 BRANCH bne TEST");
+    input_control = 7'b1110001; //bne
+
+    #full
+
+    $display("----------------------Fetch----------------");
+
+    $display("----------------------Fetch----------------");
+
+    #full
+
+    $display("----------------------Decode----------------");
+    
+    $display("----------------------Decode----------------");
+
+    #full
+    
+    $display("----------------------BRANCH----------------");
+    
+    $display("----------------------BRANCH----------------");
+
+    #full
+
+    $display("----------------------BRANCH2----------------");
+    
+    $display("----------------------BRANCH2----------------");
+
+    $display("~~~TEST 8 L input_control changed to 7'bXXXX011 at Time %0t~~~~", $time);
+    input_control = 7'bXXXX011; //L
+
+    $display("*****************************************************************");
+
+    $display("*****************************************************************");
     // Test Case for L Type Instruction
-#half;
-$display("----------L Type------------");
-// Setting input_control to represent an L Type instruction (opcode = 3'b011)
-input_control <= 7'bXXXX011;
+    $display("----------L Type------------");
+    // Setting input_control to represent an L Type instruction (opcode = 3'b011)
+    input_control <= 7'bXXXX011;
 
-#full; // Wait for one clock cycle
+    #full; // Wait for one clock cycle
 
 
-// Test Case for output_control_IoD
-if (output_control_IoD !== 1'b0) // ince L Type instruction writes to IR
-  $display("Test Case L Type: output_control_IoD Failed. Expected: %h, Actual: %h", 1'b0, output_control_IoD);
-else
-  $display("Test Case L Type: output_control_IoD Passed at Time %0t.", $time);
+    // Test Case for output_control_IoD
+    if (output_control_IoD !== 1'b0) // ince L Type instruction writes to IR
+      $display("Test Case L Type: output_control_IoD Failed. Expected: %h, Actual: %h", 1'b0, output_control_IoD);
+    else
+      $display("Test Case L Type: output_control_IoD Passed at Time %0t.", $time);
 
-// Test Case for output_control_IRWrite
-if (output_control_IRWrite !== 0'b1) // Since L Type instruction writes to IR
-  $display("Test Case L Type: output_control_IRWrite Failed. Expected: %h, Actual: %h", 0'b1, output_control_IRWrite);
-else
-  $display("Test Case L Type: output_control_IRWrite Passed at Time %0t.", $time);
+    // Test Case for output_control_IRWrite
+    if (output_control_IRWrite !== 0'b1) // Since L Type instruction writes to IR
+      $display("Test Case L Type: output_control_IRWrite Failed. Expected: %h, Actual: %h", 0'b1, output_control_IRWrite);
+    else
+      $display("Test Case L Type: output_control_IRWrite Passed at Time %0t.", $time);
 
-// Test Case for output_control_MemR
-if (output_control_MemR !== 1'b0) // L Type instruction does not memory read
-  $display("Test Case L Type: output_control_MemR Failed. Expected: %h, Actual: %h", 1'b0, output_control_MemR);
-else
-  $display("Test Case L Type: output_control_MemR Passed at Time %0t.", $time);
+    // Test Case for output_control_MemR
+    if (output_control_MemR !== 1'b0) // L Type instruction does not memory read
+      $display("Test Case L Type: output_control_MemR Failed. Expected: %h, Actual: %h", 1'b0, output_control_MemR);
+    else
+      $display("Test Case L Type: output_control_MemR Passed at Time %0t.", $time);
 
-// Test Case for output_control_PCSrc
-if (output_control_PCSrc !== 1'b0) // Since L Type instruction doesn't involve PC source change
-  $display("Test Case L Type: output_control_PCSrc Failed. Expected: %h, Actual: %h", 1'b0, output_control_PCSrc);
-else
-  $display("Test Case L Type: output_control_PCSrc Passed at Time %0t.", $time);
+    // Test Case for output_control_PCSrc
+    if (output_control_PCSrc !== 1'b0) // Since L Type instruction doesn't involve PC source change
+      $display("Test Case L Type: output_control_PCSrc Failed. Expected: %h, Actual: %h", 1'b0, output_control_PCSrc);
+    else
+      $display("Test Case L Type: output_control_PCSrc Passed at Time %0t.", $time);
 
-// Test Case for output_control_PCWrite
-if (output_control_PCWrite !== 1'b0) // Since L Type instruction doesn't involve PC write
-  $display("Test Case L Type: output_control_PCWrite Failed. Expected: %h, Actual: %h", 1'b0, output_control_PCWrite);
-else
-  $display("Test Case L Type: output_control_PCWrite Passed at Time %0t.", $time);
+    // Test Case for output_control_PCWrite
+    if (output_control_PCWrite !== 1'b0) // Since L Type instruction doesn't involve PC write
+      $display("Test Case L Type: output_control_PCWrite Failed. Expected: %h, Actual: %h", 1'b0, output_control_PCWrite);
+    else
+      $display("Test Case L Type: output_control_PCWrite Passed at Time %0t.", $time);
 
-// Test Case for output_control_RegWrite
-if (output_control_RegWrite !== 1'b0) // Since L Type instruction doesn't write to register
-  $display("Test Case L Type: output_control_RegWrite Failed. Expected: %h, Actual: %h", 1'b0, output_control_RegWrite);
-else
-  $display("Test Case L Type: output_control_RegWrite Passed at Time %0t.", $time);
+    // Test Case for output_control_RegWrite
+    if (output_control_RegWrite !== 1'b0) // Since L Type instruction doesn't write to register
+      $display("Test Case L Type: output_control_RegWrite Failed. Expected: %h, Actual: %h", 1'b0, output_control_RegWrite);
+    else
+      $display("Test Case L Type: output_control_RegWrite Passed at Time %0t.", $time);
 
-// Test Case for output_control_Mem2Reg
-if (output_control_Mem2Reg !== 1'b0) // Since L Type instruction doesn't involve memory to register
-  $display("Test Case L Type: output_control_Mem2Reg Failed. Expected: %h, Actual: %h", 1'b0, output_control_Mem2Reg);
-else
-  $display("Test Case L Type: output_control_Mem2Reg Passed at Time %0t.", $time);
+    // Test Case for output_control_Mem2Reg
+    if (output_control_Mem2Reg !== 1'b0) // Since L Type instruction doesn't involve memory to register
+      $display("Test Case L Type: output_control_Mem2Reg Failed. Expected: %h, Actual: %h", 1'b0, output_control_Mem2Reg);
+    else
+      $display("Test Case L Type: output_control_Mem2Reg Passed at Time %0t.", $time);
 
-// Test Case for output_control_Branch
-if (output_control_Branch !== 1'b0) // Since L Type instruction doesn't involve branch
-  $display("Test Case L Type: output_control_Branch Failed. Expected: %h, Actual: %h", 1'b0, output_control_Branch);
-else
-  $display("Test Case L Type: output_control_Branch Passed at Time %0t.", $time);
+    // Test Case for output_control_Branch
+    if (output_control_Branch !== 1'b0) // Since L Type instruction doesn't involve branch
+      $display("Test Case L Type: output_control_Branch Failed. Expected: %h, Actual: %h", 1'b0, output_control_Branch);
+    else
+      $display("Test Case L Type: output_control_Branch Passed at Time %0t.", $time);
 
-// Test Case for output_control_BranchType
-if (output_control_BranchType !== 2'b00) // Since L Type instruction doesn't involve branch
-  $display("Test Case L Type: output_control_BranchType Failed. Expected: %h, Actual: %h", 2'b00, output_control_BranchType);
-else
-  $display("Test Case L Type: output_control_BranchType Passed at Time %0t.", $time);
+    // Test Case for output_control_BranchType
+    if (output_control_BranchType !== 2'b00) // Since L Type instruction doesn't involve branch
+      $display("Test Case L Type: output_control_BranchType Failed. Expected: %h, Actual: %h", 2'b00, output_control_BranchType);
+    else
+      $display("Test Case L Type: output_control_BranchType Passed at Time %0t.", $time);
 
-// Test Case for output_control_next_state
-if (output_control_next_state !== Fetch) // Since L Type instruction directly goes back to Fetch
-  $display("Test Case L Type: output_control_next_state Failed. Expected: %h, Actual: %h", Fetch, output_control_next_state);
-else
-  $display("Test Case L Type: output_control_next_state Passed at Time %0t.", $time);
+    // Test Case for output_control_next_state
+    if (output_control_next_state !== Fetch) // Since L Type instruction directly goes back to Fetch
+      $display("Test Case L Type: output_control_next_state Failed. Expected: %h, Actual: %h", Fetch, output_control_next_state);
+    else
+      $display("Test Case L Type: output_control_next_state Passed at Time %0t.", $time);
 
-#full;
+    #full;
 
 
     // Finish simulation
