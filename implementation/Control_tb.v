@@ -89,69 +89,69 @@ parameter    jal = 11;
 
     // Test 1 3R Type Path
 
-    // Test 1 3R Type Path Fetech
+    // Test 1 3R Type Path Fetch
     #half;
-    $display("----------------------Fetech----------------");
-    // Test Case 1 (3R) Fetech for output_control_ALUOp
+    $display("----------------------Fetch----------------");
+    // Test Case 1 (3R) Fetch for output_control_ALUOp
     if (output_control_ALUOp !== 4'b0000)
-      $display("Test Case 1 (3R) Fetech 1 (3R) Fetech output_control_ALUOp Failed. Expected: %h, Actual: %h", 4'b0000, output_control_ALUOp);
+      $display("Test Case 1 (3R) Fetch 1 (3R) Fetch output_control_ALUOp Failed. Expected: %h, Actual: %h", 4'b0000, output_control_ALUOp);
     else
-      $display("Test Case 1 (3R) Fetech 1 (3R) Fetech output_control_ALUOp Passed at Time %0t.", $time);
+      $display("Test Case 1 (3R) Fetch 1 (3R) Fetch output_control_ALUOp Passed at Time %0t.", $time);
 
-    // Test Case 1 (3R) Fetech 1 (3R) Fetech for output_control_ALUSrcA
+    // Test Case 1 (3R) Fetch 1 (3R) Fetch for output_control_ALUSrcA
     if (output_control_ALUSrcA !== 2'b00)
-      $display("Test Case 1 (3R) Fetech output_control_ALUSrcA Failed. Expected: %h, Actual: %h", 2'b00, output_control_ALUSrcA);
+      $display("Test Case 1 (3R) Fetch output_control_ALUSrcA Failed. Expected: %h, Actual: %h", 2'b00, output_control_ALUSrcA);
     else
-      $display("Test Case 1 (3R) Fetech output_control_ALUSrcA Passed at Time %0t.", $time);
+      $display("Test Case 1 (3R) Fetch output_control_ALUSrcA Passed at Time %0t.", $time);
 
-    // Test Case 1 (3R) Fetech for output_control_ALUSrcB
+    // Test Case 1 (3R) Fetch for output_control_ALUSrcB
     if (output_control_ALUSrcB !== 2'b01)
-      $display("Test Case 1 (3R) Fetech output_control_ALUSrcB Failed. Expected: %h, Actual: %h", 2'b01, output_control_ALUSrcB);
+      $display("Test Case 1 (3R) Fetch output_control_ALUSrcB Failed. Expected: %h, Actual: %h", 2'b01, output_control_ALUSrcB);
     else
-      $display("Test Case 1 (3R) Fetech output_control_ALUSrcB Passed at Time %0t.", $time);
+      $display("Test Case 1 (3R) Fetch output_control_ALUSrcB Passed at Time %0t.", $time);
 
-    // Test Case 1 (3R) Fetech for output_control_IoD
+    // Test Case 1 (3R) Fetch for output_control_IoD
     if (output_control_IoD !== 1'b0)
-      $display("Test Case 1 (3R) Fetech output_control_IoD Failed. Expected: %h, Actual: %h", 1'b0, output_control_IoD);
+      $display("Test Case 1 (3R) Fetch output_control_IoD Failed. Expected: %h, Actual: %h", 1'b0, output_control_IoD);
     else
-      $display("Test Case 1 (3R) Fetech output_control_IoD Passed at Time %0t.", $time);
+      $display("Test Case 1 (3R) Fetch output_control_IoD Passed at Time %0t.", $time);
 
-    // Test Case 1 (3R) Fetech for output_control_IRWrite
+    // Test Case 1 (3R) Fetch for output_control_IRWrite
     if (output_control_IRWrite !== 1'b1)
-      $display("Test Case 1 (3R) Fetech output_control_IRWrite Failed. Expected: %h, Actual: %h", 1'b1, output_control_IRWrite);
+      $display("Test Case 1 (3R) Fetch output_control_IRWrite Failed. Expected: %h, Actual: %h", 1'b1, output_control_IRWrite);
     else
-      $display("Test Case 1 (3R) Fetech output_control_IRWrite Passed at Time %0t.", $time);
+      $display("Test Case 1 (3R) Fetch output_control_IRWrite Passed at Time %0t.", $time);
 
-    // Test Case 1 (3R) Fetech for output_control_MemR
+    // Test Case 1 (3R) Fetch for output_control_MemR
     if (output_control_MemR !== 1'b0)
-      $display("Test Case 1 (3R) Fetech output_control_MemR Failed. Expected: %h, Actual: %h", 1'b0, output_control_MemR);
+      $display("Test Case 1 (3R) Fetch output_control_MemR Failed. Expected: %h, Actual: %h", 1'b0, output_control_MemR);
     else
-      $display("Test Case 1 (3R) Fetech output_control_MemR Passed at Time %0t.", $time);
+      $display("Test Case 1 (3R) Fetch output_control_MemR Passed at Time %0t.", $time);
 
-    // Test Case 1 (3R) Fetech for output_control_PCSrc
+    // Test Case 1 (3R) Fetch for output_control_PCSrc
     if (output_control_PCSrc !== 1'b0)
-      $display("Test Case 1 (3R) Fetech output_control_PCSrc Failed. Expected: %h, Actual: %h", 1'b0, output_control_PCSrc);
+      $display("Test Case 1 (3R) Fetch output_control_PCSrc Failed. Expected: %h, Actual: %h", 1'b0, output_control_PCSrc);
     else
-      $display("Test Case 1 (3R) Fetech output_control_PCSrc Passed at Time %0t.", $time);
+      $display("Test Case 1 (3R) Fetch output_control_PCSrc Passed at Time %0t.", $time);
 
-    // Test Case 1 (3R) Fetech for output_control_PCWrite
+    // Test Case 1 (3R) Fetch for output_control_PCWrite
     if (output_control_PCWrite !== 1'b1)
-      $display("Test Case 1 (3R) Fetech output_control_PCWrite Failed. Expected: %h, Actual: %h", 1'b1, output_control_PCWrite);
+      $display("Test Case 1 (3R) Fetch output_control_PCWrite Failed. Expected: %h, Actual: %h", 1'b1, output_control_PCWrite);
     else
-      $display("Test Case 1 (3R) Fetech output_control_PCWrite Passed at Time %0t.", $time);
+      $display("Test Case 1 (3R) Fetch output_control_PCWrite Passed at Time %0t.", $time);
 
     // Test Case for output_control_current_state
     if (output_control_current_state !== Fetch)
-      $display("Test Case 1 (3R) Fetech output_control_current_state Failed. Expected: %h, Actual: %h", Fetch, output_control_current_state);
+      $display("Test Case 1 (3R) Fetch output_control_current_state Failed. Expected: %h, Actual: %h", Fetch, output_control_current_state);
     else
-      $display("Test Case 1 (3R) Fetech: output_control_current_state Passed at Time %0t.", $time);
+      $display("Test Case 1 (3R) Fetch: output_control_current_state Passed at Time %0t.", $time);
 
     // Test Case for output_control_next_state
     if (output_control_next_state !== Decode)
-      $display("Test Case 1 (3R) Fetech for output_control_next_state Failed. Expected: %h, Actual: %h", Decode, output_control_next_state);
+      $display("Test Case 1 (3R) Fetch for output_control_next_state Failed. Expected: %h, Actual: %h", Decode, output_control_next_state);
     else
-      $display("Test Case 1 (3R) Fetech for output_control_next_state Passed at Time %0t.", $time);
-    $display("----------------------Fetech----------------");
+      $display("Test Case 1 (3R) Fetch for output_control_next_state Passed at Time %0t.", $time);
+    $display("----------------------Fetch----------------");
     #full
     $display("----------------------Decode----------------");
     //Test 1 3R Type Path Decode
@@ -241,8 +241,8 @@ parameter    jal = 11;
       $display("Test Case for output_control_current_state in RTypeEnd State Passed at Time %0t.", $time);
 
     // State Machine Transition Test for RTypeEnd State
-    if (output_control_next_state !== Fetech)
-      $display("Test Case for State Machine Transition in RTypeEnd State Failed. Next State Expected: %h, Actual: %h", Fetech, output_control_next_state);
+    if (output_control_next_state !== Fetch)
+      $display("Test Case for State Machine Transition in RTypeEnd State Failed. Next State Expected: %h, Actual: %h", Fetch, output_control_next_state);
     else
       $display("Test Case for State Machine Transition in RTypeEnd State Passed at Time %0t.", $time);
     $display("----------------------RTypeEnd----------------");
@@ -256,7 +256,7 @@ parameter    jal = 11;
     $display("TEST 2 Normal 2RI Type slli TEST");
     input_control = 7'b0101001; //slli
     #full
-    $display("----------------------Fetech----------------");
+    $display("----------------------Fetch----------------");
     // Test for output_control_ALUOp
     if (output_control_ALUOp !== 4'b0000)
       $display("TEST 2 Normal 2RI Type slli: output_control_ALUOp Failed at Time %0t. Expected: %h, Actual: %h", $time, 4'b0000, output_control_ALUOp);
@@ -316,7 +316,7 @@ parameter    jal = 11;
       $display("TEST 2 Normal 2RI Type slli: State Machine Transition Test for Fetch State Failed at Time %0t. Next State Expected: %h, Actual: %h", $time, Decode, output_control_next_state);
     else
       $display("TEST 2 Normal 2RI Type slli: State Machine Transition Test for Fetch State Passed at Time %0t.", $time);
-    $display("----------------------Fetech----------------");
+    $display("----------------------Fetch----------------");
 
     #full
 
