@@ -12,7 +12,7 @@ module Control_tb;
   reg Reset;
 
   // Outputs
-  wire [0:0] output_control_branch;
+  wire [0:0] output_control_Branch;
   wire [0:0] output_control_IoD;
   wire [0:0] output_control_IRWrite;
   wire [0:0] output_control_Mem2Reg;
@@ -23,7 +23,7 @@ module Control_tb;
   wire [0:0] output_control_RegWrite;
   wire [1:0] output_control_ALUSrcA;
   wire [1:0] output_control_ALUSrcB;
-  wire [1:0] output_control_branchType;
+  wire [1:0] output_control_BranchType;
   wire [2:0] output_control_ALUOp;
   wire [3:0] output_control_current_state;
   wire [3:0] output_control_next_state;
@@ -33,7 +33,7 @@ module Control_tb;
     .input_control(input_control),
     .CLK(CLK),
     .Reset(Reset),
-    .output_control_Branch(output_control_branch),
+    .output_control_Branch(output_control_Branch),
     .output_control_IoD(output_control_IoD),
     .output_control_IRWrite(output_control_IRWrite),
     .output_control_Mem2Reg(output_control_Mem2Reg),
@@ -44,7 +44,7 @@ module Control_tb;
     .output_control_RegWrite(output_control_RegWrite),
     .output_control_ALUSrcA(output_control_ALUSrcA),
     .output_control_ALUSrcB(output_control_ALUSrcB),
-    .output_control_BranchType(output_control_branchType),
+    .output_control_BranchType(output_control_BranchType),
     .output_control_ALUOp(output_control_ALUOp),
     .output_control_current_state(output_control_current_state),
     .output_control_next_state(output_control_next_state)
@@ -88,6 +88,8 @@ parameter    jal = 11;
     input_control = 7'b0010000; //and
 
     // Test 1 3R Type Path Fetech
+    #half;
+    
     // Test Case 1 (3R) Fetech for output_control_ALUOp
     if (output_control_ALUOp !== 4'b0000)
       $display("Test Case 1 (3R) Fetech 1 (3R) Fetech output_control_ALUOp Failed. Expected: %h, Actual: %h", 4'b0000, output_control_ALUOp);
