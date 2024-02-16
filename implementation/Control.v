@@ -52,7 +52,10 @@ module contol(
   output [1:0] output_control_ALUSrcA,
   output [1:0] output_control_ALUSrcB,
   output [1:0] output_control_branchType,
-  output [2:0] output_control_ALUOp
+  output [2:0] output_control_ALUOp,
+
+  output [3:0] output_control_current_state,
+  output [3:0] output_control_next_state,
 );
 
 
@@ -383,7 +386,8 @@ always @ (current_state, next_state, input_control) begin
     end
 
   endcase
-
+  output_control_current_state = current_state;
+  output_control_next_state = next_state;
   $display("After the tests, the next_state is %d", next_state);
 end
 
