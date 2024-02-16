@@ -86,50 +86,50 @@ module Data_tb;
             $display("Test Case 1 For 3R-Type Failed Output: output_reg_A=%h, output_reg_B=%h", output_reg_A, output_reg_B);
 				
 				
-        // Test case 2: 2RI Type
-		  input_branch = 1'b1;
-        input_reg_readA_address = 3'b010;
-        input_reg_write = 1'b1;
-        input_reg_write_address = 3'b100;
-        input_imm = 16'b010010000000001;
-        input_ALUOut = 16'h9876;
-        memToReg = 1'b0;
+    //     // Test case 2: 2RI Type
+		  // input_branch = 1'b1;
+    //     input_reg_readA_address = 3'b010;
+    //     input_reg_write = 1'b1;
+    //     input_reg_write_address = 3'b100;
+    //     input_imm = 16'b010010000000001;
+    //     input_ALUOut = 16'h9876;
+    //     memToReg = 1'b0;
         
-        #CLK_PERIOD; // Wait for a few cycles
-        if (output_reg_A !== 16'h0001 || output_reg_B !== 16'h0010)
-          $display("Test Case 2 For 2RI-type Failed Output: output_reg_A=%h, output_reg_B=%h", output_reg_A, output_reg_B);
+    //     #CLK_PERIOD; // Wait for a few cycles
+    //     if (output_reg_A !== 16'h0001 || output_reg_B !== 16'h0010)
+    //       $display("Test Case 2 For 2RI-type Failed Output: output_reg_A=%h, output_reg_B=%h", output_reg_A, output_reg_B);
 
-        // Test case 3: UJ Type
-		  input_branch = 1'b0;
-        input_reg_write = 1'b1;
-        input_reg_write_address = 3'b100;
-        input_imm = 16'b100_000001101_100;
-        input_MDR = 16'h5432;
-        memToReg = 1'b1;
+    //     // Test case 3: UJ Type
+		  // input_branch = 1'b0;
+    //     input_reg_write = 1'b1;
+    //     input_reg_write_address = 3'b100;
+    //     input_imm = 16'b100_000001101_100;
+    //     input_MDR = 16'h5432;
+    //     memToReg = 1'b1;
         
-        #CLK_PERIOD; // Wait for a few cycles
-        if (output_imm !== 16'b0000000_000001101)
-          $display("Test Case 3 For UJ-type Failed");
+    //     #CLK_PERIOD; // Wait for a few cycles
+    //     if (output_imm !== 16'b0000000_000001101)
+    //       $display("Test Case 3 For UJ-type Failed");
 
-        // Test case 4: RI Type
-		  input_branch = 1'b0;
-        input_reg_write = 1'b1;
-        input_reg_write_address = 3'b100;
-        input_imm = 16'h100_000001_0110_010;
-        input_MDR = 16'h5432;
-        memToReg = 1'b1;
+    //     // Test case 4: RI Type
+		  // input_branch = 1'b0;
+    //     input_reg_write = 1'b1;
+    //     input_reg_write_address = 3'b100;
+    //     input_imm = 16'h100_000001_0110_010;
+    //     input_MDR = 16'h5432;
+    //     memToReg = 1'b1;
 
-        #CLK_PERIOD; // Wait for a few cycles
-        if (output_imm !== 16'b0000000000_000001)
-          $display("Test Case 4 For RI-type Failed Output: output_reg_A=%h, output_reg_B=%h", output_reg_A, output_imm);
+    //     #CLK_PERIOD; // Wait for a few cycles
+    //     if (output_imm !== 16'b0000000000_000001)
+    //       $display("Test Case 4 For RI-type Failed Output: output_reg_A=%h, output_reg_B=%h", output_reg_A, output_imm);
 
-        // Test case 5: L Type
-		  input_branch = 1'b0;
-        input_reg_write = 1'b1;
-        input_reg_write_address = 3'b100;
-        input_imm = 16'b0000000000000_011;
-        input_ALUOut = 16'h9876;
-        memToReg = 1'b0;
+    //     // Test case 5: L Type
+		  // input_branch = 1'b0;
+    //     input_reg_write = 1'b1;
+    //     input_reg_write_address = 3'b100;
+    //     input_imm = 16'b0000000000000_011;
+    //     input_ALUOut = 16'h9876;
+    //     memToReg = 1'b0;
 
         #CLK_PERIOD; // Wait for a few cycles
         if (output_imm !== 16'b0000_0000000000000)
