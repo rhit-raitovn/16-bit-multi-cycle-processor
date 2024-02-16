@@ -7,7 +7,11 @@ module memory_component
 	input [15:0] addr,
 	input we, clk,
 	
-	output [15:0] q
+	
+	input wire[15:0] processor_input,
+	output reg[15:0] processor_output,
+
+	output reg [15:0] q
 );
 parameter ADDR_WIDTH=10;
 	// Declare the RAM variable
@@ -29,13 +33,32 @@ parameter ADDR_WIDTH=10;
 		// Write
 		if (we)
 			ram[addr] <= data;
-
+		
+		//get new address
 		addr_reg <= addr;
+
+		//check if address is valid for 10 bit ram
+		if(addr[15:10]!==6'b000000) 
+			$display("EXCEPTION IN MEMORY: the memory address 0x%h is invalid for 10 bit adressed ram component (first 6 bits are ignored)",addr);
 	end
 
 	// Continuous assignment implies read returns NEW data.
 	// This is the natural behavior of the TriMatrix memory
 	// blocks in Single Port mode.  
-	assign q = ram[addr_reg];
+	
+
+	always @ (*) begin
+		case (addr) 
+			16'b1111110000000000: begin
+				processor_output = data;
+				if(we) 
+					q = processor_input;
+			end
+			
+			default: begin
+				q = ram[addr_reg];
+			end
+		endcase
+	end
 
 endmodule
