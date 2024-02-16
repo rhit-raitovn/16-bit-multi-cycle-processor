@@ -527,7 +527,35 @@ parameter    jal = 11;
     $display("----------------------Decode----------------");
     #full    
     $display("----------------------RIType----------------");
-    
+    // Test Case for output_control_ALUOp in RIType State
+    if (output_control_ALUOp !== ALUOp)
+      $display("TEST 3 Load Word Path: output_control_ALUOp in RIType state Failed at Time %0t. Expected: %h, Actual: %h", $time, ALUOp, output_control_ALUOp);
+    else
+      $display("TEST 3 Load Word Path: output_control_ALUOp in RIType state !!!Passed!!! at Time %0t.", $time);
+
+    // Test Case for output_control_ALUSrcA in RIType State
+    if (output_control_ALUSrcA !== 2'b10)
+      $display("TEST 3 Load Word Path: output_control_ALUSrcA in RIType state Failed at Time %0t. Expected: %h, Actual: %h", $time, 2'b10, output_control_ALUSrcA);
+    else
+      $display("TEST 3 Load Word Path: output_control_ALUSrcA in RIType state !!!Passed!!! at Time %0t.", $time);
+
+    // Test Case for output_control_ALUSrcB in RIType State
+    if (output_control_ALUSrcB !== 2'b10)
+      $display("TEST 3 Load Word Path: output_control_ALUSrcB in RIType state Failed at Time %0t. Expected: %h, Actual: %h", $time, 2'b10, output_control_ALUSrcB);
+    else
+      $display("TEST 3 Load Word Path: output_control_ALUSrcB in RIType state !!!Passed!!! at Time %0t.", $time);
+
+    // Test Case for output_control_current_state in RIType State
+    if (output_control_current_state !== RIType)
+      $display("TEST 3 Load Word Path: output_control_current_state in RIType State Failed at Time %0t. Expected: %h, Actual: %h", $time, RIType, output_control_current_state);
+    else
+      $display("TEST 3 Load Word Path: output_control_current_state in RIType State !!!Passed!!! at Time %0t.", $time);
+
+    // State Machine Transition Test from RIType State to LW1 State
+    if (output_control_next_state !== LW1)
+      $display("TEST 3 Load Word Path: State Machine Transition from RIType State to LW1 State Failed at Time %0t. Next State Expected: %h, Actual: %h", $time, LW1, output_control_next_state);
+    else
+      $display("TEST 3 Load Word Path: State Machine Transition from RIType State to LW1 State !!!Passed!!! at Time %0t.", $time);
     $display("----------------------RIType----------------");
     #full    
     $display("----------------------LW1----------------");
