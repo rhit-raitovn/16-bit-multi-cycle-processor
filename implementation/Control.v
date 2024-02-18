@@ -188,6 +188,7 @@ always @ (current_state)
 
     SW: begin
       // Define behavior for the store word instruction
+      output_control_Branch = 1;
       output_control_IoD = 1;
       output_control_MemW = 1;
     end
