@@ -52,8 +52,12 @@ reg [16:0] alu_output;
 // ALUOp Calculation
 always @ (*) begin
     case(input_ALUOp)
-        4'b0000: alu_output = input_A + input_B; // add
-        4'b0001: alu_output = input_A - input_B; // subtract
+        4'b0000: begin // add
+            {output_Carry, alu_output} = {1'b0, input_A} + {1'b0, input_B};
+        end
+        4'b0001: begin // subtract
+            {output_Carry, alu_output} = {1'b0, input_A} - {1'b0, input_B};
+        end
         4'b0010: alu_output = input_A & input_B; // and
         4'b0011: alu_output = input_A | input_B; // or
         4'b0100: alu_output = input_A ^ input_B; // xor
