@@ -225,3 +225,11 @@ implementation/simulation/modelsim/TheLime_modelsim.xrf
 implementation/simulation/modelsim/TheLime_v.sdo
 implementation/simulation/modelsim/transcript
 implementation/simulation/modelsim/vsim.wlf
+*.flock
+implementation/output_files/TheLime.map.smsg
+implementation/db/TheLime.smp_dump.txt
+implementation/output_files/TheLime.map.smsg
+implementation/simulation/modelsim/wlft1qdn80
+implementation/simulation/modelsim/wlft88e0sy
+implementation/db/TheLime.smp_dump.txt
+implementation/output_files/TheLime.map.smsg

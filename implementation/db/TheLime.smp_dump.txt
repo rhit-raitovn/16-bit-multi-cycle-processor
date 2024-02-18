@@ -1,11 +1,11 @@
 
 State Machine - |Control|current_state
-Name current_state.JAL current_state.BRANCH2 current_state.BRANCH current_state.JALR current_state.SW current_state.LW2 current_state.LW1 current_state.RTypeEnd current_state.RIType current_state.RType current_state.Decode current_state.Fetch 
-current_state.Fetch 0 0 0 0 0 0 0 0 0 0 0 0 
-current_state.Decode 0 0 0 0 0 0 0 0 0 0 1 1 
-current_state.RType 0 0 0 0 0 0 0 0 0 1 0 1 
-current_state.RIType 0 0 0 0 0 0 0 0 1 0 0 1 
-current_state.RTypeEnd 0 0 0 0 0 0 0 1 0 0 0 1 
+Name current_state.JAL current_state.BRANCH2 current_state.BRANCH current_state.JALR current_state.SW current_state.LW2 current_state.LW1 current_state.RTYPEEND current_state.RITYPE current_state.RTYPE current_state.DECODE current_state.0000 
+current_state.0000 0 0 0 0 0 0 0 0 0 0 0 0 
+current_state.DECODE 0 0 0 0 0 0 0 0 0 0 1 1 
+current_state.RTYPE 0 0 0 0 0 0 0 0 0 1 0 1 
+current_state.RITYPE 0 0 0 0 0 0 0 0 1 0 0 1 
+current_state.RTYPEEND 0 0 0 0 0 0 0 1 0 0 0 1 
 current_state.LW1 0 0 0 0 0 0 1 0 0 0 0 1 
 current_state.LW2 0 0 0 0 0 1 0 0 0 0 0 1 
 current_state.SW 0 0 0 0 1 0 0 0 0 0 0 1 
