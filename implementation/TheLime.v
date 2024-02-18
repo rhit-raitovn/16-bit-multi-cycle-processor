@@ -11,8 +11,13 @@ module TheLime(
   output wire [15:0] main_output, // main output
   output reg CLK
 );
-  initial CLK=1;
-  always #5 CLK=~CLK;
+
+initial CLK=1;
+always begin
+  #5 
+  CLK=~CLK;
+  $display("~~~~~~~~Half Cycle Passed~~~~~~~")
+  end
 
 // Control signals
 wire PCWrite;
@@ -28,10 +33,6 @@ wire [3:0] ALUOp;
 wire PCSrc;
 wire branch;
 wire [1:0] branchType;
-
-
-
-
 
 wire reset;
 wire zero;

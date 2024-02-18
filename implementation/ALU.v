@@ -65,10 +65,11 @@ always @ (*) begin
         4'b1100: alu_output = input_B; // set to IG
         default: begin 
 		 alu_output = 16'hxxxx; // default value for undefined inputs
-		 $display("ALU EXCEPTION: invalid operation %b",input_ALUOp);		
+		 //$display("ALU EXCEPTION: invalid operation %b",input_ALUOp);		
 		end
     endcase
-	output_ALU=alu_output[15:0];
+	output_ALU = alu_output[15:0];
+    $display("ALU Output: %b", output_ALU);
 end
 
 //Flag Logic
