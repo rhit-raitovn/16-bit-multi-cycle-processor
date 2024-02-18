@@ -74,7 +74,7 @@ Control control_inst (
         
   // Outputs
   .output_control_PCWrite(PCWrite),
-  .output_control_IoD(IoD),
+  .output_control_IoD(IorD),
   .output_control_MemR(memR),
   .output_control_MemW(memW),
   .output_control_IRWrite(IRWrite),
