@@ -44,7 +44,7 @@ PC PC_inst(
     	.input_zero(input_zero),                 // Signal indicating ALU output is zero.
     	.input_negative(input_negative),             // Signal indicating ALU output is negative.
     	.input_branchType(input_branchType),     // Branch type selector.
-    	.input_PC_isbranch(input_PC_isBranch),          // Signal from control indicating if a branch comparison is being performed.
+    	.input_PC_isbranch(input_PC_isbranch),          // Signal from control indicating if a branch comparison is being performed.
     	.output_PC(output_PC)            // Output representing the value of the PC.
 );
 
