@@ -104,8 +104,8 @@ always @ (*) begin
         4'b0110: ALUOp = 4'b0110; // shift right logical
         4'b0111: ALUOp = 4'b0111; // shift left arithmetic
         4'b1000: ALUOp = 4'b1000; // shift right arithmetic
-        4'b1001: ALUOp = 4'b1001; // lw
-        4'b1010: ALUOp = 4'b1001; // sw
+        4'b1001: ALUOp = 4'b1000; // lw
+        4'b1010: ALUOp = 4'b1000; // sw
         4'b1011: ALUOp = 4'bxxxx; // changeable
         4'b1100: ALUOp = 4'b1100; // set
         4'b1101: ALUOp = 4'bxxxx; // changeable
@@ -166,7 +166,7 @@ always @ (current_state)
       output_control_ALUOp = ALUOp;
       output_control_ALUSrcA = 2;
       output_control_ALUSrcB = 2;
-      output_control_Branch = 1; // speical situation
+      output_control_Branch = 1; // speical situation for sw
     end
 
     RTYPEEND: begin
