@@ -752,8 +752,8 @@ parameter    JAL = 11;
       $display("Test Case L Type: output_control_IoD Passed at Time %0t.", $time);
 
     // Test Case for output_control_IRWrite
-    if (output_control_IRWrite !== 0'b1) // Since L Type instruction writes to IR
-      $display("Test Case L Type: output_control_IRWrite Failed. Expected: %h, Actual: %h", 0'b1, output_control_IRWrite);
+    if (output_control_IRWrite !== 1'b1) // Since L Type instruction writes to IR
+      $display("Test Case L Type: output_control_IRWrite Failed. Expected: %h, Actual: %h", 1'b1, output_control_IRWrite);
     else
       $display("Test Case L Type: output_control_IRWrite Passed at Time %0t.", $time);
 
