@@ -37,6 +37,11 @@ begin
     // On the rising edge of the clock, set the internal register to the input value.
     register_data <= input_SR;
 
+    
+end
+
+always @(*)
+begin
     // Assign the value of the internal register to the output
     output_SR <= register_data;
 end
