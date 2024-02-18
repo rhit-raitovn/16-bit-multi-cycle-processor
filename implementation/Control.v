@@ -166,6 +166,7 @@ always @ (current_state)
       output_control_ALUOp = ALUOp;
       output_control_ALUSrcA = 2;
       output_control_ALUSrcB = 2;
+      output_control_Branch = 1; // speical situation
     end
 
     RTYPEEND: begin
@@ -188,7 +189,7 @@ always @ (current_state)
 
     SW: begin
       // Define behavior for the store word instruction
-      output_control_Branch = 1;
+
       output_control_IoD = 1;
       output_control_MemW = 1;
     end
