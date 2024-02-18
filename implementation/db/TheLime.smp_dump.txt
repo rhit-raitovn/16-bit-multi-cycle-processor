@@ -1,5 +1,5 @@
 
-State Machine - |Control|current_state
+State Machine - |TheLime|Control:control_inst|current_state
 Name current_state.JAL current_state.BRANCH2 current_state.BRANCH current_state.JALR current_state.SW current_state.LW2 current_state.LW1 current_state.RTYPEEND current_state.RITYPE current_state.RTYPE current_state.DECODE current_state.0000 
 current_state.0000 0 0 0 0 0 0 0 0 0 0 0 0 
 current_state.DECODE 0 0 0 0 0 0 0 0 0 0 1 1 

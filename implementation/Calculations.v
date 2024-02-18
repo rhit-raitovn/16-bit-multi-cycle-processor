@@ -59,7 +59,7 @@ always @(*) begin
         0: B_mux_out = output_B_sr;
         1: B_mux_out = 16'b0000_0000_0000_0001; // Assuming you have an immediate generator module
         2: B_mux_out = input_imm; // Assuming '2' is a 16-bit immediate value
-        default: B_mux_out = 16'hxxxx; // Default to zero if an invalid selection
+        default: B_mux_out = B_mux_out; // Default to zero if an invalid selection
     endcase
 end
 	

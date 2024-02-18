@@ -44,7 +44,7 @@ module ProgrammableRegisterFile(
 
 reg [15:0] registers [0:7]; // Array of 8 registers, each 16 bits wide
 
-always @(posedge CLK)
+always @(negedge CLK)
 begin
     // Read operations
     output_reg_A <= registers[input_reg_readA_address];
