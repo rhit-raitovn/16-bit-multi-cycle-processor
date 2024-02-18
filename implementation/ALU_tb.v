@@ -65,7 +65,7 @@ module ALU_tb;
     end
 
     // Test Case 4: OR Operation (ALUOp = 3'b101)
-    input_ALUOp = 3'b0011;
+    input_ALUOp = 4'b0011;
     input_A = 16'hAAAA;
     input_B = 16'h5555;
     #10;

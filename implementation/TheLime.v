@@ -130,7 +130,7 @@ Data data_inst (
   .input_ALUOut(output_ALUOut),
   .input_MDR(output_MDR),
   .memToReg(mem2reg),
-  .input_branch(input_branch),
+  .input_branch(branch),
         
   // Outputs
   .output_imm(output_imm),
