@@ -16,7 +16,7 @@ initial CLK=1;
 always begin
   #5 
   CLK=~CLK;
-  $display("~~~~~~~~Half Cycle Passed~~~~~~~")
+  $display("~~~~~~~~Half Cycle Passed~~~~~~~");
   end
 
 // Control signals
