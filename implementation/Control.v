@@ -230,7 +230,7 @@ always @ (current_state)
       output_control_PCWrite = 1;
       output_control_ALUSrcA = 3;
       output_control_ALUSrcB = 1;
-      output_control_ALUOp = 4'b0000;
+      output_control_ALUOp = 4'b1100;
     end
   endcase
 end
