@@ -229,8 +229,8 @@ always @ (current_state)
       // Define behavior for the jump and link instruction
       output_control_PCWrite = 1;
       output_control_ALUSrcA = 3;
-      output_control_ALUSrcB = 1;
-      output_control_ALUOp = 4'b1100;
+      output_control_ALUSrcB = 2;
+      output_control_ALUOp = 4'b1100;// PC = IG
     end
   endcase
 end
