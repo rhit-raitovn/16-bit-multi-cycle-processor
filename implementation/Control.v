@@ -196,7 +196,7 @@ always @ (current_state)
 
     JALR: begin
       // Define behavior for the jump and link register instruction
-      output_control_ALUOp = 4'b1100;
+      output_control_ALUOp = 4'b1100; // PC = IG
       output_control_ALUSrcA = 3;
       output_control_ALUSrcB = 2;
       output_control_Mem2Reg = 0;
