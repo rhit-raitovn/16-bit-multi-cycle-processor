@@ -29,7 +29,7 @@ wire [1:0] ALUSrcB;
 wire [1:0] branchType;
 wire [3:0] ALUOp;
 wire branch;
-wire decoding;
+wire keepALUOut;
 wire mem2reg;
 wire memR;
 wire memW;
@@ -79,7 +79,7 @@ Control control_inst (
   .output_control_ALUSrcB(ALUSrcB),
   .output_control_Branch(branch),
   .output_control_BranchType(branchType),
-  .output_control_Decoding(decoding),
+  .output_control_keepALUOut(keepALUOut),
   .output_control_IRWrite(IRWrite),
   .output_control_IoD(IorD),
   .output_control_Mem2Reg(mem2reg),
@@ -151,7 +151,7 @@ Calculations calculations_inst (
   .input_PC(output_PC),
   .input_PCSrc(PCSrc),
   .input_imm(output_imm),
-  .input_keep_ALUOut(decoding),
+  .input_keep_ALUOut(keepALUOut),
   .reset(reset),
   
   // Outputs
