@@ -1,3 +1,4 @@
+# opcode mapping
 OPCODES = {
     # 3R Type: Instructions with opcode 000 
     'add': '000',
