@@ -47,7 +47,7 @@ wire [2:0] Output_IR_RegD;
 wire [15:0] Output_IR_Imm;
 //wire [15:0] input_from_ALUOut;
 wire [15:0] output_MDR;
-wire [15:0] input_mem_data;
+
 
 wire [3:0] output_control_current_state;
 wire [3:0] output_control_next_state;
@@ -59,7 +59,7 @@ wire [3:0] output_control_next_state;
 wire [15:0] output_reg_A;
 wire [15:0] output_reg_B;
 wire [15:0] output_imm;
-wire [15:0] ALUOut;
+
   
 // For Calculations
 wire [15:0] output_ALUOut;
