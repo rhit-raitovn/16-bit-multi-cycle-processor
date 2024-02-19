@@ -196,15 +196,15 @@ always @ (current_state)
 
     JALR: begin
       // Define behavior for the jump and link register instruction
-      output_control_ALUOp = 4'b0111;
+      output_control_ALUOp = 4'b1100;
       output_control_ALUSrcA = 3;
-      output_control_ALUSrcB = 1;
+      output_control_ALUSrcB = 2;
       output_control_Mem2Reg = 0;
       output_control_RegWrite = 1;
     end
 
     BRANCH: begin
-      output_control_ALUOp = 4'b1001;
+      output_control_ALUOp = 4'b0000;
       output_control_ALUSrcA = 0;
       output_control_ALUSrcB = 2;
       output_control_Branch = 1;
@@ -228,7 +228,7 @@ always @ (current_state)
       output_control_PCWrite = 1;
       output_control_ALUSrcA = 3;
       output_control_ALUSrcB = 1;
-      output_control_ALUOp = 4'b0111;
+      output_control_ALUOp = 4'b0000;
     end
   endcase
 end
