@@ -53,9 +53,9 @@ module Control(
   output reg [1:0] output_control_ALUSrcB,
   output reg [1:0] output_control_BranchType,
   output reg [3:0] output_control_ALUOp,
-
   output reg [3:0] output_control_current_state,
-  output reg [3:0] output_control_next_state
+  output reg [3:0] output_control_next_state,
+  output reg [0:0] output_control_Decoding
 );
 
 
@@ -129,8 +129,9 @@ always @ (current_state)
   output_control_ALUSrcB = 2'b00;
   output_control_Branch = 1'b0;
   output_control_BranchType = 2'b00;
-  output_control_IoD = 1'b0;
+  output_control_Decoding = 1'b0;
   output_control_IRWrite = 1'b0;
+  output_control_IoD = 1'b0;
   output_control_Mem2Reg = 1'b0;
   output_control_MemR = 1'b0;
   output_control_MemW = 1'b0;
@@ -154,6 +155,7 @@ always @ (current_state)
       output_control_IRWrite = 0;
       output_control_MemR = 0;
       output_control_PCWrite = 0;
+      output_control_Decoding = 1;
     end
 
     RTYPE: begin
