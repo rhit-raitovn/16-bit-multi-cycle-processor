@@ -202,6 +202,8 @@ always @ (current_state)
       output_control_ALUSrcA = 3;
       output_control_ALUSrcB = 2;
       output_control_Mem2Reg = 0;
+      output_control_PCSrc = 0;
+      output_control_PCWrite = 1;
       output_control_RegWrite = 1;
     end
 
