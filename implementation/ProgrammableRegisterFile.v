@@ -45,7 +45,7 @@ module ProgrammableRegisterFile(
 reg [15:0] registers [0:7]; // Array of 8 registers, each 16 bits wide
 
 initial registers[0]=16'h0000;
-initial registers[1]=16'h0050;
+initial registers[1]=16'b0000001111111111;
 
 always @(negedge CLK)
 begin
