@@ -75,7 +75,7 @@ parameter    SW = 7;
 parameter    JALR = 8;
 parameter    BRANCH = 9;
 parameter    BRANCH2 = 10;
-parameter    JAL = 11;
+parameter    JAL = 11;	
 
 initial current_state = 4'b0000;
 
@@ -115,6 +115,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
+
   branchType = input_control[4:3];
 end
 
@@ -124,7 +125,7 @@ always @ (current_state)
   begin
 
   //Reset all signals that cannot be don't cares
-  output_control_ALUOp = 4'b1111;
+  output_control_ALUOp = 4'bxxxx;
   output_control_ALUSrcA = 2'b00;
   output_control_ALUSrcB = 2'b00;
   output_control_Branch = 1'b0;
@@ -169,6 +170,7 @@ always @ (current_state)
       output_control_ALUSrcA = 2;
       output_control_ALUSrcB = 2;
       output_control_Branch = 1; // speical situation for sw
+      output_control_keepALUOut = 0;
     end
 
     RTYPEEND: begin
@@ -191,7 +193,7 @@ always @ (current_state)
 
     SW: begin
       // Define behavior for the store word instruction
-
+      // output_control_ALUOp = ALUOp; LUKE AND NAZIA ADDED THIS
       output_control_IoD = 1;
       output_control_MemW = 1;
     end
