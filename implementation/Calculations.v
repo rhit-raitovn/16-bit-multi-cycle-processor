@@ -76,13 +76,23 @@ ALU calculations_inst (
 	.output_Negative(output_negative),
 	.output_Carry(output_carry)
 );
+
+
 reg [15:0] keepALUOut_mux;
+// 2:1 mux for keepALUOut
+always @(*) begin
+    case(input_keep_ALUOut)
+        0: keepALUOut_mux = ALU_output_wire;
+        1: keepALUOut_mux = output_ALUOut_sr; 
+        default: keepALUOut_mux = 16'hxxxx; // Default to xxxx if an invalid selection
+    endcase
+end
+
 SimpleRegister ALUOut_inst (
     .CLK(clk),
     .input_SR(keepALUOut_mux),			  
     .output_SR(output_ALUOut_sr)
 );
-
 
 // 2:1 Mux for PCSrc
 //reg [15:0] ALUOut_mux_out;
@@ -93,17 +103,5 @@ always @(*) begin
         default: output_ALUMuxOut = 16'hxxxx; // Default to xxxx if an invalid selection
     endcase
 end
-
-
-// 2:1 mux for keepALUOut
-always @(*) begin
-    case(input_keep_ALUOut)
-        0: keepALUOut_mux = ALU_output_wire;
-        1: keepALUOut_mux = output_ALUOut_sr; 
-        default: output_ALUMuxOut = 16'hxxxx; // Default to xxxx if an invalid selection
-    endcase
-end
-
-//assign ALUOut_mux_out = output_ALUMuxOut;
 
 endmodule
