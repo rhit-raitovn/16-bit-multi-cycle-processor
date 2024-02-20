@@ -21,6 +21,7 @@ initial begin
 	//	$display("TEST PASSED! :)");
 	//$stop;
 	@(main_output==16'h0005);
+#10
 	$stop;
 end
 
