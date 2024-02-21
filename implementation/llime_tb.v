@@ -25,17 +25,26 @@ always begin
 
 initial begin
 	CLK=1;
+	$display("Testing Processor");
 	//test 1 relprime
-	main_input=16'h13b0;
-	//#500;
-	//if(main_output!==16'h0005)
-	//	$display("lime processor test failed :( output was: 0x%h",main_output);
-	//else
-	//	$display("TEST PASSED! :)");
-	//$stop;
-	@(main_output==16'h000b);
-	$display(cycleCount/2);
-#10
+	main_input=30;
+	@(main_output==5);
+	main_input=16'h0906;	
+	$display("Test 1 Success after %d cycles",cycleCount/2);
+
+	//test 2 relprime
+	cycleCount=0;
+	@(main_output==16'h000d);
+	main_input=0030;
+	$display("Test 2 Success after %d cycles",cycleCount/2);
+	
+
+	//test 3 relprime
+	cycleCount=0;
+	@(main_output==16'h0005);
+	$display("Test 3 Success after %d cycles",cycleCount/2);
+	
+	#10
 	$stop;
 end
 
