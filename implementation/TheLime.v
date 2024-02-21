@@ -9,15 +9,9 @@
 module TheLime(
   input wire [15:0] main_input, //main input
   output wire [15:0] main_output, // main output
-  output reg CLK
+  input wire CLK
 );
 
-initial CLK=1;
-always begin
-  #5 
-  CLK=~CLK;
-  $display("~~~~~~~~Half Cycle Passed~~~~~~~");
-  end
 
 // Control signals
 wire IRWrite;

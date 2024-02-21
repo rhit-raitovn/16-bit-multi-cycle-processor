@@ -243,112 +243,112 @@ end
 
 //NEXT STATE calculation (depends on current state and opcode)       
 always @ (current_state, next_state, input_control) begin         
-  $display("The current state is %d", current_state);
+  ////$display("The current state is %d", current_state);
   case (current_state)
     FETCH: begin
       next_state = DECODE;
-      $display("In FETCH, the next_state is %d", next_state);
+      ////$display("In FETCH, the next_state is %d", next_state);
     end
 
     DECODE: begin       
-      $display("The opcode is %d", input_control[2:0]);
+      ////$display("The opcode is %d", input_control[2:0]);
       case (input_control[2:0])
 
         3'b000: begin
-          $display("3R Type Instruction");
+          ////$display("3R Type Instruction");
           next_state = RTYPE;
-          $display("The next state is RTYPE");
+          ////$display("The next state is RTYPE");
         end
 
         3'b001: begin
           case (input_control[6:3])
 
             4'b1011: begin
-              $display("2RI JALR Instruction");
+              //$display("2RI JALR Instruction");
               next_state = JALR;
-              $display("The next state is JALR");
+              //$display("The next state is JALR");
             end
 
             4'b1100: begin
-              $display("2RI Branch Instruction");
+              //$display("2RI Branch Instruction");
               next_state = BRANCH;
-              $display("The next state is BRANCH");
+              //$display("The next state is BRANCH");
             end
 
             4'b1101: begin
-              $display("2RI BRANCH Instruction");
+              //$display("2RI BRANCH Instruction");
               next_state = BRANCH;
-              $display("The next state is BRANCH");
+              //$display("The next state is BRANCH");
             end
 
             4'b1110: begin
-              $display("2RI BRANCH Instruction");
+              //$display("2RI BRANCH Instruction");
               next_state = BRANCH;
-              $display("The next state is BRANCH");
+              //$display("The next state is BRANCH");
             end
 
             4'b1111: begin
-              $display("2RI BRANCH Instruction");
+              //$display("2RI BRANCH Instruction");
               next_state = BRANCH;
-              $display("The next state is BRANCH");
+              //$display("The next state is BRANCH");
             end
 
             default: begin
-              $display("2RI Normal Instruction");
+              //$display("2RI Normal Instruction");
               next_state = RITYPE;
-              $display("The next state is RITYPE");
+              //$display("The next state is RITYPE");
             end
           endcase 
         end
 
         3'b010: begin
-          $display("RI Type Instruction");
+          //$display("RI Type Instruction");
           next_state = RITYPE;
-          $display("The next state is RITYPE");
+          //$display("The next state is RITYPE");
         end
 
         3'b011: begin
-          $display("L Type Instruction");
+          //$display("L Type Instruction");
           next_state = FETCH;
-          $display("The next state is FETCH");
+          //$display("The next state is FETCH");
         end
 
         3'b100: begin
-          $display("UJ Type Instruction");
+          //$display("UJ Type Instruction");
           next_state = JAL;
-          $display("The next state is JAL");
+          //$display("The next state is JAL");
         end
 
       endcase  
 
-      $display("In DECODE, the next_state is %d", next_state);
+      //$display("In DECODE, the next_state is %d", next_state);
     end
 
     RTYPE: begin
       next_state = RTYPEEND;
-      $display("In RTYPE, the next_state RTYPEEND is %d", next_state);
+      //$display("In RTYPE, the next_state RTYPEEND is %d", next_state);
     end
 
     RTYPEEND: begin
       next_state = FETCH;
-      $display("In RTYPEEND, the next_state FETCH is %d", next_state);
+      //$display("In RTYPEEND, the next_state FETCH is %d", next_state);
     end
 
     RITYPE: begin
       case(input_control[6:3])
         4'b1001: begin
           next_state = LW1;
-          $display("In RITYPE, lw instruction, the next_state LW1 is %d", next_state);
+          //$display("In RITYPE, lw instruction, the next_state LW1 is %d", next_state);
         end
 
         4'b1010: begin
           next_state = SW;
-          $display("In RITYPE, SW instruction, the next_state SW is %d", next_state);
+          //$display("In RITYPE, SW instruction, the next_state SW is %d", next_state);
         end
 
         default: begin
           next_state = RTYPEEND;
-          $display("In RITYPE, normal calculation instruction, the next_state RTYPEEND is %d", next_state);
+          //$display("In RITYPE, normal calculation instruction, the next_state RTYPEEND is %d", next_state);
         end
 
       endcase
@@ -356,48 +356,48 @@ always @ (current_state, next_state, input_control) begin
 
     SW: begin
       next_state = FETCH;
-      $display("In SW, the next_state FETCH is %d", next_state);
+      //$display("In SW, the next_state FETCH is %d", next_state);
     end
 
     LW1: begin
       next_state = LW2;
-      $display("In LW1, the next_state LW2 is %d", next_state);
+      //$display("In LW1, the next_state LW2 is %d", next_state);
     end
 
     LW2: begin
       next_state = FETCH;
-      $display("In LW2, the next_state FETCH is %d", next_state);
+      //$display("In LW2, the next_state FETCH is %d", next_state);
     end
 
     JAL: begin
       next_state = FETCH;
-      $display("In JAL, the next_state FETCH is %d", next_state);
+      //$display("In JAL, the next_state FETCH is %d", next_state);
     end
 
     JALR: begin
       next_state = FETCH;
-      $display("In JALR, the next_state FETCH is %d", next_state);
+      //$display("In JALR, the next_state FETCH is %d", next_state);
     end
 
     BRANCH: begin
       next_state = BRANCH2;
-      $display("In BRANCH, the next_state BRANCH2 is %d", next_state);
+      //$display("In BRANCH, the next_state BRANCH2 is %d", next_state);
     end
 
     BRANCH2: begin
       next_state = FETCH;
-      $display("In JALR, the next_state FETCH is %d", next_state);
+      //$display("In JALR, the next_state FETCH is %d", next_state);
     end
 
     default: begin
-      $display("Error State!");
+      //$display("Error State!");
       next_state = FETCH;
     end
 
   endcase
   output_control_current_state <= current_state;
   output_control_next_state <= next_state;
-  $display("After the tests, the next_state is %d", next_state);
+  //$display("After the tests, the next_state is %d", next_state);
 end
 
 

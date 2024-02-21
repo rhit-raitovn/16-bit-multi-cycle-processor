@@ -74,7 +74,7 @@ always @ (*) begin
 		end
     endcase
 	output_ALU = alu_output[15:0];
-    $display("ALU Output: %b", output_ALU);
+    //$display("ALU Output: %b", output_ALU);
 end
 
 //Flag Logic
