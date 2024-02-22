@@ -1,37 +1,38 @@
 /*
- * Module: control
- * Description: This module implements the control logic for lime. It generates control signals
- *              based on the current state and input control signals. The module defines various states
- *              such as FETCH, DECODE, RTYPE3, RITYPE, RTYPEEND, lw1, lw2, sw, JALR, BRANCH, BRANCH2,
- *              and JAL. It utilizes sequential logic to transition between states and assigns output
- *              control signals accordingly. The module takes input control signals, clock signal (CLK),
- *              and reset signal (Reset), and outputs various control signals required for the processor
- *              operation. It also includes combinational logic to calculate ALU operation (ALUOp) and
- *              ALU source (ALUSrcA and ALUSrcB) based on the input control signals.
+ * Module: Control
+ * Description: This module implements the control logic for lime processor, generating control signals
+ *              based on the current state and input control signals. It defines various operational states
+ *              such as FETCH, DECODE, RTYPE, RITYPE, RTYPEEND, LW1, LW2, SW, JALR, BRANCH, BRANCH2,
+ *              and JAL. Using sequential logic, it transitions between these states and assigns output
+ *              control signals to manage the processor's operation. Combinational logic calculates the ALU
+ *              operation (ALUOp) and the sources for the ALU (ALUSrcA and ALUSrcB) based on the input
+ *              control signals. The module interfaces with both the processor's datapath and the clock
+ *              system, responding to the clock signal (CLK) and a reset signal (Reset) to ensure timely
+ *              and correct execution of instructions.
  *
  * Author: Yueqiao Wang
- * Date: Feb 15, 2024
- * Version: 1.1
+ * Date: Feb 20, 2024
+ * Version: 2.0
  * 
  * Inputs:
- *   - input_control: 7-bit input control signals
- *   - CLK: Clock signal
- *   - Reset: Reset signal
+ *   - input_control [6:0]: 7-bit input control signals for instruction decoding and control flow management.
+ *   - CLK: Clock signal for synchronizing the control logic operations.
+ *   - Reset: Reset signal for initializing the control logic to a known state, typically the FETCH state.
  *
  * Outputs:
- *   - output_control_branch: Branch control signal
- *   - output_control_IoD: Instruction/Data write control signal
- *   - output_control_IRWrite: Instruction register write control signal
- *   - output_control_Mem2Reg: Memory to register control signal
- *   - output_control_MemR: Memory read control signal
- *   - output_control_MemW: Memory write control signal
- *   - output_control_PCSrc: PC source control signal
- *   - output_control_PCWrite: PC write enable control signal
- *   - output_control_RegWrite: Register write control signal
- *   - output_control_ALUSrcA: ALU source A control signal
- *   - output_control_ALUSrcB: ALU source B control signal
- *   - output_control_branchType: Branch type control signal
- *   - output_control_ALUOp: ALU operation control signal
+ *   - output_control_ALUOp [3:0]: Control signal defining the operation to be performed by the ALU.
+ *   - output_control_ALUSrcA [1:0]: Control signal for selecting the source A for the ALU.
+ *   - output_control_ALUSrcB [1:0]: Control signal for selecting the source B for the ALU.
+ *   - output_control_Branch [0:0]: Control signal for branching decisions.
+ *   - output_control_BranchType [1:0]: Control signal indicating the type of branch operation.
+ *   - output_control_IoD [0:0]: Control signal for selecting between instruction and data for memory operations.
+ *   - output_control_IRWrite [0:0]: Control signal for enabling writing to the instruction register.
+ *   - output_control_Mem2Reg [0:0]: Control signal for selecting between memory and ALU results for writing back to the register.
+ *   - output_control_MemR [0:0]: Memory read control signal.
+ *   - output_control_MemW [0:0]: Memory write control signal.
+ *   - output_control_PCSrc [0:0]: Control signal for selecting the source for the Program Counter (PC) update.
+ *   - output_control_PCWrite [0:0]: Control signal for enabling writing to the PC.
+ *   - output_control_RegWrite [0:0]: Control signal for enabling writing to the register file.
  */
 
 
