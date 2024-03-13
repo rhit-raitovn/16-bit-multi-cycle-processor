@@ -153,6 +153,7 @@ Calculations calculations_inst (
   .output_ALUMuxOut(output_ALUMuxOut),
   .output_ALUOut_sr(output_ALUOut),
   .output_B_sr(output_B_sr),
+  .output_A_sr(output_A_sr),
   .output_Zero(zero),
   .output_carry(carry),
   .output_negative(negative)
