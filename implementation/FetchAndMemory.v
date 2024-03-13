@@ -11,6 +11,7 @@ module FetchAndMemory(
 	output wire [15:0] output_PC, // Output representing the value of the PC.
 	
 	input wire input_IR_write,
+	input wire [15:0] input_A_sr,
 	
 	output wire [6:0] Output_IR_Control,
 	output wire [2:0] Output_IR_RegA,
@@ -21,7 +22,7 @@ module FetchAndMemory(
 	input wire [15:0] input_from_ALUOut,
 	output wire [15:0] output_MDR, // Output representing the value in the MDR register.
 	
-	input wire IorD,
+	input wire [1:0] IorD,
 	
 	input wire input_mem_write,
 	input wire [15:0] input_mem_data,
@@ -85,6 +86,17 @@ mux2to1 IorDMux(
   	.select(IorD),
   	.out(input_mem_addr)
 );
+
+	//IorD mux
+reg [15:0] B_mux_out;
+always @(*) begin
+    case(IorD)
+        0: input_mem_addr = output_PC;
+        1: input_mem_addr = input_from_ALUOut; 
+        2: input_mem_addr = input_A_sr; 
+        default: input_mem_addr = 16'hxxxx; // Default to keeping value if an invalid selection
+    endcase
+end
 
 
 
