@@ -100,6 +100,7 @@ FetchAndMemory fetch_and_memory_inst (
   .input_mem_write(memW),
   .input_negative(negative),
   .input_zero(zero),
+  .input_A_sr(output_A_sr),
   
   .Output_IR_Control(Output_IR_Control),
   .Output_IR_Imm(Output_IR_Imm),
