@@ -15,10 +15,10 @@ module TheLime(
 
 // Control signals
 wire IRWrite;
-wire IorD;
+  wire [1:0] IorD;
 wire PCSrc;
 wire PCWrite;
-wire [1:0] ALUSrcA;
+  wire [2:0] ALUSrcA;
 wire [1:0] ALUSrcB;
 wire [1:0] branchType;
 wire [3:0] ALUOp;
