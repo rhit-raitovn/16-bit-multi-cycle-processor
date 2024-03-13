@@ -138,6 +138,7 @@ Calculations calculations_inst (
   // Inputs
   .clk(CLK),
   .input_A(output_reg_A),
+  .mdr(output_MDR),
   .input_ALUOp(ALUOp),
   .input_ALUSrcA(ALUSrcA),
   .input_ALUSrcB(ALUSrcB),
