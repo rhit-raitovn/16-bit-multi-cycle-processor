@@ -42,7 +42,7 @@ module Control(
   input CLK,
   input Reset,
   output reg [0:0] output_control_Branch,
-  output reg [0:0] output_control_IoD,
+  output reg [1:0] output_control_IoD,
   output reg [0:0] output_control_IRWrite,
   output reg [0:0] output_control_Mem2Reg,
   output reg [0:0] output_control_MemR,
@@ -50,7 +50,7 @@ module Control(
   output reg [0:0] output_control_PCSrc,
   output reg [0:0] output_control_PCWrite,
   output reg [0:0] output_control_RegWrite,
-  output reg [1:0] output_control_ALUSrcA,
+  output reg [2:0] output_control_ALUSrcA,
   output reg [1:0] output_control_ALUSrcB,
   output reg [1:0] output_control_BranchType,
   output reg [3:0] output_control_ALUOp,
@@ -77,6 +77,9 @@ parameter    JALR = 8;
 parameter    BRANCH = 9;
 parameter    BRANCH2 = 10;
 parameter    JAL = 11;	
+parameter    LAS1 = 12;
+parameter    LAS2 = 13;
+parameter    LAS3 = 14;
 
 initial current_state = 4'b0000;
 
@@ -127,13 +130,13 @@ always @ (current_state)
 
   //Reset all signals that cannot be don't cares
   output_control_ALUOp = 4'bxxxx;
-  output_control_ALUSrcA = 2'b00;
+  output_control_ALUSrcA = 3'b00;
   output_control_ALUSrcB = 2'b00;
   output_control_Branch = 1'b0;
   output_control_BranchType = 2'b00;
   output_control_keepALUOut = 1'b0;
   output_control_IRWrite = 1'b0;
-  output_control_IoD = 1'b0;
+  output_control_IoD = 2'b0;
   output_control_Mem2Reg = 1'b0;
   output_control_MemR = 1'b0;
   output_control_MemW = 1'b0;
@@ -186,6 +189,9 @@ always @ (current_state)
       output_control_MemR = 1;
     end
 
+    
+      
+    
     LW2: begin
       // Define behavior for the second load word instruction
       output_control_Mem2Reg = 1;
@@ -199,6 +205,25 @@ always @ (current_state)
       output_control_MemW = 1;
     end
 
+    LAS1: begin
+      output_control_MemR = 1;
+      output_control_IoD = 2;
+      output_control_keepALUOut = 1;
+    end
+
+    LAS2: begin
+      output_control_ALUOp = 4'b0000;
+      output_control_ALUSrcA = 4;
+      output_control_ALUSrcB = 2;
+    end
+
+    LAS3: begin
+      output_control_RegWrite = 1;
+      output_control_Mem2Reg = 0;
+      output_control_MemW = 1;
+      output_control_IoD = 2;
+    end  
+       
     JALR: begin
       // Define behavior for the jump and link register instruction
       output_control_ALUOp = 4'b0000; // PC = A + IG
@@ -260,6 +285,9 @@ always @ (current_state, next_state, input_control) begin
           next_state = RTYPE;
           ////$display("The next state is RTYPE");
         end
+
+        3'b101: begin
+          next_state = LAS1;
 
         3'b001: begin
           case (input_control[6:3])
@@ -388,6 +416,18 @@ always @ (current_state, next_state, input_control) begin
     BRANCH2: begin
       next_state = FETCH;
       //$display("In JALR, the next_state FETCH is %d", next_state);
+    end
+
+    LAS1: begin
+      next_state = LAS2;
+    end
+
+     LAS2: begin
+      next_state = LAS3;
+    end
+
+     LAS3: begin
+      next_state = FETCH;
     end
 
     default: begin
