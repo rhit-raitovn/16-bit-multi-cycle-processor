@@ -12,11 +12,12 @@ module Calculations(
     input wire [15:0] input_A, input_B, // ALU inputs
     input wire [3:0] input_ALUOp, // ALU operation code
     input wire [15:0] input_PC,
-    input wire [1:0] input_ALUSrcA, 
+	input wire [2:0] input_ALUSrcA, 
 	 input wire [1:0] input_ALUSrcB,
     input wire [0:0] input_PCSrc,
     input wire [15:0] input_imm,
     input wire input_keep_ALUOut,
+	input wire [15:0] mdr,
 	
     output wire [15:0] output_ALUOut_sr, // ALUOut_sr
     output reg [15:0] output_ALUMuxOut, // ALUMuxOut
@@ -41,7 +42,7 @@ SimpleRegister B_inst (
 	.output_SR(output_B_sr)
 );
 
-// 3:1 Mux for ALUSrcA
+// 4:1 Mux for ALUSrcA
 reg [15:0] A_mux_out;
 always @(*) begin
 	case(input_ALUSrcA)
@@ -49,6 +50,7 @@ always @(*) begin
 		1: A_mux_out = 16'b0000_0000_0000_0001;
 		2: A_mux_out = A_sr;
 		3: A_mux_out = input_imm;
+		4: A_mux_out = mdr;
       default: A_mux_out = 16'hxxxx; // Default to xxxx if an invalid selection
    endcase
 end
