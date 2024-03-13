@@ -22,7 +22,7 @@ module Calculations(
     output wire [15:0] output_ALUOut_sr, // ALUOut_sr
     output reg [15:0] output_ALUMuxOut, // ALUMuxOut
     output wire output_Zero, output_negative, output_carry, // ALU flags
-    output wire [15:0] output_B_sr,
+	output wire [15:0] output_B_sr,output_A_sr,
 	 
     input wire clk, reset
 );
@@ -32,7 +32,7 @@ SimpleRegister A_inst (
 	.CLK(clk),
 			  
 	.input_SR(input_A),			  
-	.output_SR(A_sr)
+	.output_SR(output_A_sr)
 );
 
 SimpleRegister B_inst (
@@ -48,7 +48,7 @@ always @(*) begin
 	case(input_ALUSrcA)
 		0: A_mux_out = input_PC;
 		1: A_mux_out = 16'b0000_0000_0000_0001;
-		2: A_mux_out = A_sr;
+		2: A_mux_out = output_A_sr;
 		3: A_mux_out = input_imm;
 		4: A_mux_out = mdr;
       default: A_mux_out = 16'hxxxx; // Default to xxxx if an invalid selection
