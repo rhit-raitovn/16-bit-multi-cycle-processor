@@ -1,1 +1,1 @@
-Put design document and journals in the "design" directory.  Implementation, code, etc should go in the "implementation" directory.
+Design document and journals are in the "design" directory.  Implementation, code, etc are in the "implementation" directory.
